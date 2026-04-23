@@ -3,7 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pxelight Futures</title>
+<title>Pxelight Futures Simulator</title>
+<meta name="description" content="Pxelight Futures, gerçek piyasa verileriyle risk almadan kripto para futures işlemlerini öğrenmenizi sağlayan ücretsiz bir eğitim simülatörüdür. BTC, ETH ve daha fazlası.">
+<meta name="keywords" content="kripto futures simülatörü, bitcoin trading, ethereum futures, kaldıraçlı işlem, paper trading, kripto eğitim">
+<meta name="robots" content="index, follow">
+<meta property="og:title" content="Pxelight Futures – Kripto Futures Simülatörü">
+<meta property="og:description" content="Gerçek piyasa verileriyle risk almadan kripto futures işlemlerini öğren.">
+<meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
 
 <!-- REKLAMLAR -->
@@ -364,6 +370,32 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
   .ticker-stats .tstat:nth-child(n+3){display:none}
   .price-live{font-size:14px}
 }
+
+/* ── FOOTER ── */
+.site-footer{
+  background:var(--panel);border-top:1px solid var(--border);
+  padding:10px 20px;display:flex;align-items:center;justify-content:space-between;
+  flex-shrink:0;z-index:100;flex-wrap:wrap;gap:8px;
+}
+.footer-disclaimer{font-size:10px;color:var(--muted);line-height:1.4;max-width:600px}
+.footer-links{display:flex;gap:16px;flex-shrink:0}
+.footer-links a{font-size:10px;color:var(--muted2);text-decoration:none;cursor:pointer;transition:color .15s}
+.footer-links a:hover{color:var(--yellow)}
+@media(max-width:768px){
+  .site-footer{display:none}
+}
+
+/* ── LEGAL MODAL ── */
+.legal-modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:5000;align-items:center;justify-content:center;padding:20px}
+.legal-modal-bg.open{display:flex}
+.legal-modal-box{background:#1a1e26;border:1px solid var(--border2);border-radius:8px;width:100%;max-width:680px;max-height:85vh;display:flex;flex-direction:column}
+.legal-modal-head{padding:20px 24px 16px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;flex-shrink:0}
+.legal-modal-head h2{font-family:var(--font-display);font-size:16px;font-weight:700;color:var(--text)}
+.legal-modal-body{padding:20px 24px;overflow-y:auto;font-size:12px;color:var(--muted2);line-height:1.8}
+.legal-modal-body h3{font-family:var(--font-display);font-size:13px;font-weight:700;color:var(--text);margin:16px 0 6px}
+.legal-modal-body p{margin-bottom:10px}
+.legal-modal-body ul{margin:6px 0 10px 18px}
+.legal-modal-body li{margin-bottom:4px}
 </style>
 </head>
 <body>
@@ -642,6 +674,123 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
 
 <!-- TOAST -->
 <div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-disclaimer">
+    <strong style="color:var(--orange)">Risk Uyarısı:</strong> Pxelight Futures yalnızca eğitim amaçlı bir simülatördür. Gerçek para kullanılmaz. Kripto para piyasaları yüksek risk içerir; bu platform finansal tavsiye sunmaz.
+  </div>
+  <div class="footer-links">
+    <a onclick="openLegal('about')">Hakkımızda</a>
+    <a onclick="openLegal('disclaimer')">Yasal Uyarı</a>
+    <a onclick="openLegal('privacy')">Gizlilik Politikası</a>
+    <a onclick="openLegal('contact')">İletişim</a>
+  </div>
+</footer>
+
+<!-- ABOUT MODAL -->
+<div class="legal-modal-bg" id="modal-about">
+  <div class="legal-modal-box">
+    <div class="legal-modal-head">
+      <h2>Hakkımızda</h2>
+      <span class="modal-close" onclick="closeLegal('about')">×</span>
+    </div>
+    <div class="legal-modal-body">
+      <h3>Pxelight Futures Nedir?</h3>
+      <p>Pxelight Futures, kripto para vadeli işlemlerini (futures) gerçek piyasa koşullarını simüle ederek öğrenmenize olanak tanıyan ücretsiz bir eğitim platformudur. Gerçek para yatırmanıza gerek kalmadan kaldıraçlı işlemleri, emir defterini ve risk yönetimini deneyimleyebilirsiniz.</p>
+      <h3>Ne Sunuyoruz?</h3>
+      <ul>
+        <li>Gerçek zamanlı piyasa verileriyle BTC, ETH ve diğer kripto çiftleri</li>
+        <li>Limit, Market ve Stop-Limit emir türleri</li>
+        <li>1x'ten 125x'e kaldıraç desteği</li>
+        <li>İzole ve Çapraz marjin modları</li>
+        <li>Canlı emir defteri ve TradingView grafik entegrasyonu</li>
+        <li>Komisyon hesaplama ve likidasyon simülasyonu</li>
+      </ul>
+      <h3>Hedef Kitlemiz</h3>
+      <p>Kripto piyasalarına yeni başlayan bireyler, kaldıraçlı işlemleri öğrenmek isteyen yatırımcılar ve stratejilerini test etmek isteyen deneyimli traderlar için tasarlanmıştır.</p>
+      <h3>Teknik Altyapı</h3>
+      <p>Platform, Binance WebSocket API üzerinden gerçek zamanlı fiyat ve emir defteri verisi çeker. Grafik motoru olarak TradingView kütüphanesi kullanılmaktadır. Tüm işlemler yalnızca tarayıcınızda gerçekleşir; hiçbir kişisel veri sunucularımıza gönderilmez.</p>
+    </div>
+  </div>
+</div>
+
+<!-- DISCLAIMER MODAL -->
+<div class="legal-modal-bg" id="modal-disclaimer">
+  <div class="legal-modal-box">
+    <div class="legal-modal-head">
+      <h2>Yasal Uyarı ve Sorumluluk Reddi</h2>
+      <span class="modal-close" onclick="closeLegal('disclaimer')">×</span>
+    </div>
+    <div class="legal-modal-body">
+      <h3>Yatırım Tavsiyesi Değildir</h3>
+      <p>Pxelight Futures platformunda sunulan tüm içerikler, araçlar ve simülasyonlar yalnızca eğitim ve bilgilendirme amaçlıdır. Hiçbir içerik yatırım, finansal, hukuki veya vergi tavsiyesi niteliği taşımaz.</p>
+      <h3>Simülasyon Ortamı</h3>
+      <p>Platform tamamen sanal bir ortamdır. Gerçekleştirilen tüm işlemler simülasyondur; hiçbir gerçek para transferi veya işlemi gerçekleşmez. Sanal bakiyeler ve PNL değerleri yalnızca eğitim amaçlıdır.</p>
+      <h3>Piyasa Riski</h3>
+      <p>Kripto para piyasaları son derece değişkendir ve yüksek risk içerir. Gerçek piyasalarda kaldıraçlı işlemler, yatırdığınız tutarın tamamını veya daha fazlasını kaybetmenize yol açabilir. Gerçek yatırım kararları vermeden önce bir finansal danışmana başvurmanızı şiddetle tavsiye ederiz.</p>
+      <h3>Veri Doğruluğu</h3>
+      <p>Gerçek zamanlı piyasa verileri üçüncü taraf kaynaklardan sağlanmaktadır. Pxelight Futures, veri gecikmelerinden, eksikliklerden veya yanlışlıklardan kaynaklanan zararlardan sorumlu tutulamaz.</p>
+      <h3>Sorumluluk Sınırlaması</h3>
+      <p>Platformun kullanımından doğan doğrudan veya dolaylı hiçbir zarar için Pxelight Futures ve geliştiricileri sorumlu değildir. Platformu kullanarak bu koşulları kabul etmiş sayılırsınız.</p>
+    </div>
+  </div>
+</div>
+
+<!-- PRIVACY MODAL -->
+<div class="legal-modal-bg" id="modal-privacy">
+  <div class="legal-modal-box">
+    <div class="legal-modal-head">
+      <h2>Gizlilik Politikası</h2>
+      <span class="modal-close" onclick="closeLegal('privacy')">×</span>
+    </div>
+    <div class="legal-modal-body">
+      <p><strong>Son güncelleme:</strong> Nisan 2025</p>
+      <h3>Topladığımız Veriler</h3>
+      <p>Pxelight Futures, kullanıcıların kişisel verilerini toplamaz veya saklamaz. Platform tamamen istemci taraflı çalışır; tüm simülasyon verileri yalnızca tarayıcınızda tutulur.</p>
+      <h3>Çerezler (Cookies)</h3>
+      <p>Platform, temel işlevsellik için yerel depolama (localStorage) kullanabilir. Bu veriler yalnızca kaldıraç ve bakiye gibi tercihlerinizi hatırlamak amacıyla cihazınızda saklanır, hiçbir sunucuya iletilmez.</p>
+      <h3>Üçüncü Taraf Hizmetleri</h3>
+      <ul>
+        <li><strong>Binance WebSocket API:</strong> Gerçek zamanlı piyasa verisi için kullanılır. Binance'in gizlilik politikası geçerlidir.</li>
+        <li><strong>TradingView:</strong> Grafik gösterimi için kullanılır. TradingView'ın gizlilik politikası geçerlidir.</li>
+        <li><strong>Google AdSense:</strong> Ücretsiz hizmetin sürdürülebilirliği için reklam gösterimi yapılabilir. Google'ın gizlilik politikası geçerlidir.</li>
+        <li><strong>Google Fonts:</strong> Yazı tipi yükleme amacıyla kullanılır.</li>
+      </ul>
+      <h3>Reklam</h3>
+      <p>Bu site, Google AdSense aracılığıyla reklamlar gösterebilir. Google, reklam kişiselleştirmesi amacıyla çerez kullanabilir. Reklam kişiselleştirmesini <a href="https://adssettings.google.com" target="_blank" style="color:var(--yellow)">Google Reklam Ayarları</a> üzerinden devre dışı bırakabilirsiniz.</p>
+      <h3>Değişiklikler</h3>
+      <p>Bu gizlilik politikası zaman zaman güncellenebilir. Değişiklikler bu sayfada yayınlandığı anda geçerli olur. Platformu kullanmaya devam ederek güncel politikayı kabul etmiş sayılırsınız.</p>
+      <h3>İletişim</h3>
+      <p>Gizlilik ile ilgili sorularınız için: <span style="color:var(--yellow)">pxelight@gmail.com</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div class="legal-modal-bg" id="modal-contact">
+  <div class="legal-modal-box">
+    <div class="legal-modal-head">
+      <h2>İletişim</h2>
+      <span class="modal-close" onclick="closeLegal('contact')">×</span>
+    </div>
+    <div class="legal-modal-body">
+      <h3>Bize Ulaşın</h3>
+      <p>Pxelight Futures hakkında soru, öneri veya geri bildirimleriniz için aşağıdaki kanalları kullanabilirsiniz.</p>
+      <h3>E-posta</h3>
+      <p>Genel sorular: <span style="color:var(--yellow)">pxelight@gmail.com</span><br>
+      Teknik destek: <span style="color:var(--yellow)">pxelight@gmail.com</span><br>
+      Gizlilik: <span style="color:var(--yellow)">pxelight@gmail.com</span></p>
+      <h3>Hata Bildirimi</h3>
+      <p>Platform ile ilgili bir hata veya sorun fark ettiyseniz lütfen support@pxelight.com adresine bildirin. Geri bildirimleriniz platforma katkı sağlar.</p>
+      <h3>Reklam ve İş Birliği</h3>
+      <p>Reklam veya iş birliği teklifleri için: <span style="color:var(--yellow)">pxelight@gmail.com</span></p>
+      <p style="margin-top:16px;padding:12px;background:var(--panel2);border-radius:4px;border-left:3px solid var(--yellow);font-size:11px;color:var(--muted2)">
+        Pxelight Futures bağımsız bir geliştirici projesidir. Herhangi bir kripto borsası veya finansal kurum ile bağlantısı yoktur.
+      </p>
+    </div>
+  </div>
+</div>
 
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script>
@@ -1509,6 +1658,19 @@ function startFunding() {
 
   }, 1000);
 }
+
+// ── LEGAL MODALS ─────────────────────────────────────────────────────────────
+function openLegal(page) {
+  document.getElementById('modal-' + page).classList.add('open');
+}
+function closeLegal(page) {
+  document.getElementById('modal-' + page).classList.remove('open');
+}
+// Click outside to close legal modals
+['about','disclaimer','privacy','contact'].forEach(id => {
+  const el = document.getElementById('modal-' + id);
+  el.addEventListener('click', (e) => { if (e.target === el) closeLegal(id); });
+});
 
 // ── INPUT LISTENERS ────────────────────────────────────────────────────────────
 document.getElementById('size-inp').addEventListener('input', updateCostDisplay);
