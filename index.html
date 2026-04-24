@@ -139,6 +139,16 @@ header{height:52px;background:var(--panel);border-bottom:1px solid var(--border)
 .conn-label{color:var(--muted2);font-size:11px}
 .header-balance{font-size:13px;font-weight:600;color:var(--text)}
 .header-balance span{color:var(--muted2);font-weight:400;font-size:11px;margin-right:4px}
+/* Yenileme butonu */
+.refresh-btn{width:22px;height:22px;border-radius:50%;background:none;border:1.5px solid var(--border2);color:var(--muted2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:12px;line-height:1;transition:all .2s;flex-shrink:0;padding:0}
+.refresh-btn:hover{border-color:var(--yellow);color:var(--yellow);transform:rotate(90deg)}
+.refresh-btn.spinning svg{animation:spin-once .5s ease forwards}
+@keyframes spin-once{from{transform:rotate(0deg)}to{transform:rotate(-360deg)}}
+/* Info butonu (logo yanı) — yalnızca mobilde */
+.info-btn{display:none;width:20px;height:20px;border-radius:50%;background:none;border:1.5px solid var(--border2);color:var(--muted2);cursor:pointer;align-items:center;justify-content:center;font-size:10px;font-weight:700;line-height:1;transition:all .2s;flex-shrink:0;padding:0;font-family:var(--font-mono)}
+.info-btn:hover{border-color:var(--yellow);color:var(--yellow)}
+/* Mobil ticker alt satır */
+.mob-ticker-row{display:none}
 
 /* LAYOUT */
 .workspace{display:grid;grid-template-columns:1fr 240px 280px;flex:1;overflow:hidden;min-height:0}
@@ -148,6 +158,8 @@ header{height:52px;background:var(--panel);border-bottom:1px solid var(--border)
 
 /* TICKER */
 .ticker{height:54px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 14px;gap:28px;flex-shrink:0;position:relative;z-index:50}
+.ticker-top-row{display:contents}
+.mob-ticker-row{display:none}
 .pair-wrap{position:relative;cursor:pointer}
 .pair-name{font-family:var(--font-display);font-size:16px;font-weight:700;display:flex;align-items:center;gap:6px}
 .pair-name .sym{color:var(--yellow)}
@@ -303,6 +315,7 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
   .logo{font-size:14px}
   .logo-sub{font-size:11px}
   .conn-label{display:none}
+  .info-btn{display:flex}
 
   /* Workspace tek sütun — sekmeli panel */
   .workspace{
@@ -321,12 +334,18 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
   .trade-col{overflow-y:auto}
 
   /* Ticker kompakt */
-  .ticker{height:auto;padding:8px 10px;gap:10px;flex-wrap:wrap}
+  .ticker{height:auto;padding:6px 10px 6px;gap:0;flex-wrap:nowrap;flex-direction:column;align-items:flex-start}
+  .ticker-top-row{display:flex!important;align-items:center;gap:10px;width:100%;margin-bottom:5px}
   .pair-name{font-size:14px}
   .price-live{font-size:16px;min-width:auto}
-  .ticker-stats{gap:12px;flex-wrap:wrap}
-  .tstat .lbl{font-size:9px}
-  .tstat .val{font-size:11px}
+  .ticker-stats{display:none!important}
+  /* Mobil alt satır: fonlama + sayım + değişim */
+  .mob-ticker-row{
+    display:flex;gap:14px;width:100%;
+    padding-top:5px;border-top:1px solid var(--border)
+  }
+  .mob-ticker-row .tstat .lbl{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
+  .mob-ticker-row .tstat .val{font-size:11px;font-weight:500}
 
   /* Chart yüksekliği */
   .chart-wrap{flex:1;min-height:200px}
@@ -367,7 +386,7 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
 /* ── ÇOK KÜÇÜK MOBİL (≤400px) ── */
 @media(max-width:400px){
   .ticker{gap:6px;padding:6px 8px}
-  .ticker-stats .tstat:nth-child(n+3){display:none}
+  .mob-ticker-row .tstat:nth-child(n+3){display:none}
   .price-live{font-size:14px}
 }
 
@@ -396,6 +415,19 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
 .legal-modal-body p{margin-bottom:10px}
 .legal-modal-body ul{margin:6px 0 10px 18px}
 .legal-modal-body li{margin-bottom:4px}
+/* Info modal sekme navigasyonu */
+.info-modal-tabs{display:flex;border-bottom:1px solid var(--border);flex-shrink:0}
+.info-tab-btn{flex:1;background:none;border:none;border-bottom:2px solid transparent;color:var(--muted2);font-family:var(--font-mono);font-size:10px;font-weight:600;padding:10px 4px;cursor:pointer;transition:all .15s;margin-bottom:-1px;text-transform:uppercase;letter-spacing:.3px}
+.info-tab-btn.active{color:var(--yellow);border-bottom-color:var(--yellow)}
+.info-tab-pane{display:none}
+.info-tab-pane.active{display:block}
+
+/* Genel Taşma Engelleme */
+html, body {
+    overflow-x: hidden;
+    width: 100%;
+    position: relative;
+}
 </style>
 </head>
 <body>
@@ -444,8 +476,15 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
     </svg>
     <span class="logo-main">PXELIGHT</span>
     <span class="logo-sub">FUTURES</span>
+    <button class="info-btn" onclick="openInfoModal()" title="Hakkımızda ve Yasal Bilgiler">i</button>
   </div>
   <div class="header-right">
+    <button class="refresh-btn" id="refresh-btn" onclick="refreshData()" title="Verileri Yenile">
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/>
+        <path d="M3 3v5h5"/>
+      </svg>
+    </button>
     <div class="conn-dot" id="conn-dot"></div>
     <span class="conn-label" id="conn-label">Bağlanıyor...</span>
   </div>
@@ -456,23 +495,32 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
   <!-- LEFT -->
   <div class="main-col">
     <div class="ticker">
-      <div class="pair-wrap">
-        <div class="pair-name">
-          <span class="sym" id="active-sym">BTC</span><span class="sep">/</span>USDT
-          <span class="perp-badge">PERP</span>
-          <span class="pair-arrow">▾</span>
+      <!-- Masaüstü + Mobil üst satır -->
+      <div class="ticker-top-row">
+        <div class="pair-wrap">
+          <div class="pair-name">
+            <span class="sym" id="active-sym">BTC</span><span class="sep">/</span>USDT
+            <span class="perp-badge">PERP</span>
+            <span class="pair-arrow">▾</span>
+          </div>
+          <div class="market-dropdown">
+            <div class="mdd-header">Piyasalar - 24S Değişim</div>
+            <div class="mdd-list" id="mdd-list"></div>
+          </div>
         </div>
-        <div class="market-dropdown">
-          <div class="mdd-header">Piyasalar - 24S Değişim</div>
-          <div class="mdd-list" id="mdd-list"></div>
+        <div class="price-live" id="live-price">—</div>
+        <div class="ticker-stats">
+          <div class="tstat"><span class="lbl">Mark</span><span class="val" id="mark-price">—</span></div>
+          <div class="tstat"><span class="lbl">Index</span><span class="val" id="idx-price">—</span></div>
+          <div class="tstat"><span class="lbl">Fonlama / Geri Sayım</span><span class="val funding-val" id="funding-cd">0.0100% / —</span></div>
+          <div class="tstat"><span class="lbl">24s Değişim</span><span class="val" id="chg-24h">—</span></div>
         </div>
       </div>
-      <div class="price-live" id="live-price">—</div>
-      <div class="ticker-stats">
-        <div class="tstat"><span class="lbl">Mark</span><span class="val" id="mark-price">—</span></div>
-        <div class="tstat"><span class="lbl">Index</span><span class="val" id="idx-price">—</span></div>
-        <div class="tstat"><span class="lbl">Fonlama / Geri Sayım</span><span class="val funding-val" id="funding-cd">0.0100% / —</span></div>
-        <div class="tstat"><span class="lbl">24s Değişim</span><span class="val" id="chg-24h">—</span></div>
+      <!-- Yalnızca mobilde görünen alt satır: fonlama + geri sayım + değişim -->
+      <div class="mob-ticker-row">
+        <div class="tstat"><span class="lbl">Fonlama</span><span class="val funding-val" id="mob-funding">—</span></div>
+        <div class="tstat"><span class="lbl">Geri Sayım</span><span class="val" id="mob-countdown">—</span></div>
+        <div class="tstat"><span class="lbl">24s Değişim</span><span class="val" id="mob-chg">—</span></div>
       </div>
     </div>
 
@@ -792,6 +840,88 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
   </div>
 </div>
 
+<!-- UNIFIED INFO MODAL (mobil) -->
+<div class="legal-modal-bg" id="modal-info">
+  <div class="legal-modal-box">
+    <div class="legal-modal-head">
+      <h2>Bilgi &amp; Yasal</h2>
+      <span class="modal-close" onclick="closeInfoModal()">×</span>
+    </div>
+    <div class="info-modal-tabs">
+      <button class="info-tab-btn active" onclick="switchInfoTab('about',this)">Hakkımızda</button>
+      <button class="info-tab-btn" onclick="switchInfoTab('disclaimer',this)">Yasal Uyarı</button>
+      <button class="info-tab-btn" onclick="switchInfoTab('privacy',this)">Gizlilik</button>
+      <button class="info-tab-btn" onclick="switchInfoTab('contact',this)">İletişim</button>
+    </div>
+    <div class="legal-modal-body">
+      <!-- HAKKIMIZDA -->
+      <div class="info-tab-pane active" id="itab-about">
+        <h3>Pxelight Futures Nedir?</h3>
+        <p>Pxelight Futures, kripto para vadeli işlemlerini (futures) gerçek piyasa koşullarını simüle ederek öğrenmenize olanak tanıyan ücretsiz bir eğitim platformudur. Gerçek para yatırmanıza gerek kalmadan kaldıraçlı işlemleri, emir defterini ve risk yönetimini deneyimleyebilirsiniz.</p>
+        <h3>Ne Sunuyoruz?</h3>
+        <ul>
+          <li>Gerçek zamanlı Bybit verileriyle BTC, ETH ve diğer kripto çiftleri</li>
+          <li>Limit, Market ve Stop-Limit emir türleri</li>
+          <li>1x'ten 125x'e kaldıraç desteği</li>
+          <li>İzole ve Çapraz marjin modları</li>
+          <li>Canlı emir defteri ve TradingView grafik entegrasyonu</li>
+          <li>Komisyon hesaplama ve likidasyon simülasyonu</li>
+        </ul>
+        <h3>Hedef Kitle</h3>
+        <p>Kripto piyasalarına yeni başlayan bireyler, kaldıraçlı işlemleri öğrenmek isteyen yatırımcılar ve stratejilerini test etmek isteyen deneyimli traderlar için tasarlanmıştır.</p>
+        <h3>Teknik Altyapı</h3>
+        <p>Platform, Bybit WebSocket ve REST API üzerinden gerçek zamanlı fiyat ve emir defteri verisi çeker. Grafik motoru olarak TradingView kütüphanesi kullanılmaktadır. Tüm işlemler yalnızca tarayıcınızda gerçekleşir; hiçbir kişisel veri sunucularımıza gönderilmez.</p>
+      </div>
+      <!-- YASAL UYARI -->
+      <div class="info-tab-pane" id="itab-disclaimer">
+        <h3>Yatırım Tavsiyesi Değildir</h3>
+        <p>Pxelight Futures platformunda sunulan tüm içerikler, araçlar ve simülasyonlar yalnızca eğitim ve bilgilendirme amaçlıdır. Hiçbir içerik yatırım, finansal, hukuki veya vergi tavsiyesi niteliği taşımaz.</p>
+        <h3>Simülasyon Ortamı</h3>
+        <p>Platform tamamen sanal bir ortamdır. Gerçekleştirilen tüm işlemler simülasyondur; hiçbir gerçek para transferi veya işlemi gerçekleşmez.</p>
+        <h3>Piyasa Riski</h3>
+        <p>Kripto para piyasaları son derece değişkendir ve yüksek risk içerir. Gerçek piyasalarda kaldıraçlı işlemler, yatırdığınız tutarın tamamını veya daha fazlasını kaybetmenize yol açabilir. Gerçek yatırım kararları vermeden önce bir finansal danışmana başvurmanızı şiddetle tavsiye ederiz.</p>
+        <h3>Veri Doğruluğu</h3>
+        <p>Gerçek zamanlı piyasa verileri üçüncü taraf kaynaklardan sağlanmaktadır. Pxelight Futures, veri gecikmelerinden veya yanlışlıklardan kaynaklanan zararlardan sorumlu tutulamaz.</p>
+        <h3>Sorumluluk Sınırlaması</h3>
+        <p>Platformun kullanımından doğan doğrudan veya dolaylı hiçbir zarar için Pxelight Futures ve geliştiricileri sorumlu değildir. Platformu kullanarak bu koşulları kabul etmiş sayılırsınız.</p>
+      </div>
+      <!-- GİZLİLİK -->
+      <div class="info-tab-pane" id="itab-privacy">
+        <p><strong>Son güncelleme:</strong> Nisan 2025</p>
+        <h3>Topladığımız Veriler</h3>
+        <p>Pxelight Futures, kullanıcıların kişisel verilerini toplamaz veya saklamaz. Platform tamamen istemci taraflı çalışır; tüm simülasyon verileri yalnızca tarayıcınızda tutulur.</p>
+        <h3>Çerezler (Cookies)</h3>
+        <p>Platform, temel işlevsellik için yerel depolama (localStorage) kullanabilir. Bu veriler yalnızca kaldıraç ve bakiye gibi tercihlerinizi hatırlamak amacıyla cihazınızda saklanır, hiçbir sunucuya iletilmez.</p>
+        <h3>Üçüncü Taraf Hizmetleri</h3>
+        <ul>
+          <li><strong>Bybit WebSocket API:</strong> Gerçek zamanlı piyasa verisi için kullanılır.</li>
+          <li><strong>TradingView:</strong> Grafik gösterimi için kullanılır.</li>
+          <li><strong>Google AdSense:</strong> Ücretsiz hizmetin sürdürülebilirliği için reklam gösterimi yapılabilir.</li>
+          <li><strong>Google Fonts:</strong> Yazı tipi yükleme amacıyla kullanılır.</li>
+        </ul>
+        <h3>Değişiklikler</h3>
+        <p>Bu gizlilik politikası zaman zaman güncellenebilir. Platformu kullanmaya devam ederek güncel politikayı kabul etmiş sayılırsınız.</p>
+        <h3>İletişim</h3>
+        <p>Gizlilik ile ilgili sorularınız için: <span style="color:var(--yellow)">pxelight@gmail.com</span></p>
+      </div>
+      <!-- İLETİŞİM -->
+      <div class="info-tab-pane" id="itab-contact">
+        <h3>Bize Ulaşın</h3>
+        <p>Pxelight Futures hakkında soru, öneri veya geri bildirimleriniz için aşağıdaki kanalları kullanabilirsiniz.</p>
+        <h3>E-posta</h3>
+        <p>Genel sorular &amp; Teknik destek &amp; Gizlilik:<br><span style="color:var(--yellow)">pxelight@gmail.com</span></p>
+        <h3>Hata Bildirimi</h3>
+        <p>Platform ile ilgili bir hata veya sorun fark ettiyseniz lütfen e-posta ile bildirin. Geri bildirimleriniz platforma katkı sağlar.</p>
+        <h3>Reklam ve İş Birliği</h3>
+        <p>Reklam veya iş birliği teklifleri için: <span style="color:var(--yellow)">pxelight@gmail.com</span></p>
+        <p style="margin-top:16px;padding:12px;background:var(--panel2);border-radius:4px;border-left:3px solid var(--yellow);font-size:11px;color:var(--muted2)">
+          Pxelight Futures bağımsız bir geliştirici projesidir. Herhangi bir kripto borsası veya finansal kurum ile bağlantısı yoktur.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script src="https://s3.tradingview.com/tv.js"></script>
 <script>
 // ── STATE ─────────────────────────────────────────────────────────────────────
@@ -877,14 +1007,21 @@ const coinMinSizes = {BTC:0.001,ETH:0.01,SOL:0.1,XRP:1,BNB:0.01,LINK:0.1,ADA:1,A
 function connectWS(symbol) {
   if (ws) { ws.close(); ws = null; }
   setConn(false);
-  ws = new WebSocket(`wss://fstream.binance.com/ws/${symbol.toLowerCase()}usdt@ticker`);
-  ws.onopen = () => setConn(true);
+  ws = new WebSocket('wss://stream.bybit.com/v5/public/linear');
+  ws.onopen = () => {
+    setConn(true);
+    ws.send(JSON.stringify({ op: 'subscribe', args: [`tickers.${symbol.toUpperCase()}USDT`] }));
+  };
   ws.onclose = () => { setConn(false); setTimeout(()=>connectWS(coin), 3000); };
   ws.onerror = () => { setConn(false); };
   ws.onmessage = (e) => {
-    const d = JSON.parse(e.data);
+    const msg = JSON.parse(e.data);
+    if (!msg.data) return;
+    const d = msg.data;
+    const newPrice = parseFloat(d.lastPrice);
+    if (!newPrice) return;
     prevPrice = livePrice;
-    livePrice = parseFloat(d.c);
+    livePrice = newPrice;
     livePrices[symbol.toUpperCase()] = livePrice;
     lastPriceDirection = livePrice >= prevPrice ? 1 : -1;
     updateTicker(d);
@@ -898,11 +1035,15 @@ function connectWS(symbol) {
 function ensureBgWS(symbol) {
   if (symbol === coin) return;
   if (bgWs[symbol]) return;
-  const s = new WebSocket(`wss://fstream.binance.com/ws/${symbol.toLowerCase()}usdt@ticker`);
+  const s = new WebSocket('wss://stream.bybit.com/v5/public/linear');
+  s.onopen = () => {
+    s.send(JSON.stringify({ op: 'subscribe', args: [`tickers.${symbol.toUpperCase()}USDT`] }));
+  };
   s.onmessage = (e) => {
-    const d = JSON.parse(e.data);
-    livePrices[symbol] = parseFloat(d.c);
-    updatePNL();
+    const msg = JSON.parse(e.data);
+    if (!msg.data) return;
+    const price = parseFloat(msg.data.lastPrice);
+    if (price) { livePrices[symbol] = price; updatePNL(); }
   };
   s.onclose = () => { delete bgWs[symbol]; };
   bgWs[symbol] = s;
@@ -932,16 +1073,32 @@ function updateTicker(d) {
   const el = document.getElementById('live-price');
   el.textContent = fmt(livePrice, coinDecimals[coin]);
   el.className = 'price-live ' + (lastPriceDirection > 0 ? '' : 'down');
-  document.getElementById('mark-price').textContent = fmt(livePrice * 1.00008, coinDecimals[coin]);
-  document.getElementById('idx-price').textContent = fmt(livePrice * 0.99992, coinDecimals[coin]);
+  // Bybit: markPrice ve indexPrice doğrudan gelir
+  const markP = parseFloat(d.markPrice) || livePrice * 1.00008;
+  const idxP  = parseFloat(d.indexPrice) || livePrice * 0.99992;
+  document.getElementById('mark-price').textContent = fmt(markP, coinDecimals[coin]);
+  document.getElementById('idx-price').textContent  = fmt(idxP,  coinDecimals[coin]);
   document.getElementById('mid-row').innerHTML = `${fmt(livePrice, coinDecimals[coin])}<span class="spread" style="color:var(--muted)"> Spread: ${(livePrice * 0.0002).toFixed(2)}</span>`;
-  const chg = parseFloat(d.P) || 0;
+  // Bybit: price24hPcnt → oran (0.012 = %1.2)
+  const chgRaw = parseFloat(d.price24hPcnt) || 0;
+  const chg = chgRaw * 100;
   const chgEl = document.getElementById('chg-24h');
   chgEl.textContent = (chg >= 0 ? '+' : '') + chg.toFixed(2) + '%';
   chgEl.style.color = chg >= 0 ? 'var(--green)' : 'var(--red)';
+  // Mobil ticker alt satır senkronize güncelle
+  const mobFunding = document.getElementById('mob-funding');
+  const mobChg = document.getElementById('mob-chg');
+  if (mobFunding) {
+    const fEl = document.getElementById('funding-cd');
+    if (fEl) mobFunding.textContent = fEl.textContent.split(' / ')[0];
+    mobFunding.style.color = 'var(--yellow)';
+  }
+  if (mobChg) {
+    mobChg.textContent = chgEl.textContent;
+    mobChg.style.color = chgEl.style.color;
+  }
   document.getElementById('avbl').textContent = fmt(walletBalance, 2) + ' USDT ✎';
   if (orderType === 'Market') document.getElementById('price-inp').value = livePrice.toFixed(coinDecimals[coin]);
-  // max size: walletBalance = size * (price/leverage + price*COMMISSION_RATE) => size = walletBalance / (price * (1/leverage + COMMISSION_RATE))
   const maxSize = (walletBalance / (livePrice * (1 / leverage + COMMISSION_RATE))).toFixed(coinDecimals[coin] + 2);
   document.getElementById('max-long').textContent = maxSize + ' ' + coin;
   document.getElementById('max-short').textContent = maxSize + ' ' + coin;
@@ -1009,11 +1166,15 @@ function setBookPrice(p) {
 // ── MARKETS ────────────────────────────────────────────────────────────────────
 async function renderMarkets() {
   try {
-    const symbols = COINS.map(c => `"${c}USDT"`).join(',');
-    const res = await fetch(`https://fapi.binance.com/fapi/v1/ticker/24hr`);
+    const res = await fetch('https://api.bybit.com/v5/market/tickers?category=linear');
     const data = await res.json();
     const map = {};
-    data.forEach(d => { map[d.symbol] = parseFloat(d.priceChangePercent); });
+    if (data.result && data.result.list) {
+      data.result.list.forEach(d => {
+        // price24hPcnt Bybit'te oran olarak gelir (0.012 = %1.2)
+        map[d.symbol] = parseFloat(d.price24hPcnt) * 100;
+      });
+    }
     document.getElementById('mdd-list').innerHTML = COINS.map(c => {
       const chg = map[c + 'USDT'] ?? 0;
       const color = chg >= 0 ? 'var(--green)' : 'var(--red)';
@@ -1066,7 +1227,7 @@ function loadTVWidget(sym) {
   if (typeof TradingView === 'undefined') return;
   tvWidget = new TradingView.widget({
     autosize: true,
-    symbol: `BINANCE:${sym}USDT.P`,
+    symbol: `BYBIT:${sym}USDT.P`,
     interval: '15',
     theme: 'dark',
     locale: 'tr',
@@ -1166,7 +1327,7 @@ function placeTrade(side) {
       if (immediate) {
         closePos(targetPos.id, clampedSize);
       } else {
-        pendingOrders.push({ id: Date.now(), symbol: coin, side, price: priceInput, size: clampedSize, margin: 0, lev: leverage, mode: marginMode, reduceOnly: true, closingId: targetPos.id });
+        pendingOrders.push({ id: Date.now(), symbol: coin, side, price: priceInput, size: clampedSize, margin: 0, lev: leverage, mode: marginMode, reduceOnly: true, closingId: targetPos.id, closingPos: closingSide, orderEntryPrice: livePrice });
         renderPendingOrders();
         toast(`Limit Yalnızca Azalt verildi — ${closingSide} ${fmt(clampedSize, coinDecimals[coin] + 2)} ${coin}`, 'success');
       }
@@ -1195,25 +1356,47 @@ function placeTrade(side) {
     }
   } else if (orderType === 'StopLimit') {
     const stopPrice = parseFloat(document.getElementById('stop-inp').value);
-    if (!stopPrice || !priceInput) { toast('Stop ve limit fiyat girin', 'error'); return; }
+    if (!stopPrice || stopPrice <= 0 || !priceInput || priceInput <= 0) { toast('Stop ve limit fiyat girin', 'error'); return; }
+    if (stopPrice === priceInput) { toast('Stop ve limit fiyat aynı olamaz', 'error'); return; }
+
     if (reduceOnly) {
-      // "KAPAT SHORT" → side='Long' → kapatılacak pozisyon: Short
-      // "KAPAT LONG"  → side='Short' → kapatılacak pozisyon: Long
+      // Pozisyon kapatma (SL veya TP):
+      // Kullanıcı stop'u nereye koymuşsa oradan tetikle — yön otomatik algılanır
       const closingSide = side === 'Long' ? 'Short' : 'Long';
       const targetPos = positions.find(p => p.symbol === coin && p.side === closingSide);
       if (!targetPos) { toast(`Yalnızca Azalt: Kapatılacak ${closingSide} pozisyon yok`, 'error'); return; }
       const clampedSize = Math.min(size, targetPos.size);
-      pendingOrders.push({ id: Date.now(), symbol: coin, side, price: priceInput, stopPrice, size: clampedSize, margin: 0, isStop: true, lev: leverage, mode: marginMode, reduceOnly: true, closingId: targetPos.id });
+      // stopAbove: stop, mevcut fiyatın üstündeyse true → fiyat >= stop olunca tetikle
+      const stopAbove = stopPrice > livePrice;
+      // TP/SL etiketi burada kesin belirleniyor:
+      // Long TP: closingSide=Long, stop USTTE → stopAbove=true
+      // Long SL: closingSide=Long, stop ALTTA → stopAbove=false
+      // Short TP: closingSide=Short, stop ALTTA → stopAbove=false
+      // Short SL: closingSide=Short, stop USTTE → stopAbove=true
+      const isTPOrder = (closingSide === 'Long' && stopAbove) || (closingSide === 'Short' && !stopAbove);
+      pendingOrders.push({
+        id: Date.now(), symbol: coin, side, price: priceInput, stopPrice, stopAbove,
+        size: clampedSize, margin: 0, isStop: true, stopActivated: false,
+        lev: leverage, mode: marginMode, reduceOnly: true, closingId: targetPos.id,
+        closingPos: closingSide, isTP: isTPOrder
+      });
       renderPendingOrders();
-      toast(`Stop-Limit Yalnızca Azalt verildi — ${closingSide} ${fmt(clampedSize, coinDecimals[coin] + 2)} ${coin}`, 'success');
+      const label = isTPOrder ? 'TP' : 'SL';
+      toast(`Stop-Limit ${label} verildi — Stop: ${fmt(stopPrice, coinDecimals[coin])} → Limit: ${fmt(priceInput, coinDecimals[coin])}`, 'success');
     } else {
+      // Yeni pozisyon açma (breakout/breakdown)
+      const stopAbove = stopPrice > livePrice;
       const cost = (priceInput * size) / leverage;
       const commission = priceInput * size * COMMISSION_RATE;
       if ((cost + commission) > walletBalance) { toast('Yetersiz bakiye!', 'error'); return; }
       walletBalance -= cost;
-      pendingOrders.push({ id: Date.now(), symbol: coin, side, price: priceInput, stopPrice, size, margin: cost, isStop: true, lev: leverage, mode: marginMode, reduceOnly: false });
+      pendingOrders.push({
+        id: Date.now(), symbol: coin, side, price: priceInput, stopPrice, stopAbove,
+        size, margin: cost, isStop: true, stopActivated: false,
+        lev: leverage, mode: marginMode, reduceOnly: false
+      });
       renderPendingOrders();
-      toast(`Stop-Limit emir verildi`, 'success');
+      toast(`Stop-Limit verildi — Stop: ${fmt(stopPrice, coinDecimals[coin])} → Limit: ${fmt(priceInput, coinDecimals[coin])}`, 'success');
     }
   }
   document.getElementById('size-inp').value = '';
@@ -1313,55 +1496,89 @@ function cancelOrder(id) {
 
 function checkPendingOrders() {
   let filled = [];
+  let changed = false;
+
   pendingOrders.forEach(o => {
     const oPrice = livePrices[o.symbol] || livePrice;
+
     if (o.isStop) {
-      let stopHit;
-      if (o.reduceOnly) {
-        // Reduce Only: tetikleme yönü kapatılacak pozisyonun tarafına göre belirlenir
-        // Long pozisyonu kapatmak → stop aşağıda → fiyat stopPrice'ın altına düşünce tetikle
-        // Short pozisyonu kapatmak → stop yukarıda → fiyat stopPrice'ın üstüne çıkınca tetikle
-        const targetPos = positions.find(p => p.id === o.closingId);
-        if (!targetPos) { filled.push(o.id); return; } // pozisyon kapanmış, emri iptal
-        stopHit = (targetPos.side === 'Long' && oPrice <= o.stopPrice) ||
-                  (targetPos.side === 'Short' && oPrice >= o.stopPrice);
-      } else {
-        stopHit = (o.side === 'Long' && oPrice <= o.stopPrice) || (o.side === 'Short' && oPrice >= o.stopPrice);
+
+      if (!o.stopActivated) {
+        // Tetikleme: stop nereye konduysa o yönden tetikle
+        // stopAbove=true  → fiyat stop'un üstüne çıkınca tetikle (fiyat >= stop)
+        // stopAbove=false → fiyat stop'un altına düşünce tetikle (fiyat <= stop)
+        const stopHit = o.stopAbove ? (oPrice >= o.stopPrice) : (oPrice <= o.stopPrice);
+        if (stopHit) {
+          o.stopActivated = true;
+          changed = true;
+          toast(`Stop tetiklendi @ ${fmt(oPrice, coinDecimals[o.symbol] || 2)} — Limit bekleniyor: ${fmt(o.price, coinDecimals[o.symbol] || 2)}`, 'warn');
+        }
+        return;
       }
-      if (stopHit) {
+
+      // Limit dolumu: pozisyon yonu ve TP/SL bilgisine gore dogru yon
+      let limitHit;
+      if (o.reduceOnly) {
+        // closingPos=kapatilacak pozisyon yonu, isTP=kar al mi zarar kes mi
+        // Long TP (closingPos=Long, isTP=true):  yukari git → oPrice >= limit
+        // Long SL (closingPos=Long, isTP=false): asagi git → oPrice <= limit
+        // Short TP (closingPos=Short, isTP=true): asagi git → oPrice <= limit
+        // Short SL (closingPos=Short, isTP=false): yukari git → oPrice >= limit
+        if (o.isTP) {
+          limitHit = o.closingPos === 'Long' ? (oPrice >= o.price) : (oPrice <= o.price);
+        } else {
+          limitHit = o.closingPos === 'Long' ? (oPrice <= o.price) : (oPrice >= o.price);
+        }
+      } else {
+        // Yeni pozisyon acma: limit vs stop yonune gore
+        const limitAbove = o.price > o.stopPrice;
+        limitHit = limitAbove ? (oPrice >= o.price) : (oPrice <= o.price);
+      }
+
+      if (limitHit) {
         if (o.reduceOnly) {
-          const targetPos = positions.find(p => p.id === o.closingId);
-          if (targetPos) {
-            if (o.size >= targetPos.size) {
-              closePos(targetPos.id);
-            } else {
-              const ratio = o.size / targetPos.size;
-              const partialPnl = targetPos.pnl * ratio;
-              const partialMargin = targetPos.margin * ratio;
-              const closePrice = livePrices[targetPos.symbol] || livePrice || targetPos.entry;
-              const commission = closePrice * o.size * COMMISSION_RATE;
-              walletBalance += partialMargin + partialPnl - commission;
-              targetPos.size = parseFloat((targetPos.size - o.size).toFixed(8));
-              targetPos.margin -= partialMargin;
-              renderPositions();
-              toast(`Kısmi kapanış: ${partialPnl >= 0 ? '+' : ''}${fmt(partialPnl - commission, 2)} USDT`, partialPnl >= 0 ? 'success' : 'error');
-            }
-          }
+          // ID ile bul, yoksa sembol+yon ile fallback
+          const targetPos = positions.find(p => p.id === o.closingId)
+            || positions.find(p => p.symbol === o.symbol && p.side === o.closingPos);
+          if (targetPos) closePos(targetPos.id, o.size < targetPos.size ? o.size : undefined);
         } else {
           walletBalance += o.margin;
           openPosition(o.side, o.price, o.size, o.symbol, o.lev, o.mode);
         }
         filled.push(o.id);
       }
+
     } else {
-      const hit = (o.side === 'Long' && oPrice <= o.price) || (o.side === 'Short' && oPrice >= o.price);
+      // Normal Limit
+      // reduceOnly icin: side degil closingPos yonune gore dolum kontrol edilmeli
+      // Long pozisyonu kapatmak (sell): fiyat limit'e yukari gelince (TP) veya asagi (SL)
+      //   - Limit emirde: side='Short' (sell), closingPos='Long'
+      //     TP: limit yukarda → fiyat >= limit | SL: limit asagida → fiyat <= limit
+      // Normal (yeni poz): Long limit → fiyat <= limit, Short limit → fiyat >= limit
+      let hit;
+      if (o.reduceOnly && o.closingPos) {
+        // closingPos: kapatilacak pozisyon yonu
+        // Long pozisyon kapatmak (sell emri):
+        //   limit > emir fiyati → TP (yukari) → oPrice >= limit
+        //   limit < emir fiyati → SL (asagi) → oPrice <= limit
+        // Short pozisyon kapatmak (buy emri):
+        //   limit < emir fiyati → TP (asagi) → oPrice <= limit
+        //   limit > emir fiyati → SL (yukari) → oPrice >= limit
+        // orderEntryPrice: emir verilirken kaydedilen fiyat
+        const entryRef = o.orderEntryPrice || o.price;
+        if (o.closingPos === 'Long') {
+          hit = o.price > entryRef ? (oPrice >= o.price) : (oPrice <= o.price);
+        } else {
+          hit = o.price < entryRef ? (oPrice <= o.price) : (oPrice >= o.price);
+        }
+      } else {
+        hit = (o.side === 'Long' && oPrice <= o.price) || (o.side === 'Short' && oPrice >= o.price);
+      }
       if (hit) {
         if (o.reduceOnly) {
-          const closingSide = o.side === 'Long' ? 'Short' : 'Long';
+          const closingSide = o.closingPos || (o.side === 'Long' ? 'Short' : 'Long');
           const targetPos = positions.find(p => p.id === o.closingId) || positions.find(p => p.symbol === o.symbol && p.side === closingSide);
-          if (targetPos) {
-            closePos(targetPos.id, o.size < targetPos.size ? o.size : undefined);
-          }
+          if (targetPos) closePos(targetPos.id, o.size < targetPos.size ? o.size : undefined);
         } else {
           walletBalance += o.margin;
           openPosition(o.side, o.price, o.size, o.symbol, o.lev, o.mode);
@@ -1370,7 +1587,11 @@ function checkPendingOrders() {
       }
     }
   });
-  if (filled.length) { pendingOrders = pendingOrders.filter(o => !filled.includes(o.id)); renderPendingOrders(); }
+
+  if (filled.length || changed) {
+    pendingOrders = pendingOrders.filter(o => !filled.includes(o.id));
+    renderPendingOrders();
+  }
 }
 
 // ── RENDER ─────────────────────────────────────────────────────────────────────
@@ -1402,15 +1623,35 @@ function renderPendingOrders() {
   document.getElementById('ord-tab').textContent = `Emirler (${pendingOrders.length})`;
   if (pendingOrders.length === 0) { body.innerHTML = ''; empty.style.display = 'flex'; return; }
   empty.style.display = 'none';
-  body.innerHTML = pendingOrders.map(o => `
-    <tr>
+  body.innerHTML = pendingOrders.map(o => {
+    let typeCell;
+    if (o.isStop) {
+      const stateTag = o.stopActivated
+        ? `<span class="tag" style="color:var(--yellow);background:rgba(240,185,11,.15)">LİMİT AKTİF</span>`
+        : `<span class="tag" style="color:var(--muted2);background:rgba(255,255,255,.06)">STOP BEKLİYOR</span>`;
+      let purposeTag = '';
+      if (o.reduceOnly) {
+        // isTP emirde kesin olarak kaydedildi — dinamik hesaba gerek yok
+        const isTP = (o.isTP !== undefined) ? o.isTP
+          : ((o.side === 'Long' ? 'Short' : 'Long') === 'Long' ? o.stopAbove : !o.stopAbove);
+        purposeTag = isTP
+          ? ` <span class="tag" style="color:var(--green);background:rgba(14,203,129,.12)">TP</span>`
+          : ` <span class="tag" style="color:var(--red);background:rgba(246,70,93,.12)">SL</span>`;
+      }
+      typeCell = `Stop-Limit ${stateTag}${purposeTag}<br><span style="font-size:10px;color:var(--muted)">S:${fmt(o.stopPrice,coinDecimals[o.symbol]||2)} L:${fmt(o.price,coinDecimals[o.symbol]||2)}</span>`;
+    } else {
+      const roTag = o.reduceOnly ? ` <span class="tag" style="color:var(--orange);background:rgba(255,154,0,.12)">RO</span>` : '';
+      typeCell = `Limit${roTag}`;
+    }
+    return `<tr>
       <td>${o.symbol}USDT</td>
-      <td>${o.isStop ? 'Stop-Limit' + (o.reduceOnly ? ' <span class="tag" style="color:var(--orange);background:rgba(255,154,0,.12)">RO</span>' : '') : 'Limit'}</td>
+      <td>${typeCell}</td>
       <td style="color:${o.side==='Long'?'var(--green)':'var(--red)'}">${o.side === 'Long' ? 'Alış' : 'Satış'}</td>
       <td>${fmt(o.price, coinDecimals[o.symbol] || 2)}</td>
       <td>${o.size}</td>
       <td><button class="cancel-btn" onclick="cancelOrder(${o.id})">İptal</button></td>
-    </tr>`).join('');
+    </tr>`;
+  }).join('');
 }
 
 function updatePNL() {
@@ -1616,10 +1857,13 @@ let fundingNextTime = null;
 
 async function fetchFundingRate(symbol) {
   try {
-    const res = await fetch(`https://fapi.binance.com/fapi/v1/premiumIndex?symbol=${symbol.toUpperCase()}USDT`);
+    const res = await fetch(`https://api.bybit.com/v5/market/tickers?category=linear&symbol=${symbol.toUpperCase()}USDT`);
     if (!res.ok) return;
-    const d = await res.json();
-    const rate = parseFloat(d.lastFundingRate);
+    const data = await res.json();
+    const d = data.result && data.result.list && data.result.list[0];
+    if (!d) return;
+    // Bybit: fundingRate ve nextFundingTime
+    const rate = parseFloat(d.fundingRate);
     const nextTime = parseInt(d.nextFundingTime);
     if (!isNaN(rate)) currentFundingRate = rate;
     if (!isNaN(nextTime) && nextTime > 0) fundingNextTime = nextTime;
@@ -1656,7 +1900,28 @@ function startFunding() {
     const el = document.getElementById('funding-cd');
     el.textContent = `${rate} / ${countdown}`;
 
+    // Mobil geri sayım senkronize
+    const mobCd = document.getElementById('mob-countdown');
+    if (mobCd) mobCd.textContent = countdown;
+    const mobF = document.getElementById('mob-funding');
+    if (mobF) { mobF.textContent = rate; mobF.style.color = 'var(--yellow)'; }
+
   }, 1000);
+}
+
+// ── VERİ YENİLEME ────────────────────────────────────────────────────────────
+function refreshData() {
+  const btn = document.getElementById('refresh-btn');
+  if (btn) {
+    btn.classList.add('spinning');
+    setTimeout(() => btn.classList.remove('spinning'), 520);
+  }
+  // WebSocket yeniden bağlan
+  connectWS(coin);
+  // Funding rate yenile
+  fetchFundingRate(coin);
+  // Market dropdown yenile
+  renderMarkets();
 }
 
 // ── LEGAL MODALS ─────────────────────────────────────────────────────────────
@@ -1665,6 +1930,27 @@ function openLegal(page) {
 }
 function closeLegal(page) {
   document.getElementById('modal-' + page).classList.remove('open');
+}
+// Mobil birleşik info modal
+function openInfoModal(tab) {
+  if (tab) switchInfoTab(tab);
+  document.getElementById('modal-info').classList.add('open');
+}
+function closeInfoModal() {
+  document.getElementById('modal-info').classList.remove('open');
+}
+function switchInfoTab(tab, btn) {
+  document.querySelectorAll('.info-tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.info-tab-btn').forEach(b => b.classList.remove('active'));
+  const pane = document.getElementById('itab-' + tab);
+  if (pane) pane.classList.add('active');
+  if (btn) btn.classList.add('active');
+  else {
+    const btns = document.querySelectorAll('.info-tab-btn');
+    const tabs = ['about','disclaimer','privacy','contact'];
+    const idx = tabs.indexOf(tab);
+    if (idx >= 0 && btns[idx]) btns[idx].classList.add('active');
+  }
 }
 // Click outside to close legal modals
 ['about','disclaimer','privacy','contact'].forEach(id => {
