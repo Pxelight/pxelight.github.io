@@ -2,7 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>Pxelight Futures Simulator</title>
 <meta name="description" content="Pxelight Futures, gerçek piyasa verileriyle risk almadan kripto para futures işlemlerini öğrenmenizi sağlayan ücretsiz bir eğitim simülatörüdür. BTC, ETH ve daha fazlası.">
 <meta name="keywords" content="kripto futures simülatörü, bitcoin trading, ethereum futures, kaldıraçlı işlem, paper trading, kripto eğitim">
@@ -308,7 +308,7 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
 
 /* ── MOBİL (≤768px) ── */
 @media(max-width:768px){
-  body{overflow:hidden;height:100dvh}
+  body{overflow:hidden;height:100dvh;touch-action:pan-x pan-y}
 
   /* Header küçültme */
   header{height:44px;padding:0 12px}
@@ -330,8 +330,8 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
   }
   .main-col.mob-active,.book-col.mob-active,.trade-col.mob-active{display:flex}
 
-  /* Trade col scroll */
-  .trade-col{overflow-y:auto}
+  /* Trade col scroll yok — her şey sığsın */
+  .trade-col{overflow:hidden;padding:10px 12px}
 
   /* Ticker kompakt */
   .ticker{height:auto;padding:6px 10px 6px;gap:0;flex-wrap:nowrap;flex-direction:column;align-items:flex-start}
@@ -381,12 +381,21 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
 
   /* Toast alt nav üstünde */
   .toast{bottom:60px;right:12px;left:12px;max-width:none;text-align:center}
+
+  /* Trade panel kompakt */
+  .mode-row{margin-bottom:10px}
+  .order-type-tabs{margin-bottom:10px}
+  .avbl-row{margin-bottom:8px}
+  .inp-group{padding:7px 10px;margin-bottom:7px}
+  .slider-wrap{margin:10px 0 4px}
+  .btn-row{margin-top:6px}
+  .cost-row{padding-top:3px}
+  .buy-btn,.sell-btn{padding:10px}
 }
 
 /* ── ÇOK KÜÇÜK MOBİL (≤400px) ── */
 @media(max-width:400px){
   .ticker{gap:6px;padding:6px 8px}
-  .mob-ticker-row .tstat:nth-child(2){display:none}
   .price-live{font-size:14px}
 }
 
