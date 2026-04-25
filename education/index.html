@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eğitim Merkezi – Pxelight Futures</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%230d0f12'/%3E%3Cg transform='translate(256,256)'%3E%3Cpolygon points='0,-110 95,-55 95,55 0,110 -95,55 -95,-55' fill='none' stroke='%23f0b90b' stroke-width='22'/%3E%3Cpolygon points='0,-62 54,-31 54,31 0,62 -54,31 -54,-31' fill='%23f0b90b' opacity='.25'/%3E%3Cline x1='0' y1='-110' x2='0' y2='-62' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='0' y1='62' x2='0' y2='110' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='-55' x2='54' y2='-31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='-31' x2='-95' y2='-55' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='55' x2='54' y2='31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='31' x2='-95' y2='55' stroke='%23f0b90b' stroke-width='14'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%230d0f12'/%3E%3Cg transform='translate(256,256)'%3E%3Cpolygon points='0,-110 95,-55 95,55 0,110 -95,55 -95,-55' fill='none' stroke='%23f0b90b' stroke-width='22'/%3E%3Cpolygon points='0,-62 54,-31 54,31 0,62 -54,31 -54,-31' fill='%23f0b90b' opacity='.25'/%3E%3Cline x1='0' y1='-110' x2='0' y2='-62' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='0' y1='62' x2='0' y2='110' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='-55' x2='54' y2='-31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='-31' x2='-95' y2='-55' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='55' x2='54' y2='31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='31' x2='-95' y2='55' stroke='%23f0b90b' stroke-width='14'/%3E%3C/g%3E%3C/svg%3E">
+<meta name="description" content="Kripto para futures işlemleri hakkında kapsamlı eğitim makaleleri. Futures nedir, kaldıraç nasıl kullanılır, risk yönetimi ve daha fazlası.">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f12;--panel:#13161b;--panel2:#191d24;--border:#252a33;--border2:#2e3441;
+  --text:#e2e6ed;--muted:#5a6375;--muted2:#8892a4;--yellow:#f0b90b;--green:#0ecb81;
+  --red:#f6465d;--orange:#ff9a00;--blue:#1677ff;
+  --font-mono:'JetBrains Mono',monospace;--font-display:'Syne',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-mono);font-size:13px;min-height:100vh;display:flex;flex-direction:column;}
+
+/* NAV */
+nav.topnav{height:52px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:var(--font-display);font-size:17px;font-weight:800;letter-spacing:-.5px;text-decoration:none;}
+.nav-logo span{color:var(--yellow)}
+.nav-logo em{color:var(--muted2);font-style:normal;font-weight:500;font-size:13px;}
+.nav-links{display:flex;gap:24px;align-items:center;}
+.nav-links a{color:var(--muted2);text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;transition:color .15s;}
+.nav-links a:hover,.nav-links a.active{color:var(--yellow);}
+.nav-back{display:flex;align-items:center;gap:6px;color:var(--muted2);text-decoration:none;font-size:11px;font-weight:600;transition:color .15s;}
+.nav-back:hover{color:var(--yellow);}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,#0d0f12 0%,#13161b 50%,#0d1a0d 100%);border-bottom:1px solid var(--border);padding:60px 32px 48px;}
+.hero-inner{max-width:860px;margin:0 auto;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(240,185,11,.1);border:1px solid rgba(240,185,11,.2);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:600;color:var(--yellow);letter-spacing:.5px;text-transform:uppercase;margin-bottom:20px;}
+.hero h1{font-family:var(--font-display);font-size:36px;font-weight:800;line-height:1.2;margin-bottom:14px;}
+.hero h1 span{color:var(--yellow);}
+.hero p{color:var(--muted2);font-size:13px;line-height:1.8;max-width:600px;}
+
+/* CONTENT */
+.content{flex:1;max-width:860px;margin:0 auto;width:100%;padding:48px 32px;}
+
+/* ARTICLE CARDS */
+.articles-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:48px;}
+.article-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:24px;cursor:pointer;transition:border-color .2s,transform .2s;text-decoration:none;display:block;}
+.article-card:hover{border-color:var(--yellow);transform:translateY(-2px);}
+.article-card .tag{display:inline-block;background:rgba(240,185,11,.1);color:var(--yellow);font-size:9px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px;}
+.article-card h3{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text);margin-bottom:8px;line-height:1.3;}
+.article-card p{font-size:11px;color:var(--muted2);line-height:1.7;}
+.article-card .read-time{font-size:10px;color:var(--muted);margin-top:12px;}
+
+/* ARTICLE CONTENT */
+.article{display:none;}
+.article.active{display:block;}
+.article-header{margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid var(--border);}
+.article-header .tag{display:inline-block;background:rgba(240,185,11,.1);color:var(--yellow);font-size:9px;font-weight:700;padding:2px 8px;border-radius:3px;letter-spacing:.5px;text-transform:uppercase;margin-bottom:12px;}
+.article-header h2{font-family:var(--font-display);font-size:28px;font-weight:800;line-height:1.2;margin-bottom:10px;}
+.article-header .meta{font-size:11px;color:var(--muted);}
+.back-btn{display:inline-flex;align-items:center;gap:6px;color:var(--muted2);font-size:11px;font-weight:600;cursor:pointer;margin-bottom:24px;background:none;border:none;padding:0;transition:color .15s;}
+.back-btn:hover{color:var(--yellow);}
+.article-body h3{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--text);margin:28px 0 10px;}
+.article-body h3:first-child{margin-top:0;}
+.article-body p{color:var(--muted2);line-height:1.9;margin-bottom:14px;font-size:12px;}
+.article-body ul,.article-body ol{margin:10px 0 14px 20px;color:var(--muted2);font-size:12px;}
+.article-body li{margin-bottom:6px;line-height:1.7;}
+.article-body strong{color:var(--text);}
+.info-box{background:var(--panel2);border:1px solid var(--border2);border-left:3px solid var(--yellow);border-radius:4px;padding:14px 16px;margin:18px 0;font-size:12px;color:var(--muted2);line-height:1.7;}
+.info-box strong{color:var(--yellow);}
+.warning-box{background:rgba(246,70,93,.06);border:1px solid rgba(246,70,93,.2);border-left:3px solid var(--red);border-radius:4px;padding:14px 16px;margin:18px 0;font-size:12px;color:var(--muted2);line-height:1.7;}
+.warning-box strong{color:var(--red);}
+.table-wrap{overflow-x:auto;margin:18px 0;}
+table{width:100%;border-collapse:collapse;font-size:11px;}
+th{background:var(--panel2);color:var(--muted2);padding:10px 12px;text-align:left;border:1px solid var(--border);font-weight:600;text-transform:uppercase;letter-spacing:.3px;}
+td{padding:9px 12px;border:1px solid var(--border);color:var(--muted2);}
+td strong{color:var(--text);}
+tr:nth-child(even) td{background:rgba(255,255,255,.02);}
+
+/* GRID INDEX */
+.index-title{font-family:var(--font-display);font-size:22px;font-weight:800;margin-bottom:6px;}
+.index-sub{color:var(--muted2);font-size:12px;margin-bottom:32px;}
+
+/* FOOTER */
+footer{background:var(--panel);border-top:1px solid var(--border);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+footer .copy{font-size:10px;color:var(--muted);}
+footer .flinks{display:flex;gap:16px;}
+footer .flinks a{font-size:10px;color:var(--muted2);text-decoration:none;transition:color .15s;}
+footer .flinks a:hover{color:var(--yellow);}
+
+@media(max-width:768px){
+  nav.topnav{padding:0 16px;}
+  .hero{padding:36px 16px 32px;}
+  .hero h1{font-size:26px;}
+  .content{padding:32px 16px;}
+  .articles-grid{grid-template-columns:1fr;}
+  footer{padding:16px;}
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="nav-logo" href="index.html"><span>Pxelight</span> <em>Futures</em></a>
+  <div class="nav-links">
+    <a href="index.html">Simülatör</a>
+    <a href="egitim.html" class="active">Eğitim</a>
+    <a href="sss.html">SSS</a>
+    <a href="hakkimizda.html">Hakkımızda</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge"> Eğitim Merkezi</div>
+    <h1>Futures Trading'i<br><span>Temelden Öğren</span></h1>
+    <p>Kripto para vadeli işlemlerini anlamak için ihtiyacın olan her şey burada. Temel kavramlardan ileri stratejilere kadar kapsamlı rehberler.</p>
+  </div>
+</div>
+
+<div class="content">
+
+  <!-- MAKALE LİSTESİ -->
+  <div id="article-list">
+    <div class="index-title">Tüm Makaleler</div>
+    <div class="index-sub">Toplam 5 makale · Başlangıç seviyesinden ileri seviyeye</div>
+    <div class="articles-grid">
+      <a class="article-card" onclick="showArticle('futures-nedir');return false;" href="#">
+        <span class="tag">Temel</span>
+        <h3>Futures (Vadeli İşlem) Nedir?</h3>
+        <p>Futures sözleşmelerinin ne olduğunu, nasıl çalıştığını ve kripto piyasalarında neden bu kadar yaygın olduğunu öğren.</p>
+        <div class="read-time"> 5 dakika okuma</div>
+      </a>
+      <a class="article-card" onclick="showArticle('kaldirac');return false;" href="#">
+        <span class="tag">Temel</span>
+        <h3>Kaldıraç Nasıl Kullanılır?</h3>
+        <p>Kaldıraç nedir, nasıl hesaplanır, kaçıncı kaldıraç seviyesi güvenlidir? Tüm detaylarıyla açıklıyoruz.</p>
+        <div class="read-time"> 6 dakika okuma</div>
+      </a>
+      <a class="article-card" onclick="showArticle('long-short');return false;" href="#">
+        <span class="tag">Temel</span>
+        <h3>Long ve Short Pozisyon Farkı</h3>
+        <p>Piyasa düşerken de kazanmak mümkün mü? Long ve short pozisyonlar arasındaki temel farkı anla.</p>
+        <div class="read-time"> 4 dakika okuma</div>
+      </a>
+      <a class="article-card" onclick="showArticle('likidasyon');return false;" href="#">
+        <span class="tag">Orta</span>
+        <h3>Likidasyon Nedir, Nasıl Önlenir?</h3>
+        <p>Likidasyon fiyatı nasıl hesaplanır? Zorla tasfiyeden korunmak için neler yapabilirsin?</p>
+        <div class="read-time"> 7 dakika okuma</div>
+      </a>
+      <a class="article-card" onclick="showArticle('risk-yonetimi');return false;" href="#">
+        <span class="tag">İleri</span>
+        <h3>Risk Yönetimi Stratejileri</h3>
+        <p>Başarılı traderların kullandığı risk yönetimi teknikleri: pozisyon boyutlandırma, stop-loss ve daha fazlası.</p>
+        <div class="read-time"> 8 dakika okuma</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- MAKALE: FUTURES NEDİR -->
+  <div id="art-futures-nedir" class="article">
+    <button class="back-btn" onclick="showList()">← Tüm Makaleler</button>
+    <div class="article-header">
+      <span class="tag">Temel</span>
+      <h2>Futures (Vadeli İşlem) Nedir?</h2>
+      <div class="meta"> 5 dakika okuma · Başlangıç seviyesi</div>
+    </div>
+    <div class="article-body">
+      <h3>Tanım</h3>
+      <p>Futures (vadeli işlem) sözleşmesi, iki tarafın belirli bir varlığı, önceden belirlenmiş bir fiyattan, gelecekteki belirli bir tarihte alıp satmayı taahhüt ettiği finansal bir sözleşmedir. Kripto para piyasalarında futures sözleşmeleri genellikle <strong>süresiz (perpetual)</strong> yapıdadır — yani bir vade tarihi yoktur.</p>
+
+      <h3>Spot ile Farkı Ne?</h3>
+      <p>Spot işlemde bir varlığı gerçekten satın alırsın ve sahibi olursun. Futures işlemde ise varlığın kendisini değil, fiyat hareketini alıp satarsın. Bu sayede hem yükselen hem düşen piyasalardan kar etmek mümkün olur.</p>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Özellik</th><th>Spot</th><th>Futures</th></tr>
+          <tr><td>Varlık sahipliği</td><td><strong>Evet</strong></td><td>Hayır</td></tr>
+          <tr><td>Kaldıraç</td><td>Genellikle yok</td><td><strong>1x – 150x</strong></td></tr>
+          <tr><td>Düşen piyasada kazanç</td><td>Hayır</td><td><strong>Evet (short)</strong></td></tr>
+          <tr><td>Fonlama ücreti</td><td>Yok</td><td><strong>Var (perpetual)</strong></td></tr>
+        </table>
+      </div>
+
+      <h3>Perpetual Futures Nasıl Çalışır?</h3>
+      <p>Kripto borsalarındaki futures sözleşmelerinin büyük çoğunluğu <strong>perpetual (süresiz)</strong> yapıdadır. Vade tarihi olmadığı için pozisyonu istediğin süre tutabilirsin. Bunun yerine <strong>fonlama mekanizması</strong> devreye girer.</p>
+      <div class="info-box">
+        <strong>Fonlama Ücreti Nedir?</strong><br>
+        Futures fiyatının spot fiyata yakın kalmasını sağlamak için 8 saatte bir ödenen ücrettir. Piyasa yükselse long pozisyonlar short'lara ödeme yapar; düşerse short'lar long'lara öder. Pxelight Futures simülatöründe bu oran gerçek zamanlı olarak gösterilir.
+      </div>
+
+      <h3>Kim Kullanır?</h3>
+      <ul>
+        <li><strong>Spekülatörler:</strong> Fiyat hareketinden kar etmek için kaldıraç kullanır.</li>
+        <li><strong>Hedger'lar:</strong> Elindeki kripto varlığı korumak için ters yönde pozisyon açar.</li>
+        <li><strong>Arbitrajcılar:</strong> Spot ve futures fiyat farklarından faydalanır.</li>
+      </ul>
+
+      <div class="warning-box">
+        <strong>Uyarı:</strong> Futures işlemleri yüksek risk taşır. Kaldıraç, kazancınızı büyüttüğü gibi kaybınızı da aynı oranda büyütür. Gerçek para ile işlem yapmadan önce mutlaka simülatörde pratik yapın.
+      </div>
+    </div>
+  </div>
+
+  <!-- MAKALE: KALDIRAÇ -->
+  <div id="art-kaldirac" class="article">
+    <button class="back-btn" onclick="showList()">← Tüm Makaleler</button>
+    <div class="article-header">
+      <span class="tag">Temel</span>
+      <h2>Kaldıraç Nasıl Kullanılır?</h2>
+      <div class="meta"> 6 dakika okuma · Başlangıç seviyesi</div>
+    </div>
+    <div class="article-body">
+      <h3>Kaldıraç Nedir?</h3>
+      <p>Kaldıraç, sahip olduğundan daha büyük bir pozisyon açmana olanak tanıyan bir araçtır. 100 USDT bakiyenle 10x kaldıraç kullanırsan 1.000 USDT'lik bir pozisyon açmış olursun. Bu, hem karlarını hem de kayıplarını 10 kat büyütür.</p>
+
+      <h3>Kaldıraç Hesaplama</h3>
+      <div class="info-box">
+        <strong>Formül:</strong><br>
+        Pozisyon Büyüklüğü = Teminat × Kaldıraç<br><br>
+        Örnek: 500 USDT × 20x = 10.000 USDT'lik pozisyon<br>
+        Bu pozisyonda fiyat %5 artarsa: +500 USDT kar (%100 ROI)<br>
+        Fiyat %5 düşerse: −500 USDT kayıp (tüm teminat)
+      </div>
+
+      <h3>Kaldıraç Seviyeleri</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Kaldıraç</th><th>Likidasyon Riski</th><th>Kim İçin?</th></tr>
+          <tr><td><strong>1x – 3x</strong></td><td>Çok düşük</td><td>Yeni başlayanlar</td></tr>
+          <tr><td><strong>5x – 10x</strong></td><td>Orta</td><td>Deneyimliler</td></tr>
+          <tr><td><strong>20x – 50x</strong></td><td>Yüksek</td><td>İleri seviye</td></tr>
+          <tr><td><strong>100x+</strong></td><td>Çok yüksek</td><td>Profesyoneller</td></tr>
+        </table>
+      </div>
+
+      <h3>İzole vs Çapraz Marjin</h3>
+      <p><strong>İzole Marjin:</strong> Pozisyon için ayırdığın teminatla sınırlıdır. Likidasyon olursa yalnızca o pozisyonun teminatını kaybedersin, geri kalan bakiyen korunur.</p>
+      <p><strong>Çapraz Marjin:</strong> Tüm bakiyen teminat olarak kullanılır. Likidasyon fiyatı daha uzakta olur ancak likidasyon olursa tüm bakiyeni kaybedebilirsin.</p>
+
+      <div class="warning-box">
+        <strong>Altın Kural:</strong> Yeni başlıyorsan 5x ve altında kaldıraç kullan. Pozisyon başına bakiyenin %1–2'sinden fazlasını riske atma. Pxelight Futures'da farklı kaldıraç seviyelerini risksiz deneyebilirsin.
+      </div>
+    </div>
+  </div>
+
+  <!-- MAKALE: LONG SHORT -->
+  <div id="art-long-short" class="article">
+    <button class="back-btn" onclick="showList()">← Tüm Makaleler</button>
+    <div class="article-header">
+      <span class="tag">Temel</span>
+      <h2>Long ve Short Pozisyon Farkı</h2>
+      <div class="meta"> 4 dakika okuma · Başlangıç seviyesi</div>
+    </div>
+    <div class="article-body">
+      <h3>Long Pozisyon (Al/Yükseliş)</h3>
+      <p>Long pozisyon, fiyatın yükseleceğini düşündüğünde açarsın. BTC'yi 50.000 USDT'den long girersen ve fiyat 55.000 USDT'ye çıkarsa, bu fark üzerinden kar elde edersin. En basit anlatımla: <strong>"Al, yükselsin, sat."</strong></p>
+
+      <h3>Short Pozisyon (Sat/Düşüş)</h3>
+      <p>Short pozisyon, fiyatın düşeceğini düşündüğünde açarsın. BTC'yi 50.000 USDT'den short girersen ve fiyat 45.000 USDT'ye düşerse kar edersin. Kısaca: <strong>"Sat (ödünç), düşsün, geri al."</strong></p>
+
+      <div class="table-wrap">
+        <table>
+          <tr><th>Durum</th><th>Long</th><th>Short</th></tr>
+          <tr><td>Fiyat yükselirse</td><td><strong style="color:var(--green)">Kar</strong></td><td style="color:var(--red)">Zarar</td></tr>
+          <tr><td>Fiyat düşerse</td><td style="color:var(--red)">Zarar</td><td><strong style="color:var(--green)">Kar</strong></td></tr>
+          <tr><td>Maksimum kayıp</td><td>Teminat kadar</td><td>Teminat kadar</td></tr>
+        </table>
+      </div>
+
+      <h3>Hangi Durumda Hangi Pozisyon?</h3>
+      <ul>
+        <li><strong>Boğa piyasasında (yükseliş trendi):</strong> Long pozisyon daha avantajlıdır.</li>
+        <li><strong>Ayı piyasasında (düşüş trendi):</strong> Short pozisyon ile düşüşten kazanabilirsin.</li>
+        <li><strong>Yatay piyasada:</strong> Her iki yönde de dikkatli olunmalıdır.</li>
+      </ul>
+
+      <div class="info-box">
+        <strong>İpucu:</strong> Pxelight Futures simülatöründe her iki yönde de pozisyon açabilirsin. "AL/UZUN" butonu long, "SAT/KISA" butonu ise short pozisyon açar. Gerçek para riske atmadan her ikisini de dene.
+      </div>
+    </div>
+  </div>
+
+  <!-- MAKALE: LİKİDASYON -->
+  <div id="art-likidasyon" class="article">
+    <button class="back-btn" onclick="showList()">← Tüm Makaleler</button>
+    <div class="article-header">
+      <span class="tag">Orta</span>
+      <h2>Likidasyon Nedir, Nasıl Önlenir?</h2>
+      <div class="meta"> 7 dakika okuma · Orta seviye</div>
+    </div>
+    <div class="article-body">
+      <h3>Likidasyon Nedir?</h3>
+      <p>Likidasyon (tasfiye), pozisyonun teminatı sıfırlanmadan önce borsanın pozisyonu zorla kapatmasıdır. Fiyat, likidasyon fiyatına ulaştığında tüm teminatını kaybedersin.</p>
+
+      <h3>Likidasyon Fiyatı Nasıl Hesaplanır?</h3>
+      <div class="info-box">
+        <strong>İzole Marjin — Basit Formül:</strong><br><br>
+        Long için: Giriş Fiyatı × (1 − 1/Kaldıraç × 0.9)<br>
+        Short için: Giriş Fiyatı × (1 + 1/Kaldıraç × 0.9)<br><br>
+        Örnek: BTC 50.000'den 20x long → Likidasyon ≈ 47.750 USDT<br>
+        Yani fiyat yalnızca %4.5 düşünce tüm teminatı kaybedersin.
+      </div>
+
+      <h3>Kaldıraç ile Likidasyon Mesafesi</h3>
+      <div class="table-wrap">
+        <table>
+          <tr><th>Kaldıraç</th><th>Likidasyon Mesafesi (Long)</th></tr>
+          <tr><td><strong>2x</strong></td><td>~%45 düşüş</td></tr>
+          <tr><td><strong>5x</strong></td><td>~%18 düşüş</td></tr>
+          <tr><td><strong>10x</strong></td><td>~%9 düşüş</td></tr>
+          <tr><td><strong>20x</strong></td><td>~%4.5 düşüş</td></tr>
+          <tr><td><strong>50x</strong></td><td>~%1.8 düşüş</td></tr>
+          <tr><td><strong>100x</strong></td><td>~%0.9 düşüş</td></tr>
+        </table>
+      </div>
+
+      <h3>Likidasyon Nasıl Önlenir?</h3>
+      <ul>
+        <li><strong>Düşük kaldıraç kullan:</strong> Kaldıraç ne kadar düşükse likidasyon o kadar uzak olur.</li>
+        <li><strong>Stop-Loss koy:</strong> Likidasyon fiyatından önce pozisyonu otomatik kapat.</li>
+        <li><strong>Küçük pozisyon aç:</strong> Tüm bakiyeni tek bir işleme koyma.</li>
+        <li><strong>Çapraz marjin kullan:</strong> Likidasyon mesafesini uzatır (ancak tüm bakiyeyi riske atar).</li>
+      </ul>
+
+      <div class="warning-box">
+        <strong>Kritik Uyarı:</strong> Yüksek kaldıraçla küçük bir fiyat hareketi bile likidasyona neden olabilir. Özellikle 20x üzeri kaldıraçlarda her zaman stop-loss kullan.
+      </div>
+    </div>
+  </div>
+
+  <!-- MAKALE: RİSK YÖNETİMİ -->
+  <div id="art-risk-yonetimi" class="article">
+    <button class="back-btn" onclick="showList()">← Tüm Makaleler</button>
+    <div class="article-header">
+      <span class="tag">İleri</span>
+      <h2>Risk Yönetimi Stratejileri</h2>
+      <div class="meta"> 8 dakika okuma · İleri seviye</div>
+    </div>
+    <div class="article-body">
+      <h3>Neden Risk Yönetimi?</h3>
+      <p>Başarılı traderları başarısızlardan ayıran en önemli faktör teknik analiz değil, <strong>risk yönetimidir.</strong> Kazanan bir stratejiyle bile kötü risk yönetimiyle hesabını sıfırlayabilirsin.</p>
+
+      <h3>%1 – %2 Kuralı</h3>
+      <p>Profesyonel traderların büyük çoğunluğu tek bir işlemde toplam bakiyelerinin <strong>en fazla %1–2'sini</strong> riske atar. Bu kural, uzun vadede hayatta kalmayı sağlar.</p>
+      <div class="info-box">
+        <strong>Örnek:</strong> 1.000 USDT bakiyeyle işlem yapıyorsun.<br>
+        %1 kural → Her işlemde en fazla 10 USDT kaybedebilirsin.<br>
+        Bu kuralla 10 üst üste kaybetsen bile bakiyen hâlâ 900 USDT olur.
+      </div>
+
+      <h3>Stop-Loss Kullanımı</h3>
+      <p>Stop-loss, fiyat belirli bir seviyeye düştüğünde pozisyonunu otomatik olarak kapatan emirdir. Her pozisyonda stop-loss kullanmak zorunlu bir alışkanlık olmalıdır.</p>
+      <ul>
+        <li>Stop-loss seviyesini likidasyon fiyatından önce koy.</li>
+        <li>Teknik destek/direnç seviyelerini referans al.</li>
+        <li>Duygusal kararlar vermemek için stop-loss'u önceden belirle.</li>
+      </ul>
+
+      <h3>Pozisyon Boyutlandırma</h3>
+      <p>Pozisyon büyüklüğünü riske girmek istediğin miktara göre belirle, bakiyene göre değil.</p>
+      <div class="info-box">
+        <strong>Formül:</strong><br>
+        Pozisyon Büyüklüğü = (Bakiye × Risk%) ÷ Stop-Loss Mesafesi%<br><br>
+        Örnek: 1000 USDT bakiye, %1 risk, %3 stop-loss<br>
+        → (1000 × 0.01) ÷ 0.03 = 333 USDT pozisyon
+      </div>
+
+      <h3>Portföy Çeşitlendirme</h3>
+      <ul>
+        <li>Tüm bakiyeni tek bir coin'e koyma.</li>
+        <li>Aynı anda çok fazla pozisyon açmaktan kaçın.</li>
+        <li>Kazançlı dönemlerde karını çek, bir kısmını koru.</li>
+      </ul>
+
+      <h3>Psikoloji ve Disiplin</h3>
+      <p>Trading'in en zor kısmı teknik değil, psikolojiktir. Kayıpları telafi etmek için daha büyük pozisyonlar açmak (<strong>"martingale"</strong>) en yaygın hatalardan biridir ve genellikle hesabın sıfırlanmasıyla sonuçlanır.</p>
+
+      <div class="warning-box">
+        <strong>Hatırla:</strong> Piyasada her zaman yeni fırsatlar olacak. Kaybettiğinde durun, analiz edin, düzeltilmiş planla geri dönün. Panikle verilen kararlar her zaman zarar getirir.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="copy">© 2026 Pxelight Futures. Tüm hakları saklıdır.</div>
+  <div class="flinks">
+    <a href="index.html">Simülatör</a>
+    <a href="egitim.html">Eğitim</a>
+    <a href="sss.html">SSS</a>
+    <a href="gizlilik.html">Gizlilik</a>
+    <a href="hakkimizda.html">Hakkımızda</a>
+  </div>
+</footer>
+
+<script>
+function showArticle(id) {
+  document.getElementById('article-list').style.display = 'none';
+  document.querySelectorAll('.article').forEach(a => a.classList.remove('active'));
+  document.getElementById('art-' + id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+function showList() {
+  document.getElementById('article-list').style.display = 'block';
+  document.querySelectorAll('.article').forEach(a => a.classList.remove('active'));
+  window.scrollTo(0, 0);
+}
+</script>
+</body>
+</html>
