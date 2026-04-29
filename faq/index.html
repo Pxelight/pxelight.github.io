@@ -5,8 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Sık Sorulan Sorular – Pxelight Futures</title>
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%230d0f12'/%3E%3Cg transform='translate(256,256)'%3E%3Cpolygon points='0,-110 95,-55 95,55 0,110 -95,55 -95,-55' fill='none' stroke='%23f0b90b' stroke-width='22'/%3E%3Cpolygon points='0,-62 54,-31 54,31 0,62 -54,31 -54,-31' fill='%23f0b90b' opacity='.25'/%3E%3Cline x1='0' y1='-110' x2='0' y2='-62' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='0' y1='62' x2='0' y2='110' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='-55' x2='54' y2='-31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='-31' x2='-95' y2='-55' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='55' x2='54' y2='31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='31' x2='-95' y2='55' stroke='%23f0b90b' stroke-width='14'/%3E%3C/g%3E%3C/svg%3E">
-<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%230d0f12'/%3E%3Cg transform='translate(256,256)'%3E%3Cpolygon points='0,-110 95,-55 95,55 0,110 -95,55 -95,-55' fill='none' stroke='%23f0b90b' stroke-width='22'/%3E%3Cpolygon points='0,-62 54,-31 54,31 0,62 -54,31 -54,-31' fill='%23f0b90b' opacity='.25'/%3E%3Cline x1='0' y1='-110' x2='0' y2='-62' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='0' y1='62' x2='0' y2='110' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='-55' x2='54' y2='-31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='-31' x2='-95' y2='-55' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='55' x2='54' y2='31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='31' x2='-95' y2='55' stroke='%23f0b90b' stroke-width='14'/%3E%3C/g%3E%3C/svg%3E">
-<meta name="description" content="Pxelight Futures hakkında sık sorulan sorular. Simülatör nasıl çalışır, bakiye nasıl ayarlanır, futures işlemleri hakkında merak ettikleriniz.">
+<meta name="description" content="Pxelight Futures hakkında sık sorulan sorular.">
 <meta name="robots" content="index, follow">
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
 <style>
@@ -17,7 +16,9 @@
   --font-mono:'JetBrains Mono',monospace;--font-display:'Syne',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--text);font-family:var(--font-mono);font-size:13px;min-height:100vh;display:flex;flex-direction:column;}  
+html,body{overflow-x:hidden;width:100%;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-mono);font-size:13px;min-height:100vh;display:flex;flex-direction:column;}
+
 nav.topnav{height:52px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:100;}
 .nav-logo{font-family:var(--font-display);font-size:17px;font-weight:800;letter-spacing:-.5px;text-decoration:none;}
 .nav-logo span{color:var(--yellow)}
@@ -56,12 +57,25 @@ footer .flinks{display:flex;gap:16px;}
 footer .flinks a{font-size:10px;color:var(--muted2);text-decoration:none;transition:color .15s;}
 footer .flinks a:hover{color:var(--yellow);}
 
+/* MOBİL ALT NAV */
+.mob-bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:52px;background:var(--panel);border-top:1px solid var(--border);z-index:500;}
+.mob-bottom-nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--muted2);text-decoration:none;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;border-top:2px solid transparent;transition:color .15s;}
+.mob-bottom-nav a.active{color:var(--yellow);border-top-color:var(--yellow);}
+.mob-bottom-nav a:hover{color:var(--yellow);}
+.mob-bottom-nav .mnav-icon{font-size:16px;line-height:1;}
+
 @media(max-width:768px){
   nav.topnav{padding:0 16px;}
-  .hero{padding:36px 16px 32px;}
-  .hero h1{font-size:26px;}
-  .content{padding:32px 16px;}
-  footer{padding:16px;}
+  .nav-links{display:none;}
+  .hero{padding:28px 16px 24px;}
+  .hero h1{font-size:22px;}
+  .hero p{font-size:12px;}
+  .content{padding:20px 16px 72px;}
+  .section-title{font-size:15px;}
+  .faq-question{font-size:11px;padding:14px 14px;}
+  .faq-answer{padding:0 14px 14px;}
+  footer{display:none;}
+  .mob-bottom-nav{display:flex;}
 }
 </style>
 </head>
@@ -72,7 +86,7 @@ footer .flinks a:hover{color:var(--yellow);}
   <div class="nav-links">
     <a href="/">Simülatör</a>
     <a href="/education/">Eğitim</a>
-    <a href="/faq/">SSS</a>
+    <a href="/faq/" class="active">SSS</a>
     <a href="/privacy/">Gizlilik</a>
     <a href="/about/">Hakkımızda</a>
   </div>
@@ -80,7 +94,7 @@ footer .flinks a:hover{color:var(--yellow);}
 
 <div class="hero">
   <div class="hero-inner">
-    <div class="hero-badge"> Sık Sorulan Sorular</div>
+    <div class="hero-badge">Sık Sorulan Sorular</div>
     <h1>Aklındaki <span>Her Şeyi</span> Sor</h1>
     <p>Pxelight Futures ve kripto futures işlemleri hakkında en çok sorulan soruların cevapları burada.</p>
   </div>
@@ -92,57 +106,33 @@ footer .flinks a:hover{color:var(--yellow);}
     <div class="section-title">Simülatör Hakkında</div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Pxelight Futures nedir? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        Pxelight Futures, kripto para vadeli işlemlerini (futures) gerçek piyasa verileriyle ama <strong>sanal para</strong> kullanarak öğrenmenizi sağlayan ücretsiz bir eğitim simülatörüdür. Gerçek para yatırmanıza gerek yoktur; tüm işlemler simülasyondur.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Pxelight Futures nedir? <span class="arrow">▾</span></button>
+      <div class="faq-answer">Pxelight Futures, kripto para vadeli işlemlerini (futures) gerçek piyasa verileriyle ama <strong>sanal para</strong> kullanarak öğrenmenizi sağlayan ücretsiz bir eğitim simülatörüdür. Gerçek para yatırmanıza gerek yoktur; tüm işlemler simülasyondur.</div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Simülatörü kullanmak için kayıt olmam gerekiyor mu? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        Hayır. Kayıt veya hesap oluşturma zorunluluğu yoktur. Siteye girdiğinizde hemen kullanmaya başlayabilirsiniz. Verileriniz tarayıcınızda saklanır.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Simülatörü kullanmak için kayıt olmam gerekiyor mu? <span class="arrow">▾</span></button>
+      <div class="faq-answer">Hayır. Kayıt veya hesap oluşturma zorunluluğu yoktur. Siteye girdiğinizde hemen kullanmaya başlayabilirsiniz. Verileriniz tarayıcınızda saklanır.</div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Sayfayı kapattığımda verilerim sıfırlanıyor mu? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        Hayır. Pozisyonlarınız, emirleriniz ve bakiyeniz tarayıcınızın yerel depolama alanına (localStorage) kaydedilir. Sayfayı kapatsanız, yenileseniz veya bilgisayarı kapatıp açsanız bile verileriniz korunur. <strong>Tarayıcı önbelleğini temizlerseniz</strong> veriler silinebilir.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Sayfayı kapattığımda verilerim sıfırlanıyor mu? <span class="arrow">▾</span></button>
+      <div class="faq-answer">Hayır. Pozisyonlarınız, emirleriniz ve bakiyeniz tarayıcınızın yerel depolama alanına (localStorage) kaydedilir. Sayfayı kapatsanız, yenileseniz veya bilgisayarı kapatıp açsanız bile verileriniz korunur. <strong>Tarayıcı önbelleğini temizlerseniz</strong> veriler silinebilir.</div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Başlangıç bakiyem ne kadar? Değiştirebilir miyim? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        Başlangıç bakiyesi <strong>100 USDT</strong>'dir. Bakiyeyi istediğiniz zaman değiştirebilirsiniz: sağ üstteki bakiye rakamına tıklayın veya işlem panelindeki "Kullanılabilir" yazısına tıklayarak bakiye modalını açın.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Başlangıç bakiyem ne kadar? Değiştirebilir miyim? <span class="arrow">▾</span></button>
+      <div class="faq-answer">Başlangıç bakiyesi <strong>100 USDT</strong>'dir. Bakiyeyi istediğiniz zaman değiştirebilirsiniz: sağ üstteki bakiye rakamına tıklayın veya işlem panelindeki "Kullanılabilir" yazısına tıklayarak bakiye modalını açın.</div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Fiyat verileri gerçek mi? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        Evet. Fiyat verileri <strong>Bybit WebSocket API</strong> üzerinden gerçek zamanlı olarak çekilmektedir. Grafik motoru olarak TradingView kullanılmaktadır. Ancak emirlerin dolması simülasyon ortamında gerçekleşir; gerçek piyasada işlem yapılmaz.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Fiyat verileri gerçek mi? <span class="arrow">▾</span></button>
+      <div class="faq-answer">Evet. Fiyat verileri <strong>Bybit WebSocket API</strong> üzerinden gerçek zamanlı olarak çekilmektedir. Grafik motoru olarak TradingView kullanılmaktadır. Ancak emirlerin dolması simülasyon ortamında gerçekleşir; gerçek piyasada işlem yapılmaz.</div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Hangi kripto paralar destekleniyor? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        Şu anda desteklenen pariteler: <strong>BTC, ETH, SOL, XRP, BNB, LINK, ADA, AVAX, DOT, DOGE, LTC, ETC, FIL, NEAR</strong>. Hepsi USDT karşılığı perpetual futures olarak işlem görmektedir.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Hangi kripto paralar destekleniyor? <span class="arrow">▾</span></button>
+      <div class="faq-answer">Şu anda desteklenen pariteler: <strong>BTC, ETH, SOL, XRP, BNB, LINK, ADA, AVAX, DOT, DOGE, LTC, ETC, FIL, NEAR</strong>. Hepsi USDT karşılığı perpetual futures olarak işlem görmektedir.</div>
     </div>
   </div>
 
@@ -150,41 +140,27 @@ footer .flinks a:hover{color:var(--yellow);}
     <div class="section-title">İşlemler ve Emirler</div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Limit, Market ve Stop-Limit emir farkı nedir? <span class="arrow">▾</span>
-      </button>
+      <button class="faq-question" onclick="toggle(this)">Limit, Market ve Stop-Limit emir farkı nedir? <span class="arrow">▾</span></button>
       <div class="faq-answer">
         <strong>Market Emir:</strong> Anlık piyasa fiyatından hemen gerçekleşir.<br><br>
         <strong>Limit Emir:</strong> Belirlediğiniz fiyata geldiğinde gerçekleşir. Fiyat o seviyeye ulaşmazsa emir beklemede kalır.<br><br>
-        <strong>Stop-Limit Emir:</strong> İki aşamalıdır. Önce stop fiyatına ulaşıldığında tetiklenir, ardından limit fiyatından gerçekleşmeyi bekler. Genellikle stop-loss veya take-profit için kullanılır.
+        <strong>Stop-Limit Emir:</strong> İki aşamalıdır. Önce stop fiyatına ulaşıldığında tetiklenir, ardından limit fiyatından gerçekleşmeyi bekler.
       </div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Komisyon oranı ne kadar? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        Komisyon oranı işlem başına <strong>%0.05 (taker fee)</strong>'dir. Bu oran açılış ve kapanışta ayrı ayrı uygulanır. İşlem yapmadan önce "Komisyon" satırında tahmini maliyet gösterilir.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Komisyon oranı ne kadar? <span class="arrow">▾</span></button>
+      <div class="faq-answer">Komisyon oranı işlem başına <strong>%0.05 (taker fee)</strong>'dir. Bu oran açılış ve kapanışta ayrı ayrı uygulanır. İşlem yapmadan önce "Komisyon" satırında tahmini maliyet gösterilir.</div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Kısmi pozisyon kapatma mümkün mü? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        Evet. "Yalnızca Azalt" (Reduce Only) seçeneğiyle veya Stop-Limit emirle pozisyonun belirli bir kısmını kapatabilirsiniz. Slider ile kapatmak istediğiniz yüzdeyi ayarlayabilirsiniz.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Kısmi pozisyon kapatma mümkün mü? <span class="arrow">▾</span></button>
+      <div class="faq-answer">Evet. "Yalnızca Azalt" (Reduce Only) seçeneğiyle veya Stop-Limit emirle pozisyonun belirli bir kısmını kapatabilirsiniz. Slider ile kapatmak istediğiniz yüzdeyi ayarlayabilirsiniz.</div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Fonlama ücreti hesabımdan düşülüyor mu? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        Mevcut simülatör versiyonunda fonlama ücreti gösterim amaçlıdır; bakiyeden otomatik düşülmez. Bu özellik gelecek güncellemelerde eklenebilir.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Fonlama ücreti hesabımdan düşülüyor mu? <span class="arrow">▾</span></button>
+      <div class="faq-answer">Mevcut simülatör versiyonunda fonlama ücreti gösterim amaçlıdır; bakiyeden otomatik düşülmez. Bu özellik gelecek güncellemelerde eklenebilir.</div>
     </div>
   </div>
 
@@ -192,30 +168,18 @@ footer .flinks a:hover{color:var(--yellow);}
     <div class="section-title">Teknik Sorular</div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Mobilde çalışıyor mu? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        Evet. Platform mobil cihazlar için optimize edilmiştir. Grafik, emir defteri ve işlem paneline sekme sistemiyle kolayca ulaşabilirsiniz. Ayrıca ana ekrana ekleyerek PWA olarak kullanabilirsiniz.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Mobilde çalışıyor mu? <span class="arrow">▾</span></button>
+      <div class="faq-answer">Evet. Platform mobil cihazlar için optimize edilmiştir. Grafik, emir defteri ve işlem paneline sekme sistemiyle kolayca ulaşabilirsiniz. Ayrıca ana ekrana ekleyerek PWA olarak kullanabilirsiniz.</div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Verilerim güvende mi? Sunucuya gönderiliyor mu? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        Tüm simülasyon verileri yalnızca <strong>kendi tarayıcınızda</strong> saklanır. Hiçbir kişisel veri sunucularımıza gönderilmez. Tek harici bağlantılar gerçek zamanlı fiyat verisi için Bybit API ve grafik için TradingView'dır.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Verilerim güvende mi? Sunucuya gönderiliyor mu? <span class="arrow">▾</span></button>
+      <div class="faq-answer">Tüm simülasyon verileri yalnızca <strong>kendi tarayıcınızda</strong> saklanır. Hiçbir kişisel veri sunucularımıza gönderilmez. Tek harici bağlantılar gerçek zamanlı fiyat verisi için Bybit API ve grafik için TradingView'dır.</div>
     </div>
 
     <div class="faq-item">
-      <button class="faq-question" onclick="toggle(this)">
-        Bağlantı kesilirse ne olur? <span class="arrow">▾</span>
-      </button>
-      <div class="faq-answer">
-        WebSocket bağlantısı kesildiğinde sistem <strong>3 saniye</strong> içinde otomatik olarak yeniden bağlanmaya çalışır. Bu sürede fiyat verisi güncellenemez ancak mevcut pozisyonlarınız korunur.
-      </div>
+      <button class="faq-question" onclick="toggle(this)">Bağlantı kesilirse ne olur? <span class="arrow">▾</span></button>
+      <div class="faq-answer">WebSocket bağlantısı kesildiğinde sistem <strong>3 saniye</strong> içinde otomatik olarak yeniden bağlanmaya çalışır. Bu sürede fiyat verisi güncellenemez ancak mevcut pozisyonlarınız korunur.</div>
     </div>
   </div>
 
@@ -232,10 +196,17 @@ footer .flinks a:hover{color:var(--yellow);}
   </div>
 </footer>
 
+<nav class="mob-bottom-nav">
+  <a href="/"><span class="mnav-icon">◱</span>Simülatör</a>
+  <a href="/education/"><span class="mnav-icon">ƒ</span>Eğitim</a>
+  <a href="/faq/" class="active"><span class="mnav-icon">�</span>SSS</a>
+  <a href="/privacy/"><span class="mnav-icon">ꗃ</span>Gizlilik</a>
+  <a href="/about/"><span class="mnav-icon">🛈</span>Hakkımızda</a>
+</nav>
+
 <script>
 function toggle(btn) {
-  const item = btn.parentElement;
-  item.classList.toggle('open');
+  btn.parentElement.classList.toggle('open');
 }
 </script>
 </body>
