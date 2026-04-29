@@ -17,6 +17,7 @@
   --font-mono:'JetBrains Mono',monospace;--font-display:'Syne',sans-serif;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
+html,body{overflow-x:hidden;width:100%;}
 body{background:var(--bg);color:var(--text);font-family:var(--font-mono);font-size:13px;min-height:100vh;display:flex;flex-direction:column;}
 
 nav.topnav{height:52px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:100;}
@@ -27,7 +28,6 @@ nav.topnav{height:52px;background:var(--panel);border-bottom:1px solid var(--bor
 .nav-links a{color:var(--muted2);text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;transition:color .15s;}
 .nav-links a:hover,.nav-links a.active{color:var(--yellow);}
 
-/* HERO */
 .hero{background:linear-gradient(135deg,#0d0f12 0%,#13161b 40%,#0f120d 100%);border-bottom:1px solid var(--border);padding:60px 32px 48px;}
 .hero-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
 .hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(240,185,11,.1);border:1px solid rgba(240,185,11,.2);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:600;color:var(--yellow);letter-spacing:.5px;text-transform:uppercase;margin-bottom:20px;}
@@ -36,42 +36,35 @@ nav.topnav{height:52px;background:var(--panel);border-bottom:1px solid var(--bor
 .hero p{color:var(--muted2);font-size:13px;line-height:1.8;}
 .hero-logo{width:80px;height:80px;opacity:.8;}
 
-/* CONTENT */
 .content{flex:1;max-width:860px;margin:0 auto;width:100%;padding:48px 32px;}
 
-/* STATS */
 .stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:48px;}
 .stat-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:20px;text-align:center;}
 .stat-card .num{font-family:var(--font-display);font-size:24px;font-weight:800;color:var(--yellow);margin-bottom:4px;}
 .stat-card .lbl{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:.5px;}
 
-/* SECTIONS */
 .section{margin-bottom:48px;}
 .section-title{font-family:var(--font-display);font-size:20px;font-weight:800;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
 .section-title::after{content:'';flex:1;height:1px;background:var(--border);}
 .section p{color:var(--muted2);font-size:12px;line-height:1.9;margin-bottom:12px;}
 .section strong{color:var(--text);}
 
-/* FEATURES */
 .features-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
 .feature{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:18px;}
 .feature .icon{font-size:20px;margin-bottom:8px;}
 .feature h4{font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;}
 .feature p{font-size:11px;color:var(--muted2);line-height:1.6;margin:0;}
 
-/* TECH STACK */
 .tech-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
 .tech-badge{background:var(--panel2);border:1px solid var(--border2);border-radius:4px;padding:6px 12px;font-size:11px;color:var(--muted2);font-weight:600;}
 .tech-badge span{color:var(--yellow);margin-right:4px;}
 
-/* CONTACT */
 .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;}
 .contact-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:20px;}
 .contact-card h4{font-family:var(--font-display);font-size:12px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
 .contact-card .email{font-size:12px;color:var(--yellow);}
 .contact-card p{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6;}
 
-/* DISCLAIMER */
 .disclaimer{background:rgba(255,154,0,.06);border:1px solid rgba(255,154,0,.2);border-radius:6px;padding:20px 24px;margin-top:48px;}
 .disclaimer strong{color:var(--orange);}
 .disclaimer p{font-size:12px;color:var(--muted2);line-height:1.8;margin-top:8px;}
@@ -82,17 +75,31 @@ footer .flinks{display:flex;gap:16px;}
 footer .flinks a{font-size:10px;color:var(--muted2);text-decoration:none;transition:color .15s;}
 footer .flinks a:hover{color:var(--yellow);}
 
+/* MOBİL ALT NAV — yalnızca mobilde görünür */
+.mob-bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:52px;background:var(--panel);border-top:1px solid var(--border);z-index:500;}
+.mob-bottom-nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--muted2);text-decoration:none;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;border-top:2px solid transparent;transition:color .15s;}
+.mob-bottom-nav a.active{color:var(--yellow);border-top-color:var(--yellow);}
+.mob-bottom-nav a:hover{color:var(--yellow);}
+.mob-bottom-nav .mnav-icon{font-size:16px;line-height:1;}
+
 @media(max-width:768px){
   nav.topnav{padding:0 16px;}
-  .hero{padding:36px 16px 32px;}
-  .hero-inner{grid-template-columns:1fr;gap:20px;}
+  .nav-links{display:none;}
+  .hero{padding:28px 16px 24px;}
+  .hero-inner{grid-template-columns:1fr;gap:16px;}
   .hero-logo{display:none;}
-  .hero h1{font-size:26px;}
-  .content{padding:32px 16px;}
-  .stats-row{grid-template-columns:1fr 1fr;}
+  .hero h1{font-size:22px;}
+  .hero p{font-size:12px;}
+  .content{padding:20px 16px 72px;}
+  .stats-row{grid-template-columns:1fr 1fr;gap:10px;}
+  .stat-card{padding:14px 10px;}
+  .stat-card .num{font-size:20px;}
+  .section{margin-bottom:32px;}
+  .section-title{font-size:16px;}
   .features-grid{grid-template-columns:1fr;}
   .contact-grid{grid-template-columns:1fr;}
-  footer{padding:16px;}
+  footer{display:none;}
+  .mob-bottom-nav{display:flex;}
 }
 </style>
 </head>
@@ -105,13 +112,14 @@ footer .flinks a:hover{color:var(--yellow);}
     <a href="/education/">Eğitim</a>
     <a href="/faq/">SSS</a>
     <a href="/privacy/">Gizlilik</a>
-    <a href="/about/">Hakkımızda</a>
+    <a href="/about/" class="active">Hakkımızda</a>
   </div>
 </nav>
+
 <div class="hero">
   <div class="hero-inner">
     <div>
-      <div class="hero-badge"> Hakkımızda</div>
+      <div class="hero-badge">Hakkımızda</div>
       <h1>Kripto Futures'ı<br><span>Herkes İçin</span> Erişilebilir Kılıyoruz</h1>
       <p>Pxelight Futures, karmaşık görünen vadeli işlem piyasalarını herkesin anlayabileceği, güvenle deneyebileceği bir ortamda sunmak amacıyla geliştirilmiştir.</p>
     </div>
@@ -149,32 +157,32 @@ footer .flinks a:hover{color:var(--yellow);}
     <div class="section-title">Platform Özellikleri</div>
     <div class="features-grid">
       <div class="feature">
-        <div class="icon"></div>
+        <div class="icon">ϟ</div>
         <h4>Gerçek Zamanlı Veriler</h4>
         <p>Bybit WebSocket API üzerinden canlı fiyat ve emir defteri verileri anlık olarak yansıtılır.</p>
       </div>
       <div class="feature">
-        <div class="icon"></div>
+        <div class="icon">◱</div>
         <h4>TradingView Grafik</h4>
         <p>Profesyonel TradingView grafik motoru ile tüm teknik analiz araçlarına erişim.</p>
       </div>
       <div class="feature">
-        <div class="icon"></div>
+        <div class="icon">☷</div>
         <h4>3 Emir Türü</h4>
         <p>Limit, Market ve Stop-Limit emirleri ile gerçek borsa deneyimi.</p>
       </div>
       <div class="feature">
-        <div class="icon"></div>
+        <div class="icon">ꗃ</div>
         <h4>Veri Gizliliği</h4>
         <p>Tüm veriler yalnızca tarayıcınızda saklanır. Sunucuya hiçbir kişisel veri gönderilmez.</p>
       </div>
       <div class="feature">
-        <div class="icon"></div>
+        <div class="icon">▮</div>
         <h4>Mobil Uyumlu</h4>
         <p>Telefon ve tablet cihazlar için optimize edilmiş arayüz. PWA olarak ana ekrana eklenebilir.</p>
       </div>
       <div class="feature">
-        <div class="icon"></div>
+        <div class="icon">ƒ</div>
         <h4>Eğitim Merkezi</h4>
         <p>Futures, kaldıraç, likidasyon ve risk yönetimi hakkında kapsamlı makaleler.</p>
       </div>
@@ -185,13 +193,13 @@ footer .flinks a:hover{color:var(--yellow);}
     <div class="section-title">Teknik Altyapı</div>
     <p>Platform, herhangi bir sunucu taraflı işlem gerektirmeden tamamen tarayıcıda çalışır. Kullandığımız teknolojiler:</p>
     <div class="tech-list">
-      <div class="tech-badge"><span></span>Vanilla JS</div>
-      <div class="tech-badge"><span></span>Bybit WebSocket API</div>
-      <div class="tech-badge"><span></span>TradingView Widget</div>
-      <div class="tech-badge"><span></span>localStorage</div>
-      <div class="tech-badge"><span></span>CSS Variables</div>
-      <div class="tech-badge"><span></span>PWA / Service Worker</div>
-      <div class="tech-badge"><span></span>JetBrains Mono & Syne</div>
+      <div class="tech-badge"><span>▸</span>Vanilla JS</div>
+      <div class="tech-badge"><span>▸</span>Bybit WebSocket API</div>
+      <div class="tech-badge"><span>▸</span>TradingView Widget</div>
+      <div class="tech-badge"><span>▸</span>localStorage</div>
+      <div class="tech-badge"><span>▸</span>CSS Variables</div>
+      <div class="tech-badge"><span>▸</span>PWA / Service Worker</div>
+      <div class="tech-badge"><span>▸</span>JetBrains Mono & Syne</div>
     </div>
   </div>
 
@@ -212,7 +220,7 @@ footer .flinks a:hover{color:var(--yellow);}
   </div>
 
   <div class="disclaimer">
-    <strong>️ Yasal Uyarı</strong>
+    <strong> 🛈 Yasal Uyarı</strong>
     <p>Pxelight Futures yalnızca eğitim amaçlı bir simülatördür. Gerçek para kullanılmaz, gerçek işlem yapılmaz. Platform herhangi bir kripto borsası veya finansal kurum ile bağlantılı değildir. Sunulan içerikler yatırım tavsiyesi niteliği taşımaz. Kripto para piyasaları yüksek risk içerir; yatırım kararlarınızı almadan önce bir finansal danışmana başvurunuz.</p>
   </div>
 
@@ -228,6 +236,14 @@ footer .flinks a:hover{color:var(--yellow);}
     <a href="/about/">Hakkımızda</a>
   </div>
 </footer>
+
+<nav class="mob-bottom-nav">
+  <a href="/"><span class="mnav-icon">◱</span>Simülatör</a>
+  <a href="/education/"><span class="mnav-icon">ƒ</span>Eğitim</a>
+  <a href="/faq/"><span class="mnav-icon">�</span>SSS</a>
+  <a href="/privacy/"><span class="mnav-icon">ꗃ</span>Gizlilik</a>
+  <a href="/about/" class="active"><span class="mnav-icon">🛈</span>Hakkımızda</a>
+</nav>
 
 </body>
 </html>
