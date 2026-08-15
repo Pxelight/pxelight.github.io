@@ -65,6 +65,6 @@ Geliştirme sürecine katkıda bulunmak veya hata bildirmek için:
 
 E-posta: pxelight@gmail.com
 
-GitHub: @pxelight
+GitHub & All Socials: @pxelight
 
 © 2026 Pxelight Futures, All Rights Reserved.
