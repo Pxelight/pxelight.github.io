@@ -178,6 +178,13 @@ header{height:52px;background:var(--panel);border-bottom:1px solid var(--border)
 .coin-search{display:block;width:100%;margin-top:8px;box-sizing:border-box;background:var(--panel);border:1px solid var(--border2);border-radius:4px;color:var(--text);font:500 11px var(--font-mono);padding:7px 8px;outline:none;text-transform:none;letter-spacing:0}
 .coin-search::placeholder{color:var(--muted)}
 .coin-search:focus{border-color:var(--yellow);box-shadow:0 0 0 1px rgba(240,185,11,.12)}
+
+  /* Market filtreleri */
+  .market-filters{display:flex;gap:5px;margin-top:7px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .market-filters::-webkit-scrollbar{display:none}
+  .market-filter{flex:0 0 auto;background:var(--panel2);border:1px solid var(--border2);border-radius:4px;color:var(--muted2);padding:6px 8px;cursor:pointer;font:600 10px var(--font-mono);line-height:1;transition:all .15s;white-space:nowrap}
+  .market-filter:hover{border-color:var(--yellow);color:var(--text)}
+  .market-filter.active{background:rgba(240,185,11,.10);border-color:rgba(240,185,11,.45);color:var(--yellow)}
 .mdd-empty{padding:18px 12px;text-align:center;color:var(--muted2);font-size:11px;font-family:var(--font-mono)}
 .mdd-list{max-height:300px;overflow-y:auto}
 .mdd-item{padding:9px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .15s}
@@ -420,6 +427,9 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
 
   /* Market dropdown mobilde tam genişlik */
   .market-dropdown{width:calc(100vw - 24px);left:0}
+  .market-filters{gap:4px;margin-top:7px}
+  .market-filter{padding:7px 9px;font-size:10px;min-height:30px}
+
 
   /* Pozisyon tablosu → mobilde kart layout */
   .pos-desktop-row{display:none!important}
@@ -613,6 +623,11 @@ html, body {
             <div class="mdd-header">
               <div>Piyasalar - 24S Değişim</div>
               <input id="coin-search" class="coin-search" type="search" placeholder="Coin ara... (BTC, ETH, SOL)" autocomplete="off" spellcheck="false">
+              <div class="market-filters" id="market-filters" role="tablist" aria-label="Piyasa filtreleri">
+                <button type="button" class="market-filter active" data-filter="neutral" onclick="setMarketFilter('neutral', event)">İlk 100</button>
+                <button type="button" class="market-filter" data-filter="gainers" onclick="setMarketFilter('gainers', event)">Yükselenler</button>
+                <button type="button" class="market-filter" data-filter="losers" onclick="setMarketFilter('losers', event)">Düşenler</button>
+              </div>
             </div>
             <div class="mdd-list" id="mdd-list"></div>
           </div>
@@ -1192,7 +1207,7 @@ function loadState() {
     if (s.leverageMap && typeof s.leverageMap === 'object') leverageMap = s.leverageMap;
     if (typeof s.marginMode === 'string') marginMode = s.marginMode;
     if (s.marginMap && typeof s.marginMap === 'object') marginMap = s.marginMap;
-    if (typeof s.coin === 'string' && COINS.includes(s.coin)) coin = s.coin;
+    if (typeof s.coin === 'string') coin = s.coin;
     // En son tıklanan coin (işlem açılmasından bağımsız) önceliklidir
     try {
       const lastClicked = localStorage.getItem('pxe_last_clicked_coin');
@@ -1255,9 +1270,21 @@ function setSlider(pct) {
   updateCostDisplay();
 }
 
-const COINS = ['BTC','ETH','XRP','BNB','SOL','TRX','DOGE','HYPE','ADA','TON','LINK','SUI','AVAX','LTC','DOT','NEAR','ETC','AAVE','ARB','INJ','OP','TIA','WIF','SEI','JUP','JTO','FIL','PYTH','W','PIXEL','RAVE'];
-const coinDecimals = {BTC:2,ETH:2,BNB:2,XRP:4,SOL:3,DOGE:4,TRX:5,ADA:4,AVAX:3,TON:4,LINK:3,SUI:4,DOT:3,NEAR:3,LTC:2,AAVE:2,ARB:4,WIF:4,INJ:3,SEI:4,OP:4,ETC:2,TIA:4,PYTH:4,JUP:4,JTO:4,FIL:3,W:4,PIXEL:4,RAVE:4,HYPE:3};
-const coinMinSizes = {BTC:0.001,ETH:0.01,BNB:0.01,XRP:1,SOL:0.1,DOGE:1,TRX:10,ADA:1,AVAX:0.1,TON:0.1,LINK:0.1,SUI:1,DOT:0.1,NEAR:0.1,LTC:0.01,AAVE:0.01,ARB:1,WIF:1,INJ:0.1,SEI:1,OP:1,ETC:0.1,TIA:1,PYTH:1,JUP:1,JTO:1,FIL:0.1,W:1,PIXEL:1,RAVE:10,HYPE:0.1};
+// CoinMarketCap'in güncel ilk 100 sıralaması.
+// Stablecoin'ler çıkarılmıştır. Sıra CMC market-cap sırasıdır.
+let COINS = [
+  'BTC', 'ETH', 'BNB', 'XRP', 'SOL', 'TRX', 'HYPE', 'DOGE', 'ZEC', 'LEO', 'XMR', 'LINK', 'ADA', 'XLM', 'BCH', 'CC', 'GRAM', 'LTC', 'HBAR', 'AVAX', 'SUI', 'SHIB', 'XAUT', 'CRO', 'OKB', 'TAO', 'NEAR', 'UNI', 'PAXG', 'WLFI', 'ASTER', 'ONDO', 'M', 'MNT', 'AAVE', 'DOT', 'ICP', 'U', 'WLD', 'SKY', 'BGB', 'PUMP', 'PEPE', 'MORPHO', 'ETC', 'PI', 'KCS', 'JST', 'ENA', 'POL', 'ATOM', 'ALGO', 'GT', 'QNT', 'KAS', 'RENDER', 'FIL', 'LIT', 'XDC', 'JUP', 'VVV', 'FLR', 'ARB', 'VELVET', '币安人生', 'ETHFI', 'APT', 'CAKE', 'NEXO', 'INJ', 'AERO', 'VET', 'DASH', 'PENGU', 'CRV', 'VIRTUAL', 'TRUMP', 'SUN', 'PYTH', 'BSV', 'SEI', 'SPX', 'JTO', 'NIGHT', 'FET', 'ZRO', 'TIA'
+];
+
+const CMC_STABLECOIN_SYMBOLS = new Set([
+  'USDT','USDC','DAI','USD1','USDE','FDUSD','USDD','PYUSD','TUSD','USDP',
+  'GUSD','FRAX','FRXUSD','USDS','RLUSD','EURC','EURS','EURT','USTC','UST',
+  'USDB','USDC.E','USDT.E','USD0','USD0++','USR','USDY','USYC',
+  'BUSD','LUSD','CRVUSD','SUSD','MIM','DOLA','GHO','USDM'
+]);
+
+const coinDecimals = {BTC:2,ETH:2,BNB:2,XRP:4,SOL:3,TRX:5,DOGE:4,HYPE:3,ZEC:2,LEO:2,XMR:2,LINK:3,ADA:4,XLM:4,BCH:2,CC:4,GRAM:3,LTC:2,HBAR:4,AVAX:3,SUI:4,SHIB:8,XAUT:3,CRO:4,OKB:2,TAO:3,NEAR:3,UNI:3,PAXG:3,WLFI:4,ASTER:4,ONDO:4,M:4,MNT:4,AAVE:2,DOT:3,ICP:3,U:4,WLD:4,SKY:4,BGB:3,PUMP:8,PEPE:8,MORPHO:3,ETC:2,PI:4,KCS:3,JST:4,ENA:4,POL:4,ATOM:3,ALGO:4,GT:3,QNT:3,KAS:5,RENDER:3,FIL:3,LIT:4,XDC:5,JUP:4,VVV:3,FLR:5,ARB:4,VELVET:3,币安人生:4,ETHFI:4,APT:4,CAKE:3,NEXO:3,INJ:3,AERO:4,VET:5,DASH:3,PENGU:5,CRV:4,VIRTUAL:4,TRUMP:3,SUN:5,PYTH:4,BSV:3,SEI:4,SPX:4,JTO:4,NIGHT:5,FET:4,ZRO:4,TIA:4};
+const coinMinSizes = {BTC:0.001,ETH:0.01,BNB:0.01,XRP:1,SOL:0.1,DOGE:1,TRX:10,HYPE:0.1,ZEC:0.01,LEO:0.1,XMR:0.01,LINK:0.1,ADA:1,XLM:1,BCH:0.01,CC:1,GRAM:0.1,LTC:0.01,HBAR:1,AVAX:0.1,SUI:1,SHIB:1000,XAUT:0.001,CRO:1,OKB:0.01,TAO:0.01,NEAR:0.1,UNI:0.1,PAXG:0.001,WLFI:1,ASTER:1,ONDO:1,M:1,MNT:1,AAVE:0.01,DOT:0.1,ICP:0.1,U:1,WLD:1,SKY:1,BGB:0.1,PUMP:1000,PEPE:100000,MORPHO:0.1,ETC:0.1,PI:1,KCS:0.1,JST:1,ENA:1,POL:1,ATOM:0.1,ALGO:1,GT:0.1,QNT:0.01,KAS:10,RENDER:0.1,FIL:0.1,LIT:1,XDC:10,JUP:1,VVV:0.01,FLR:10,ARB:1,VELVET:0.1,币安人生:1,ETHFI:1,APT:0.1,CAKE:0.1,NEXO:0.1,INJ:0.1,AERO:1,VET:10,DASH:0.01,PENGU:10,CRV:1,VIRTUAL:0.1,TRUMP:0.1,SUN:10,PYTH:1,BSV:0.01,SEI:1,SPX:0.1,JTO:0.1,NIGHT:1,FET:1,ZRO:0.1,TIA:0.1};
 
 // Kaydedilmiş durumu yükle (sayfa yenilendiğinde sıfırlanmasın)
 loadState();
@@ -1437,22 +1464,41 @@ function setBookPrice(p) {
 
 // ── MARKETS ────────────────────────────────────────────────────────────────────
 let marketChangeMap = {};
+let marketFilter = 'neutral';
+
+function setMarketFilter(filter, event) {
+  marketFilter = filter;
+  document.querySelectorAll('.market-filter').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.filter === filter);
+  });
+  if (event) event.stopPropagation();
+  renderMarketList(document.getElementById('coin-search')?.value || '');
+}
 
 function renderMarketList(filter = '') {
   const list = document.getElementById('mdd-list');
   if (!list) return;
   const q = filter.trim().toUpperCase();
-  const filtered = COINS.filter(c => c.includes(q));
+
+  // COINS sırası = CMC Top 100 sırası. Nötr filtre bu sıralamayı aynen korur.
+  let filtered = COINS.filter(c => c.includes(q));
+  if (marketFilter === 'gainers') {
+    filtered = filtered.filter(c => (marketChangeMap[c + 'USDT'] ?? 0) > 0)
+      .sort((a, b) => (marketChangeMap[b + 'USDT'] ?? 0) - (marketChangeMap[a + 'USDT'] ?? 0));
+  } else if (marketFilter === 'losers') {
+    filtered = filtered.filter(c => (marketChangeMap[c + 'USDT'] ?? 0) < 0)
+      .sort((a, b) => (marketChangeMap[a + 'USDT'] ?? 0) - (marketChangeMap[b + 'USDT'] ?? 0));
+  }
 
   if (!filtered.length) {
-    list.innerHTML = '<div class="mdd-empty">Coin bulunamadı</div>';
+    list.innerHTML = '<div class="mdd-empty">Bu filtrede coin bulunamadı</div>';
     return;
   }
 
   list.innerHTML = filtered.map(c => {
     const chg = marketChangeMap[c + 'USDT'] ?? 0;
-    const color = chg >= 0 ? 'var(--green)' : 'var(--red)';
-    const sign = chg >= 0 ? '+' : '';
+    const color = chg > 0 ? 'var(--green)' : chg < 0 ? 'var(--red)' : 'var(--muted2)';
+    const sign = chg > 0 ? '+' : '';
     return `<div class="mdd-item" onclick="changeCoin('${c}')">
       <div><span class="coin">${c}</span><span class="usdt">/USDT</span></div>
       <span class="chg" style="color:${color}">${sign}${chg.toFixed(2)}%</span>
@@ -2864,6 +2910,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   document.addEventListener('click', () => mdd.classList.remove('open'));
+  const marketFilters = document.getElementById('market-filters');
+  if (marketFilters) marketFilters.addEventListener('click', (e) => e.stopPropagation());
 
   document.getElementById('lev-modal').addEventListener('click', (e) => { if (e.target === document.getElementById('lev-modal')) closeLevModal(); });
   document.getElementById('tpsl-modal').addEventListener('click', (e) => { if (e.target === document.getElementById('tpsl-modal')) closeTpslModal(); });
