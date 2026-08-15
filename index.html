@@ -12,7 +12,7 @@
 <meta property="og:type" content="website">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
 
-<!-- REKLAMLAR --> 
+<!-- REKLAMLAR -->
  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2352152518607775"
      crossorigin="anonymous"></script>
 
@@ -175,6 +175,10 @@ header{height:52px;background:var(--panel);border-bottom:1px solid var(--border)
 .market-dropdown{display:none;position:absolute;top:46px;left:0;width:260px;background:var(--panel2);border:1px solid var(--border2);border-radius:6px;box-shadow:0 12px 40px rgba(0,0,0,.7);z-index:9999;overflow:hidden}
 .market-dropdown.open{display:block}
 .mdd-header{padding:10px 12px;font-size:11px;color:var(--muted2);border-bottom:1px solid var(--border);font-family:var(--font-mono);font-weight:700;letter-spacing:.5px;text-transform:uppercase}
+.coin-search{display:block;width:100%;margin-top:8px;box-sizing:border-box;background:var(--panel);border:1px solid var(--border2);border-radius:4px;color:var(--text);font:500 11px var(--font-mono);padding:7px 8px;outline:none;text-transform:none;letter-spacing:0}
+.coin-search::placeholder{color:var(--muted)}
+.coin-search:focus{border-color:var(--yellow);box-shadow:0 0 0 1px rgba(240,185,11,.12)}
+.mdd-empty{padding:18px 12px;text-align:center;color:var(--muted2);font-size:11px;font-family:var(--font-mono)}
 .mdd-list{max-height:300px;overflow-y:auto}
 .mdd-item{padding:9px 12px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .15s}
 .mdd-item:hover{background:rgba(255,255,255,.04)}
@@ -285,9 +289,9 @@ td{padding:9px 10px;border-bottom:1px solid rgba(37,42,51,.5);vertical-align:mid
 .slider-pcts span:hover{color:var(--yellow)}
 .btn-row{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px}
 .buy-btn,.sell-btn{padding:13px;border:none;border-radius:4px;font-family:var(--font-mono);font-size:12px;font-weight:700;cursor:pointer;transition:all .15s;letter-spacing:.3px}
-.buy-btn{background:var(--green);color:#0a1a12}
+.buy-btn{background:var(--green);color:#fff}
 .buy-btn:hover{background:#0fdf90}
-.sell-btn{background:var(--red);color:#1a080a}
+.sell-btn{background:var(--red);color:#fff}
 .sell-btn:hover{background:#ff4f6a}
 .cost-row{display:flex;justify-content:space-between;margin-top:12px;padding-top:12px;border-top:1px solid var(--border);font-size:11px;color:var(--muted2)}
 .cost-row .val{color:var(--text);font-weight:600}
@@ -606,7 +610,10 @@ html, body {
             <span class="pair-arrow">▾</span>
           </div>
           <div class="market-dropdown">
-            <div class="mdd-header">Piyasalar - 24S Değişim</div>
+            <div class="mdd-header">
+              <div>Piyasalar - 24S Değişim</div>
+              <input id="coin-search" class="coin-search" type="search" placeholder="Coin ara... (BTC, ETH, SOL)" autocomplete="off" spellcheck="false">
+            </div>
             <div class="mdd-list" id="mdd-list"></div>
           </div>
         </div>
@@ -876,7 +883,7 @@ html, body {
 <nav class="mobile-nav">
   <button class="mob-tab active" id="mobtab-chart" onclick="switchMobTab('chart',this)">
     <span class="mob-icon">
-      <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" 
+      <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg"
 	 width="20px" height="20px" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
 <path d="M2,45.5c0,2.2,1.8,4,4,4h42.4c0.9,0,1.6-0.7,1.6-1.6v-2.8c0-0.9-0.7-1.6-1.6-1.6l-38.9,0
 	C8.7,43.5,8,42.8,8,42L8,4.1c0-0.9-0.7-1.6-1.6-1.6H3.6C2.7,2.5,2,3.2,2,4.1V45.5z"/>
@@ -1075,13 +1082,23 @@ html, body {
         </div>
         <div class="info-menu-arrow">›</div>
       </a>
+      <a class="info-menu-card" href="/privacy/" onclick="closeInfoModal()">
+        <div class="info-menu-icon">
+          <svg fill="var(--yellow)" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17,9V7A5,5,0,0,0,7,7V9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V12A3,3,0,0,0,17,9ZM9,7a3,3,0,0,1,6,0V9H9Zm9,12a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z"/></svg>
+        </div>
+        <div class="info-menu-text">
+          <div class="info-menu-title">Gizlilik Politikası</div>
+          <div class="info-menu-desc">Verileriniz nasıl saklanır ve korunur</div>
+        </div>
+        <div class="info-menu-arrow">›</div>
+      </a>
       <a class="info-menu-card" href="/about/" onclick="closeInfoModal()">
         <div class="info-menu-icon">
           <svg width="20px" height="20px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>about</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="about-white" fill="#000000" transform="translate(42.666667, 42.666667)">
-            <path d="M213.333333,3.55271368e-14 C95.51296,3.55271368e-14 3.55271368e-14,95.51168 3.55271368e-14,213.333333 C3.55271368e-14,331.153707 95.51296,426.666667 213.333333,426.666667 C331.154987,426.666667 426.666667,331.153707 426.666667,213.333333 C426.666667,95.51168 331.154987,3.55271368e-14 213.333333,3.55271368e-14 Z M213.333333,384 C119.227947,384 42.6666667,307.43872 42.6666667,213.333333 C42.6666667,119.227947 119.227947,42.6666667 213.333333,42.6666667 C307.44,42.6666667 384,119.227947 384,213.333333 C384,307.43872 307.44,384 213.333333,384 Z M240.04672,128 C240.04672,143.46752 228.785067,154.666667 213.55008,154.666667 C197.698773,154.666667 186.713387,143.46752 186.713387,127.704107 C186.713387,112.5536 197.99616,101.333333 213.55008,101.333333 C228.785067,101.333333 240.04672,112.5536 240.04672,128 Z M192.04672,192 L234.713387,192 L234.713387,320 L192.04672,320 L192.04672,192 Z" id="Shape" style="fill: var(--yellow); stroke: var(--yellow); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;"> 
+            <path d="M213.333333,3.55271368e-14 C95.51296,3.55271368e-14 3.55271368e-14,95.51168 3.55271368e-14,213.333333 C3.55271368e-14,331.153707 95.51296,426.666667 213.333333,426.666667 C331.154987,426.666667 426.666667,331.153707 426.666667,213.333333 C426.666667,95.51168 331.154987,3.55271368e-14 213.333333,3.55271368e-14 Z M213.333333,384 C119.227947,384 42.6666667,307.43872 42.6666667,213.333333 C42.6666667,119.227947 119.227947,42.6666667 213.333333,42.6666667 C307.44,42.6666667 384,119.227947 384,213.333333 C384,307.43872 307.44,384 213.333333,384 Z M240.04672,128 C240.04672,143.46752 228.785067,154.666667 213.55008,154.666667 C197.698773,154.666667 186.713387,143.46752 186.713387,127.704107 C186.713387,112.5536 197.99616,101.333333 213.55008,101.333333 C228.785067,101.333333 240.04672,112.5536 240.04672,128 Z M192.04672,192 L234.713387,192 L234.713387,320 L192.04672,320 L192.04672,192 Z" id="Shape" style="fill: var(--yellow); stroke: var(--yellow); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;">
 </path>
         </g>
     </g>
@@ -1093,22 +1110,12 @@ html, body {
         </div>
         <div class="info-menu-arrow">›</div>
       </a>
-      <a class="info-menu-card" href="/privacy/" onclick="closeInfoModal()">
-        <div class="info-menu-icon">
-          <svg fill="var(--yellow)" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17,9V7A5,5,0,0,0,7,7V9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V12A3,3,0,0,0,17,9ZM9,7a3,3,0,0,1,6,0V9H9Zm9,12a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z"/></svg>
-        </div>
-        <div class="info-menu-text">
-          <div class="info-menu-title">Gizlilik Politikası</div>
-          <div class="info-menu-desc">Verileriniz nasıl saklanır ve korunur</div>
-        </div>
-        <div class="info-menu-arrow">›</div>
-      </a>
       <div class="info-menu-disclaimer">
         <svg width="15px" height="15px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>about</title>
     <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="about-white" fill="#000000" transform="translate(42.666667, 42.666667)">
-            <path d="M213.333333,3.55271368e-14 C95.51296,3.55271368e-14 3.55271368e-14,95.51168 3.55271368e-14,213.333333 C3.55271368e-14,331.153707 95.51296,426.666667 213.333333,426.666667 C331.154987,426.666667 426.666667,331.153707 426.666667,213.333333 C426.666667,95.51168 331.154987,3.55271368e-14 213.333333,3.55271368e-14 Z M213.333333,384 C119.227947,384 42.6666667,307.43872 42.6666667,213.333333 C42.6666667,119.227947 119.227947,42.6666667 213.333333,42.6666667 C307.44,42.6666667 384,119.227947 384,213.333333 C384,307.43872 307.44,384 213.333333,384 Z M240.04672,128 C240.04672,143.46752 228.785067,154.666667 213.55008,154.666667 C197.698773,154.666667 186.713387,143.46752 186.713387,127.704107 C186.713387,112.5536 197.99616,101.333333 213.55008,101.333333 C228.785067,101.333333 240.04672,112.5536 240.04672,128 Z M192.04672,192 L234.713387,192 L234.713387,320 L192.04672,320 L192.04672,192 Z" id="Shape" style="fill: var(--muted2); stroke: var(--muted2); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;"> 
+            <path d="M213.333333,3.55271368e-14 C95.51296,3.55271368e-14 3.55271368e-14,95.51168 3.55271368e-14,213.333333 C3.55271368e-14,331.153707 95.51296,426.666667 213.333333,426.666667 C331.154987,426.666667 426.666667,331.153707 426.666667,213.333333 C426.666667,95.51168 331.154987,3.55271368e-14 213.333333,3.55271368e-14 Z M213.333333,384 C119.227947,384 42.6666667,307.43872 42.6666667,213.333333 C42.6666667,119.227947 119.227947,42.6666667 213.333333,42.6666667 C307.44,42.6666667 384,119.227947 384,213.333333 C384,307.43872 307.44,384 213.333333,384 Z M240.04672,128 C240.04672,143.46752 228.785067,154.666667 213.55008,154.666667 C197.698773,154.666667 186.713387,143.46752 186.713387,127.704107 C186.713387,112.5536 197.99616,101.333333 213.55008,101.333333 C228.785067,101.333333 240.04672,112.5536 240.04672,128 Z M192.04672,192 L234.713387,192 L234.713387,320 L192.04672,320 L192.04672,192 Z" id="Shape" style="fill: var(--muted2); stroke: var(--muted2); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;">
 </path>
         </g>
     </g>
@@ -1224,9 +1231,9 @@ function setSlider(pct) {
   if (reduceOnly) {
     // Hangi pozisyonun kapatılacağını buton metninden belirle
     const buyBtnText = document.querySelector('.buy-btn').textContent;
-    const closingSide = buyBtnText.includes('KAPAT KISA') ? 'Short' : 
+    const closingSide = buyBtnText.includes('KAPAT KISA') ? 'Short' :
                        buyBtnText.includes('KAPAT UZUN') ? 'Long' : null;
-    
+
     if (closingSide) {
       const targetPos = positions.find(p => p.symbol === coin && p.side === closingSide);
       if (targetPos) {
@@ -1429,39 +1436,51 @@ function setBookPrice(p) {
 }
 
 // ── MARKETS ────────────────────────────────────────────────────────────────────
+let marketChangeMap = {};
+
+function renderMarketList(filter = '') {
+  const list = document.getElementById('mdd-list');
+  if (!list) return;
+  const q = filter.trim().toUpperCase();
+  const filtered = COINS.filter(c => c.includes(q));
+
+  if (!filtered.length) {
+    list.innerHTML = '<div class="mdd-empty">Coin bulunamadı</div>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(c => {
+    const chg = marketChangeMap[c + 'USDT'] ?? 0;
+    const color = chg >= 0 ? 'var(--green)' : 'var(--red)';
+    const sign = chg >= 0 ? '+' : '';
+    return `<div class="mdd-item" onclick="changeCoin('${c}')">
+      <div><span class="coin">${c}</span><span class="usdt">/USDT</span></div>
+      <span class="chg" style="color:${color}">${sign}${chg.toFixed(2)}%</span>
+    </div>`;
+  }).join('');
+}
+
 async function renderMarkets() {
   try {
     const res = await fetch('https://api.bybit.com/v5/market/tickers?category=linear');
     const data = await res.json();
-    const map = {};
+    marketChangeMap = {};
     if (data.result && data.result.list) {
       data.result.list.forEach(d => {
-        // price24hPcnt Bybit'te oran olarak gelir (0.012 = %1.2)
-        map[d.symbol] = parseFloat(d.price24hPcnt) * 100;
+        marketChangeMap[d.symbol] = parseFloat(d.price24hPcnt) * 100;
       });
     }
-    document.getElementById('mdd-list').innerHTML = COINS.map(c => {
-      const chg = map[c + 'USDT'] ?? 0;
-      const color = chg >= 0 ? 'var(--green)' : 'var(--red)';
-      const sign = chg >= 0 ? '+' : '';
-      return `<div class="mdd-item" onclick="changeCoin('${c}')">
-        <div><span class="coin">${c}</span><span class="usdt">/USDT</span></div>
-        <span class="chg" style="color:${color}">${sign}${chg.toFixed(2)}%</span>
-      </div>`;
-    }).join('');
-  } catch {
-    document.getElementById('mdd-list').innerHTML = COINS.map(c =>
-      `<div class="mdd-item" onclick="changeCoin('${c}')">
-        <div><span class="coin">${c}</span><span class="usdt">/USDT</span></div>
-        <span class="chg" style="color:var(--muted2)">—</span>
-      </div>`
-    ).join('');
-  }
+  } catch {}
+  renderMarketList(document.getElementById('coin-search')?.value || '');
 }
 
 function changeCoin(c) {
   const prevCoin = coin;
   coin = c;
+  const coinSearch = document.getElementById('coin-search');
+  if (coinSearch) coinSearch.value = '';
+  const marketDropdown = document.querySelector('.market-dropdown');
+  if (marketDropdown) marketDropdown.classList.remove('open');
   // En son tıklanan coini localStorage'e kaydet
   try { localStorage.setItem('pxe_last_clicked_coin', c); } catch(e) {}
   livePrice = 0;
@@ -2823,10 +2842,27 @@ document.addEventListener('DOMContentLoaded', () => {
   // Market dropdown: click to toggle, click outside to close
   const pairWrap = document.querySelector('.pair-wrap');
   const mdd = document.querySelector('.market-dropdown');
+  const coinSearch = document.getElementById('coin-search');
+
   pairWrap.querySelector('.pair-name').addEventListener('click', (e) => {
     e.stopPropagation();
-    mdd.classList.toggle('open');
+    const willOpen = !mdd.classList.contains('open');
+    if (willOpen && coinSearch) coinSearch.value = '';
+    mdd.classList.toggle('open', willOpen);
+    if (willOpen && coinSearch) {
+      renderMarketList('');
+      coinSearch.focus();
+    }
   });
+
+  if (coinSearch) {
+    coinSearch.addEventListener('input', (e) => renderMarketList(e.target.value));
+    coinSearch.addEventListener('click', (e) => e.stopPropagation());
+    coinSearch.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') mdd.classList.remove('open');
+    });
+  }
+
   document.addEventListener('click', () => mdd.classList.remove('open'));
 
   document.getElementById('lev-modal').addEventListener('click', (e) => { if (e.target === document.getElementById('lev-modal')) closeLevModal(); });
