@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hakkımızda – Pxelight Futures</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%230d0f12'/%3E%3Cg transform='translate(256,256)'%3E%3Cpolygon points='0,-110 95,-55 95,55 0,110 -95,55 -95,-55' fill='none' stroke='%23f0b90b' stroke-width='22'/%3E%3Cpolygon points='0,-62 54,-31 54,31 0,62 -54,31 -54,-31' fill='%23f0b90b' opacity='.25'/%3E%3Cline x1='0' y1='-110' x2='0' y2='-62' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='0' y1='62' x2='0' y2='110' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='-55' x2='54' y2='-31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='-31' x2='-95' y2='-55' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='55' x2='54' y2='31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='31' x2='-95' y2='55' stroke='%23f0b90b' stroke-width='14'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Crect width='512' height='512' rx='96' fill='%230d0f12'/%3E%3Cg transform='translate(256,256)'%3E%3Cpolygon points='0,-110 95,-55 95,55 0,110 -95,55 -95,-55' fill='none' stroke='%23f0b90b' stroke-width='22'/%3E%3Cpolygon points='0,-62 54,-31 54,31 0,62 -54,31 -54,-31' fill='%23f0b90b' opacity='.25'/%3E%3Cline x1='0' y1='-110' x2='0' y2='-62' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='0' y1='62' x2='0' y2='110' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='-55' x2='54' y2='-31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='-31' x2='-95' y2='-55' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='95' y1='55' x2='54' y2='31' stroke='%23f0b90b' stroke-width='14'/%3E%3Cline x1='-54' y1='31' x2='-95' y2='55' stroke='%23f0b90b' stroke-width='14'/%3E%3C/g%3E%3C/svg%3E">
+<meta name="description" content="Pxelight Futures hakkında. Misyonumuz, platformun teknik altyapısı ve iletişim bilgileri.">
+<meta name="robots" content="index, follow">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0d0f12;--panel:#13161b;--panel2:#191d24;--border:#252a33;--border2:#2e3441;
+  --text:#e2e6ed;--muted:#5a6375;--muted2:#8892a4;--yellow:#f0b90b;--green:#0ecb81;
+  --red:#f6465d;--orange:#ff9a00;
+  --font-mono:'Inter', sans-serif;--font-display:'Syne',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{overflow-x:hidden;width:100%;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-mono);font-size:13px;min-height:100vh;display:flex;flex-direction:column;}
+
+nav.topnav{height:52px;background:var(--panel);border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;padding:0 32px;position:sticky;top:0;z-index:100;}
+.nav-logo{font-family:var(--font-mono);font-size:17px;font-weight:800;letter-spacing:-.5px;text-decoration:none;}
+.nav-logo span{color:var(--yellow)}
+.nav-logo em{color:var(--muted2);font-style:normal;font-weight:500;font-size:13px;}
+.nav-links{display:flex;gap:24px;align-items:center;}
+.nav-links a{color:var(--muted2);text-decoration:none;font-size:11px;font-weight:600;letter-spacing:.3px;text-transform:uppercase;transition:color .15s;}
+.nav-links a:hover,.nav-links a.active{color:var(--yellow);}
+
+.hero{background:linear-gradient(135deg,#0d0f12 0%,#13161b 40%,#0f120d 100%);border-bottom:1px solid var(--border);padding:60px 32px 48px;}
+.hero-inner{max-width:860px;margin:0 auto;display:grid;grid-template-columns:1fr auto;gap:40px;align-items:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(240,185,11,.1);border:1px solid rgba(240,185,11,.2);border-radius:20px;padding:4px 12px;font-size:10px;font-weight:600;color:var(--yellow);letter-spacing:.5px;text-transform:uppercase;margin-bottom:20px;}
+.hero h1{font-family:var(--font-mono);font-size:36px;font-weight:800;line-height:1.2;margin-bottom:14px;}
+.hero h1 span{color:var(--yellow);}
+.hero p{color:var(--muted2);font-size:13px;line-height:1.8;}
+.hero-logo{width:80px;height:80px;opacity:.8;}
+
+.content{flex:1;max-width:860px;margin:0 auto;width:100%;padding:48px 32px;}
+
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:48px;}
+.stat-card{background:var(--panel);border:1px solid var(--border);border-radius:8px;padding:20px;text-align:center;}
+.stat-card .num{font-family:var(--font-mono);font-size:24px;font-weight:800;color:var(--yellow);margin-bottom:4px;}
+.stat-card .lbl{font-size:10px;color:var(--muted2);text-transform:uppercase;letter-spacing:.5px;}
+
+.section{margin-bottom:48px;}
+.section-title{font-family:var(--font-mono);font-size:20px;font-weight:800;color:var(--text);margin-bottom:16px;display:flex;align-items:center;gap:10px;}
+.section-title::after{content:'';flex:1;height:1px;background:var(--border);}
+.section p{color:var(--muted2);font-size:12px;line-height:1.9;margin-bottom:12px;}
+.section strong{color:var(--text);}
+
+.features-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px;}
+.feature{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:18px;}
+.feature .icon{font-size:20px;margin-bottom:8px;}
+.feature h4{font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;}
+.feature p{font-size:11px;color:var(--muted2);line-height:1.6;margin:0;}
+
+.tech-list{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px;}
+.tech-badge{background:var(--panel2);border:1px solid var(--border2);border-radius:4px;padding:6px 12px;font-size:11px;color:var(--muted2);font-weight:600;}
+.tech-badge span{color:var(--yellow);margin-right:4px;}
+
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px;}
+.contact-card{background:var(--panel);border:1px solid var(--border);border-radius:6px;padding:20px;}
+.contact-card h4{font-family:var(--font-mono);font-size:12px;font-weight:700;color:var(--muted2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px;}
+.contact-card .email{font-size:12px;color:var(--yellow);}
+.contact-card p{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.6;}
+
+.disclaimer{background:rgba(255,154,0,.06);border:1px solid rgba(255,154,0,.2);border-radius:6px;padding:20px 24px;margin-top:48px;}
+.disclaimer strong{color:var(--orange);}
+.disclaimer p{font-size:12px;color:var(--muted2);line-height:1.8;margin-top:8px;}
+
+footer{background:var(--panel);border-top:1px solid var(--border);padding:20px 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+footer .copy{font-size:10px;color:var(--muted);}
+footer .flinks{display:flex;gap:16px;}
+footer .flinks a{font-size:10px;color:var(--muted2);text-decoration:none;transition:color .15s;}
+footer .flinks a:hover{color:var(--yellow);}
+
+/* MOBİL ALT NAV — yalnızca mobilde görünür */
+.mob-bottom-nav{display:none;position:fixed;bottom:0;left:0;right:0;height:52px;background:var(--panel);border-top:1px solid var(--border);z-index:500;}
+.mob-bottom-nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;color:var(--muted2);text-decoration:none;font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;border-top:2px solid transparent;transition:color .15s;}
+.mob-bottom-nav a.active{color:var(--yellow);border-top-color:var(--yellow);}
+.mob-bottom-nav a:hover{color:var(--yellow);}
+.mob-bottom-nav .mnav-icon{font-size:16px;line-height:1;}
+
+@media(max-width:768px){
+  nav.topnav{padding:0 16px;}
+  .nav-links{display:none;}
+  .hero{padding:28px 16px 24px;}
+  .hero-inner{grid-template-columns:1fr;gap:16px;}
+  .hero-logo{display:none;}
+  .hero h1{font-size:22px;}
+  .hero p{font-size:12px;}
+  .content{padding:20px 16px 72px;}
+  .stats-row{grid-template-columns:1fr 1fr;gap:10px;}
+  .stat-card{padding:14px 10px;}
+  .stat-card .num{font-size:20px;}
+  .section{margin-bottom:32px;}
+  .section-title{font-size:16px;}
+  .features-grid{grid-template-columns:1fr;}
+  .contact-grid{grid-template-columns:1fr;}
+  footer{display:none;}
+  .mob-bottom-nav{display:flex;}
+}
+</style>
+</head>
+<body>
+
+<nav class="topnav">
+  <a class="nav-logo" href="/"><span>Pxelight</span> <em>Futures</em></a>
+  <div class="nav-links">
+    <a href="/">Simülatör</a>
+    <a href="/education/">Eğitim</a>
+    <a href="/faq/">SSS</a>
+    <a href="/privacy/">Gizlilik</a>
+    <a href="/about/" class="active">Hakkımızda</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge">Hakkımızda</div>
+      <h1>Kripto Vadeli İşlemleri<br><span>Herkes İçin</span> Erişilebilir Kılıyoruz</h1>
+      <p>Pxelight Futures, karmaşık görünen vadeli işlem piyasalarını herkesin anlayabileceği, güvenle deneyebileceği bir ortamda sunmak amacıyla geliştirilmiştir.</p>
+    </div>
+    <svg class="hero-logo" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+      <g transform="translate(256,256)">
+        <polygon points="0,-110 95,-55 95,55 0,110 -95,55 -95,-55" fill="none" stroke="#f0b90b" stroke-width="22"/>
+        <polygon points="0,-62 54,-31 54,31 0,62 -54,31 -54,-31" fill="#f0b90b" opacity=".25"/>
+        <line x1="0" y1="-110" x2="0" y2="-62" stroke="#f0b90b" stroke-width="14"/>
+        <line x1="0" y1="62" x2="0" y2="110" stroke="#f0b90b" stroke-width="14"/>
+        <line x1="95" y1="-55" x2="54" y2="-31" stroke="#f0b90b" stroke-width="14"/>
+        <line x1="-54" y1="-31" x2="-95" y2="-55" stroke="#f0b90b" stroke-width="14"/>
+        <line x1="95" y1="55" x2="54" y2="31" stroke="#f0b90b" stroke-width="14"/>
+        <line x1="-54" y1="31" x2="-95" y2="55" stroke="#f0b90b" stroke-width="14"/>
+      </g>
+    </svg>
+  </div>
+</div>
+
+<div class="content">
+
+  <div class="stats-row">
+    <div class="stat-card"><div class="num">80+</div><div class="lbl">Kripto Parite</div></div>
+    <div class="stat-card"><div class="num">150x</div><div class="lbl">Maks. Kaldıraç</div></div>
+    <div class="stat-card"><div class="num">%100</div><div class="lbl">Ücretsiz</div></div>
+    <div class="stat-card"><div class="num">0</div><div class="lbl">Kayıt Gerekmez</div></div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Misyonumuz</div>
+    <p>Kripto para piyasaları, özellikle kaldıraçlı futures işlemleri, yeni başlayanlar için son derece karmaşık ve riskli görünebilir. Pxelight Futures, bu öğrenme sürecini <strong>gerçek para riske atmadan</strong> yaşayabileceğiniz güvenli bir alan sunar.</p>
+    <p>Amacımız basit: İnsan, bir simülatörde yüzlerce işlem yaparak deneyim kazansın, hatalarından öğrensin ve gerçek piyasalara hazır olduğunda o adımı atsın.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Platform Özellikleri</div>
+    <div class="features-grid">
+      <div class="feature">
+        <div class="icon">
+          <svg fill="#000000" width="20px" height="20px" viewBox="0 0 24 24" id="thunder" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color"><path id="primary" d="M17.76,10.63,9,21l2.14-8H7.05a1,1,0,0,1-1-1.36l3.23-8a1.05,1.05,0,0,1,1-.64h4.34a1,1,0,0,1,1,1.36L13.7,9H17A1,1,0,0,1,17.76,10.63Z" style="fill: none; stroke: rgb(255, 217, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"></path></svg>
+        </div>
+        <h4>Gerçek Zamanlı Veriler</h4>
+        <p>Bybit WebSocket API üzerinden canlı fiyat ve emir defteri verileri anlık olarak yansıtılır.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">
+          <svg fill="var(--yellow)" xmlns="http://www.w3.org/2000/svg" 
+	 width="20px" height="20px" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
+<path d="M2,45.5c0,2.2,1.8,4,4,4h42.4c0.9,0,1.6-0.7,1.6-1.6v-2.8c0-0.9-0.7-1.6-1.6-1.6l-38.9,0
+	C8.7,43.5,8,42.8,8,42L8,4.1c0-0.9-0.7-1.6-1.6-1.6H3.6C2.7,2.5,2,3.2,2,4.1V45.5z"/>
+<path d="M49.7,14.1c0-1.7-1.3-3-3-3c-0.9,0-1.6,0.4-2.2,0.9l-8.6,8.6L30,15c0,0,0,0,0,0l-0.1-0.1
+	c-0.1-0.1-0.1-0.1-0.2-0.2c-0.1,0-0.1-0.1-0.2-0.1c-0.1-0.1-0.2-0.1-0.3-0.2c-0.1,0-0.1-0.1-0.2-0.1c-0.1,0-0.2-0.1-0.4-0.1
+	c-0.1,0-0.1,0-0.2-0.1c-0.2,0-0.4-0.1-0.6-0.1c-0.2,0-0.4,0-0.6,0.1c-0.1,0-0.1,0-0.2,0.1c-0.1,0-0.3,0.1-0.4,0.1
+	c-0.1,0-0.1,0.1-0.2,0.1c-0.1,0.1-0.2,0.1-0.3,0.2c-0.1,0-0.1,0.1-0.2,0.2c-0.1,0.1-0.2,0.1-0.3,0.2c0,0,0,0,0,0L14.2,26.5
+	c-0.6,0.6-1,1.3-1,2.2c0,1.7,1.3,3,3,3c0.7,0,1.4-0.3,1.9-0.7l9.8-9.7l5.7,5.6c0,0,0,0,0,0c0.1,0.1,0.2,0.1,0.3,0.2
+	c0.1,0.1,0.1,0.1,0.2,0.2c0.1,0.1,0.2,0.1,0.3,0.2c0.1,0,0.1,0.1,0.2,0.1c0.1,0.1,0.3,0.1,0.4,0.1c0.1,0,0.1,0,0.2,0.1
+	c0.2,0,0.4,0.1,0.6,0.1c0.2,0,0.4,0,0.6-0.1c0.1,0,0.1,0,0.2,0c0.1,0,0.2-0.1,0.4-0.1c0.1,0,0.1-0.1,0.2-0.1c0.1,0,0.2-0.1,0.3-0.2
+	c0.1,0,0.1-0.1,0.2-0.1c0,0,0.1-0.1,0.1-0.1l0.1-0.1C37.9,27.1,38,27,38,27l10.8-10.7C49.3,15.7,49.7,15,49.7,14.1z" style="fill: var(--yellow); stroke: rgb(255, 217, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;"/>
+</svg>
+        </div>
+        <h4>TradingView Grafik</h4>
+        <p>Profesyonel TradingView grafik motoru ile tüm teknik analiz araçlarına erişim.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">
+          <svg fill="var(--yellow)" xmlns="http://www.w3.org/2000/svg"  width="25px" height="25px"
+	 viewBox="0 0 100 100" xml:space="preserve">
+
+<g>
+	<g>
+		<path d="M78.8,62.1l-3.6-1.7c-0.5-0.3-1.2-0.3-1.7,0L52,70.6c-1.2,0.6-2.7,0.6-3.9,0L26.5,60.4
+			c-0.5-0.3-1.2-0.3-1.7,0l-3.6,1.7c-1.6,0.8-1.6,2.9,0,3.7L48,78.5c1.2,0.6,2.7,0.6,3.9,0l26.8-12.7C80.4,65,80.4,62.8,78.8,62.1z"
+			/>
+	</g>
+	<g>
+		<path d="M78.8,48.1l-3.7-1.7c-0.5-0.3-1.2-0.3-1.7,0L52,56.6c-1.2,0.6-2.7,0.6-3.9,0L26.6,46.4
+			c-0.5-0.3-1.2-0.3-1.7,0l-3.7,1.7c-1.6,0.8-1.6,2.9,0,3.7L48,64.6c1.2,0.6,2.7,0.6,3.9,0l26.8-12.7C80.4,51.1,80.4,48.9,78.8,48.1
+			z"/>
+	</g>
+	<g>
+		<path d="M21.2,37.8l26.8,12.7c1.2,0.6,2.7,0.6,3.9,0l26.8-12.7c1.6-0.8,1.6-2.9,0-3.7L51.9,21.4
+			c-1.2-0.6-2.7-0.6-3.9,0L21.2,34.2C19.6,34.9,19.6,37.1,21.2,37.8z"/>
+	</g>
+</g>
+</svg>
+        </div>
+        <h4>3 Emir Türü</h4>
+        <p>Limit, Market ve Stop-Limit emirleri ile gerçek borsa deneyimi.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">
+          <svg fill="var(--yellow)" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17,9V7A5,5,0,0,0,7,7V9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V12A3,3,0,0,0,17,9ZM9,7a3,3,0,0,1,6,0V9H9Zm9,12a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z"/></svg>
+        </div>
+        <h4>Veri Gizliliği</h4>
+        <p>Tüm veriler yalnızca tarayıcınızda saklanır. Sunucuya hiçbir kişisel veri gönderilmez.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">
+          <svg width="20px" height="20px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M4 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4zm14 0H6v16h12V4z" fill="var(--yellow)"/>
+            <path d="M13 18a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" fill="var(--yellow)"/>
+          </svg>
+        </div>
+        <h4>Mobil Uyumlu</h4>
+        <p>Telefon ve tablet cihazlar için optimize edilmiş arayüz. PWA olarak ana ekrana eklenebilir.</p>
+      </div>
+      <div class="feature">
+        <div class="icon">
+          <svg width="20px" height="20px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione-monotone" preserveAspectRatio="xMidYMid meet"><path d="M57.063 20.218l1.029-1.698s.906-1.502.906-3.519c0-4.886-4.662-4.757-4.662-4.757L44.179 7.479L38.638 2l-7.291 1.985l-2.391-.651l-1.817 1.797l-10.497 2.858s-4.04-.111-4.04 4.123c0 1.748.786 3.05.786 3.05l1.351 2.23l-1.187 1.172l-5.86 1.596s-4.662-.129-4.662 4.757a7.56 7.56 0 0 0 .779 3.281L2 29.987l.949.376c.021.051.029.108.07.149c1.835 1.839 1.684 4.309 1.422 5.643l-1.109 1.111l8.401 4.039L23.271 60.35c1.849 2.906 5.774 1.088 5.774 1.088l29.649-14.256l-1.109-1.111c-.262-1.334-.413-3.804 1.422-5.644c.041-.041.049-.098.07-.148l.949-.377l-5.513-5.45l6.33-3.043l-.961-.963c-.227-1.156-.358-3.297 1.233-4.891c.035-.036.041-.084.06-.129l.825-.327l-4.937-4.881m-5.685-8.835l-1.25 1.978l-3.234-3.198l4.484 1.22M39.176 7.144l4.643 4.963l-16.789 6.067l-3.965-6.156l16.111-4.874M15.744 19.052l11.457 18.911l-21.827-8.658l10.37-10.253m-4.775 2.067l-1.345 1.33l-.538-.825l1.883-.505m-4.247 1.034l1.252 1.927l-2.713 2.682a5.586 5.586 0 0 1-.331-1.845c0-1.826.906-2.521 1.792-2.764M5.154 37.026l.015-.058l25.147 11.007l-24.95-11.894c.023-.135.041-.284.06-.434l19.533 8.18l-19.465-9.116a7.723 7.723 0 0 0-.086-1.245l18.079 7.445L5.165 32.4a6.048 6.048 0 0 0-.47-1.137l24.883 10.625l.566.934c1.167 1.834 3.284 1.495 4.351 1.177c1.475.728 4.119 2.412 3.442 4.893c-.357 1.312-1.142 1.948-2.399 1.948c-1.273 0-2.544-.666-2.557-.675L5.154 37.026M30.2 50.185l-1.966.814l-1.67-2.563l3.636 1.749m-7.614 5.381l-7.729-12.759l7.682 3.693l3.633 5.592c-1.465.626-3.102 2.055-3.586 3.474m34.033-12.184a7.731 7.731 0 0 0-.086 1.245l-19.465 9.116l19.533-8.18c.019.149.036.299.06.434l-24.95 11.895l25.147-11.007a.982.982 0 0 1 .015.058L29.046 60.08c-.013.009-1.282.675-2.557.675c-1.258 0-2.042-.637-2.399-1.948c-.918-3.367 4.302-5.276 4.38-5.305l4.575-1.952c.491.209 3.994 1.584 5.711-1.115l1.083-1.786l17.494-7.47a6.12 6.12 0 0 0-.471 1.137L38.54 50.827l18.079-7.445m.034-4.161l-14.825 6.144l4.114-6.791l6.767-3.253l3.944 3.9m2.393-11.107a6.9 6.9 0 0 0-.075 1.079l-16.868 7.9l16.928-7.089c.017.129.031.26.052.376L37.459 40.688l21.794-9.539a.46.46 0 0 1 .013.05L35.149 42.586c-.011.007-1.112.585-2.216.585c-1.091 0-1.77-.553-2.079-1.689c-.796-2.918 3.728-4.572 3.796-4.597l25.014-10.68a5.268 5.268 0 0 0-.407.986l-15.88 7.376l15.669-6.453" fill="var(--yellow)"></path></svg>
+        </div>
+        <h4>Eğitim Merkezi</h4>
+        <p>Futures, kaldıraç, likidasyon ve risk yönetimi hakkında kapsamlı makaleler.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Teknik Altyapı</div>
+    <p>Platform, herhangi bir sunucu taraflı işlem gerektirmeden tamamen tarayıcıda çalışır. Kullandığımız teknolojiler:</p>
+    <div class="tech-list">
+      <div class="tech-badge"><span>▸</span>Vanilla JS</div>
+      <div class="tech-badge"><span>▸</span>Bybit WebSocket API</div>
+      <div class="tech-badge"><span>▸</span>TradingView Widget</div>
+      <div class="tech-badge"><span>▸</span>localStorage</div>
+      <div class="tech-badge"><span>▸</span>CSS Variables</div>
+      <div class="tech-badge"><span>▸</span>PWA / Service Worker</div>
+      <div class="tech-badge"><span>▸</span>JetBrains Mono & Syne</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">İletişim</div>
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h4>Genel & Teknik</h4>
+        <div class="email">pxelight@gmail.com</div>
+        <p>Soru, öneri ve hata bildirimleri için.</p>
+      </div>
+      <div class="contact-card">
+        <h4>İş Birliği & Reklam</h4>
+        <div class="email">pxelight@gmail.com</div>
+        <p>Reklam ve iş birliği teklifleri için.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="disclaimer">
+    <strong> 
+      <svg width="20px" height="20px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>about</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="about-white" fill="#000000" transform="translate(42.666667, 42.666667)">
+            <path d="M213.333333,3.55271368e-14 C95.51296,3.55271368e-14 3.55271368e-14,95.51168 3.55271368e-14,213.333333 C3.55271368e-14,331.153707 95.51296,426.666667 213.333333,426.666667 C331.154987,426.666667 426.666667,331.153707 426.666667,213.333333 C426.666667,95.51168 331.154987,3.55271368e-14 213.333333,3.55271368e-14 Z M213.333333,384 C119.227947,384 42.6666667,307.43872 42.6666667,213.333333 C42.6666667,119.227947 119.227947,42.6666667 213.333333,42.6666667 C307.44,42.6666667 384,119.227947 384,213.333333 C384,307.43872 307.44,384 213.333333,384 Z M240.04672,128 C240.04672,143.46752 228.785067,154.666667 213.55008,154.666667 C197.698773,154.666667 186.713387,143.46752 186.713387,127.704107 C186.713387,112.5536 197.99616,101.333333 213.55008,101.333333 C228.785067,101.333333 240.04672,112.5536 240.04672,128 Z M192.04672,192 L234.713387,192 L234.713387,320 L192.04672,320 L192.04672,192 Z" id="Shape" style="fill: var(--orange); stroke: rgb(255, 174, 0); stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;"> 
+</path>
+        </g>
+    </g>
+</svg>
+      Yasal Uyarı</strong>
+    <p>Pxelight Futures yalnızca eğitim amaçlı bir simülatördür. Gerçek para kullanılmaz, gerçek işlem yapılmaz. Platform herhangi bir kripto borsası veya finansal kurum ile bağlantılı değildir. Sunulan içerikler yatırım tavsiyesi niteliği taşımaz. Kripto para piyasaları yüksek risk içerir; yatırım kararlarınızı almadan önce bir finansal danışmana başvurunuz.</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="copy">© 2026 Pxelight Futures. Tüm hakları saklıdır.</div>
+  <div class="flinks">
+    <a href="/">Simülatör</a>
+    <a href="/education/">Eğitim</a>
+    <a href="/faq/">SSS</a>
+    <a href="/privacy/">Gizlilik</a>
+    <a href="/about/">Hakkımızda</a>
+  </div>
+</footer>
+
+<nav class="mob-bottom-nav">
+  <a href="/"><span class="mnav-icon">
+    <svg fill="currentColor" xmlns="http://www.w3.org/2000/svg" 
+	 width="20px" height="20px" viewBox="0 0 52 52" enable-background="new 0 0 52 52" xml:space="preserve">
+<path d="M2,45.5c0,2.2,1.8,4,4,4h42.4c0.9,0,1.6-0.7,1.6-1.6v-2.8c0-0.9-0.7-1.6-1.6-1.6l-38.9,0
+	C8.7,43.5,8,42.8,8,42L8,4.1c0-0.9-0.7-1.6-1.6-1.6H3.6C2.7,2.5,2,3.2,2,4.1V45.5z"/>
+<path d="M49.7,14.1c0-1.7-1.3-3-3-3c-0.9,0-1.6,0.4-2.2,0.9l-8.6,8.6L30,15c0,0,0,0,0,0l-0.1-0.1
+	c-0.1-0.1-0.1-0.1-0.2-0.2c-0.1,0-0.1-0.1-0.2-0.1c-0.1-0.1-0.2-0.1-0.3-0.2c-0.1,0-0.1-0.1-0.2-0.1c-0.1,0-0.2-0.1-0.4-0.1
+	c-0.1,0-0.1,0-0.2-0.1c-0.2,0-0.4-0.1-0.6-0.1c-0.2,0-0.4,0-0.6,0.1c-0.1,0-0.1,0-0.2,0.1c-0.1,0-0.3,0.1-0.4,0.1
+	c-0.1,0-0.1,0.1-0.2,0.1c-0.1,0.1-0.2,0.1-0.3,0.2c-0.1,0-0.1,0.1-0.2,0.2c-0.1,0.1-0.2,0.1-0.3,0.2c0,0,0,0,0,0L14.2,26.5
+	c-0.6,0.6-1,1.3-1,2.2c0,1.7,1.3,3,3,3c0.7,0,1.4-0.3,1.9-0.7l9.8-9.7l5.7,5.6c0,0,0,0,0,0c0.1,0.1,0.2,0.1,0.3,0.2
+	c0.1,0.1,0.1,0.1,0.2,0.2c0.1,0.1,0.2,0.1,0.3,0.2c0.1,0,0.1,0.1,0.2,0.1c0.1,0.1,0.3,0.1,0.4,0.1c0.1,0,0.1,0,0.2,0.1
+	c0.2,0,0.4,0.1,0.6,0.1c0.2,0,0.4,0,0.6-0.1c0.1,0,0.1,0,0.2,0c0.1,0,0.2-0.1,0.4-0.1c0.1,0,0.1-0.1,0.2-0.1c0.1,0,0.2-0.1,0.3-0.2
+	c0.1,0,0.1-0.1,0.2-0.1c0,0,0.1-0.1,0.1-0.1l0.1-0.1C37.9,27.1,38,27,38,27l10.8-10.7C49.3,15.7,49.7,15,49.7,14.1z" style="fill: currentColor; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;"/>
+</svg>
+  </span>Simülatör</a>
+  <a href="/education/"><span class="mnav-icon">
+    <svg width="20px" height="20px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" aria-hidden="true" role="img" class="iconify iconify--emojione-monotone" preserveAspectRatio="xMidYMid meet"><path d="M57.063 20.218l1.029-1.698s.906-1.502.906-3.519c0-4.886-4.662-4.757-4.662-4.757L44.179 7.479L38.638 2l-7.291 1.985l-2.391-.651l-1.817 1.797l-10.497 2.858s-4.04-.111-4.04 4.123c0 1.748.786 3.05.786 3.05l1.351 2.23l-1.187 1.172l-5.86 1.596s-4.662-.129-4.662 4.757a7.56 7.56 0 0 0 .779 3.281L2 29.987l.949.376c.021.051.029.108.07.149c1.835 1.839 1.684 4.309 1.422 5.643l-1.109 1.111l8.401 4.039L23.271 60.35c1.849 2.906 5.774 1.088 5.774 1.088l29.649-14.256l-1.109-1.111c-.262-1.334-.413-3.804 1.422-5.644c.041-.041.049-.098.07-.148l.949-.377l-5.513-5.45l6.33-3.043l-.961-.963c-.227-1.156-.358-3.297 1.233-4.891c.035-.036.041-.084.06-.129l.825-.327l-4.937-4.881m-5.685-8.835l-1.25 1.978l-3.234-3.198l4.484 1.22M39.176 7.144l4.643 4.963l-16.789 6.067l-3.965-6.156l16.111-4.874M15.744 19.052l11.457 18.911l-21.827-8.658l10.37-10.253m-4.775 2.067l-1.345 1.33l-.538-.825l1.883-.505m-4.247 1.034l1.252 1.927l-2.713 2.682a5.586 5.586 0 0 1-.331-1.845c0-1.826.906-2.521 1.792-2.764M5.154 37.026l.015-.058l25.147 11.007l-24.95-11.894c.023-.135.041-.284.06-.434l19.533 8.18l-19.465-9.116a7.723 7.723 0 0 0-.086-1.245l18.079 7.445L5.165 32.4a6.048 6.048 0 0 0-.47-1.137l24.883 10.625l.566.934c1.167 1.834 3.284 1.495 4.351 1.177c1.475.728 4.119 2.412 3.442 4.893c-.357 1.312-1.142 1.948-2.399 1.948c-1.273 0-2.544-.666-2.557-.675L5.154 37.026M30.2 50.185l-1.966.814l-1.67-2.563l3.636 1.749m-7.614 5.381l-7.729-12.759l7.682 3.693l3.633 5.592c-1.465.626-3.102 2.055-3.586 3.474m34.033-12.184a7.731 7.731 0 0 0-.086 1.245l-19.465 9.116l19.533-8.18c.019.149.036.299.06.434l-24.95 11.895l25.147-11.007a.982.982 0 0 1 .015.058L29.046 60.08c-.013.009-1.282.675-2.557.675c-1.258 0-2.042-.637-2.399-1.948c-.918-3.367 4.302-5.276 4.38-5.305l4.575-1.952c.491.209 3.994 1.584 5.711-1.115l1.083-1.786l17.494-7.47a6.12 6.12 0 0 0-.471 1.137L38.54 50.827l18.079-7.445m.034-4.161l-14.825 6.144l4.114-6.791l6.767-3.253l3.944 3.9m2.393-11.107a6.9 6.9 0 0 0-.075 1.079l-16.868 7.9l16.928-7.089c.017.129.031.26.052.376L37.459 40.688l21.794-9.539a.46.46 0 0 1 .013.05L35.149 42.586c-.011.007-1.112.585-2.216.585c-1.091 0-1.77-.553-2.079-1.689c-.796-2.918 3.728-4.572 3.796-4.597l25.014-10.68a5.268 5.268 0 0 0-.407.986l-15.88 7.376l15.669-6.453" fill="currentColor"></path></svg>
+  </span>Eğitim</a>
+  <a href="/faq/"><span class="mnav-icon">
+    <svg fill="currentColor" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12,1A11,11,0,1,0,23,12,11.013,11.013,0,0,0,12,1Zm0,20a9,9,0,1,1,9-9A9.011,9.011,0,0,1,12,21Zm1-4.5v2H11v-2Zm3-7a3.984,3.984,0,0,1-1.5,3.122A3.862,3.862,0,0,0,13.063,15H11.031a5.813,5.813,0,0,1,2.219-3.936A2,2,0,0,0,13.1,7.832a2.057,2.057,0,0,0-2-.14A1.939,1.939,0,0,0,10,9.5,1,1,0,0,1,8,9.5V9.5a3.909,3.909,0,0,1,2.319-3.647,4.061,4.061,0,0,1,3.889.315A4,4,0,0,1,16,9.5Z"/></svg>
+  </span>SSS</a>
+  <a href="/privacy/"><span class="mnav-icon">
+    <svg fill="currentColor" width="20px" height="20px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17,9V7A5,5,0,0,0,7,7V9a3,3,0,0,0-3,3v7a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V12A3,3,0,0,0,17,9ZM9,7a3,3,0,0,1,6,0V9H9Zm9,12a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V12a1,1,0,0,1,1-1H17a1,1,0,0,1,1,1Z"/></svg>
+  </span>Gizlilik</a>
+  <a href="/about/" class="active"><span class="mnav-icon">
+    <svg width="20px" height="20px" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>about</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="about-white" fill="#000000" transform="translate(42.666667, 42.666667)">
+            <path d="M213.333333,3.55271368e-14 C95.51296,3.55271368e-14 3.55271368e-14,95.51168 3.55271368e-14,213.333333 C3.55271368e-14,331.153707 95.51296,426.666667 213.333333,426.666667 C331.154987,426.666667 426.666667,331.153707 426.666667,213.333333 C426.666667,95.51168 331.154987,3.55271368e-14 213.333333,3.55271368e-14 Z M213.333333,384 C119.227947,384 42.6666667,307.43872 42.6666667,213.333333 C42.6666667,119.227947 119.227947,42.6666667 213.333333,42.6666667 C307.44,42.6666667 384,119.227947 384,213.333333 C384,307.43872 307.44,384 213.333333,384 Z M240.04672,128 C240.04672,143.46752 228.785067,154.666667 213.55008,154.666667 C197.698773,154.666667 186.713387,143.46752 186.713387,127.704107 C186.713387,112.5536 197.99616,101.333333 213.55008,101.333333 C228.785067,101.333333 240.04672,112.5536 240.04672,128 Z M192.04672,192 L234.713387,192 L234.713387,320 L192.04672,320 L192.04672,192 Z" id="Shape" style="fill: currentColor; stroke: currentColor; stroke-linecap: round; stroke-linejoin: round; stroke-width: 1;"> 
+</path>
+        </g>
+    </g>
+</svg>
+  </span>Hakkımızda</a>
+</nav>
+
+</body>
+</html>

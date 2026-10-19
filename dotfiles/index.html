@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hyprland Dotfiles Wiki | pxelight</title>
+
+  <!-- Blue Folder Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2381d6f8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z'></path></svg>">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bgDark: '#030919',
+            cardBg: '#071634',
+            primary: '#1a4693',
+            accent: '#236ee3',
+            highlight: '#81d6f8',
+            pastelBlue: '#89b4fa',
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-bgDark text-white min-h-screen flex flex-col justify-between">
+
+  <!-- Header -->
+  <header class="border-b border-cardBg bg-bgDark/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href=".." class="text-xl font-bold text-highlight flex items-center gap-2">
+        <i data-lucide="arrow-left" class="w-5 h-5 text-accent"></i>
+        <span>Back to Home</span>
+      </a>
+      <span class="text-xs font-mono text-pastelBlue bg-cardBg px-3 py-1 rounded-full border border-primary">Hyprland v0.56+ (Lua)</span>
+    </div>
+  </header>
+
+  <!-- Wiki Content -->
+  <main class="max-w-4xl mx-auto px-6 py-12 flex-1 space-y-10">
+
+    <!-- Title Section -->
+    <div class="border-b border-cardBg pb-6">
+      <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-2">Hyprland Dotfiles Wiki &amp; Installation</h1>
+      <p class="text-gray-400">Modern Arch Linux / Hyprland setup featuring a blue-themed concept and Lua configuration.</p>
+    </div>
+
+    <!-- Requirements & Info -->
+    <section class="bg-cardBg/40 border border-primary/30 rounded-xl p-6">
+      <h2 class="text-xl font-semibold text-highlight mb-4 flex items-center gap-2">
+        <i data-lucide="info" class="w-5 h-5"></i> General Information
+      </h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-300 text-sm">
+        <li class="bg-bgDark/50 p-3 rounded-lg border border-cardBg"><strong>Window Manager:</strong> Hyprland (v0.56+)</li>
+        <li class="bg-bgDark/50 p-3 rounded-lg border border-cardBg"><strong>Config Language:</strong> Lua</li>
+        <li class="bg-bgDark/50 p-3 rounded-lg border border-cardBg"><strong>Color Palette:</strong> Deep Blue Concept</li>
+        <li class="bg-bgDark/50 p-3 rounded-lg border border-cardBg"><strong>Installation:</strong> Manual Step-by-Step</li>
+      </ul>
+    </section>
+
+    <!-- Desktop Showcase / Screenshots Section -->
+    <section class="space-y-6">
+      <h2 class="text-2xl font-bold text-highlight flex items-center gap-2">
+        <i data-lucide="image" class="w-6 h-6"></i> Desktop Showcase
+      </h2>
+
+      <div class="grid md:grid-cols-2 gap-6">
+
+        <!-- Screenshot Item 1 -->
+        <div class="bg-cardBg/40 border border-primary/30 rounded-xl overflow-hidden p-4 flex flex-col justify-between">
+          <div class="overflow-hidden rounded-lg mb-3 border border-primary/20 bg-bgDark">
+            <img src="assets/screenshots/showcase-1.png" alt="Hyprland Desktop View 1" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/071634/81d6f8?text=Add+assets/screenshots/showcase1.png';">
+          </div>
+          <div>
+            <h3 class="font-semibold text-white">Main Workspace View</h3>
+            <p class="text-xs text-gray-400 mt-1">Clean desktop setup with custom waybar and blue aesthetics.</p>
+          </div>
+        </div>
+
+        <!-- Screenshot Item 2 -->
+        <div class="bg-cardBg/40 border border-primary/30 rounded-xl overflow-hidden p-4 flex flex-col justify-between">
+          <div class="overflow-hidden rounded-lg mb-3 border border-primary/20 bg-bgDark">
+            <img src="assets/screenshots/showcase-2.png" alt="Hyprland Desktop View 2" class="w-full h-48 object-cover hover:scale-105 transition-transform duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/071634/81d6f8?text=Add+assets/screenshots/showcase2.png';">
+          </div>
+          <div>
+            <h3 class="font-semibold text-white">Lock Screen &amp; Workflows</h3>
+            <p class="text-xs text-gray-400 mt-1">Lua configuration files and terminal layout setup.</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Configuration Files & Direct Download Section -->
+    <section class="bg-cardBg/30 border border-primary/40 rounded-xl p-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <h3 class="text-xl font-semibold text-white mb-2 flex items-center gap-2">
+            <i data-lucide="archive" class="w-6 h-6 text-pastelBlue"></i> Configuration Archive
+          </h3>
+          <p class="text-gray-300 text-sm max-w-xl">
+            Download the complete dotfiles archive directly to install the Hyprland Lua setup, keybindings, and custom theme scripts on your system.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+          <!-- Install Zip Config Button -->
+          <a href="assets/configs/dotfiles.zip" download="dotfiles.zip" class="inline-flex items-center justify-center gap-2 bg-accent hover:bg-primary text-white px-5 py-3 rounded-xl font-medium text-sm transition-colors whitespace-nowrap shadow-md">
+            <i data-lucide="download" class="w-4 h-4"></i> Install Zip Config
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-cardBg py-6 text-center text-xs text-gray-500">
+    &copy; 2026 pxelight. Hyprland Dotfiles Wiki.
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
