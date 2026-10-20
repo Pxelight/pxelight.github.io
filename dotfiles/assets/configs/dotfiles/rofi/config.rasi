@@ -1,0 +1,97 @@
+* {
+    font: "JetBrainsMono Nerd Font 12";
+
+    background:      rgba(3, 9, 25, 0.9);
+    background-alt:  #07163490;
+
+    foreground:      #89b4fa;
+    selected:        #236ee3;
+    active:          #89b4fa;
+    urgent:          #ea3e44;
+}
+
+window {
+    transparency: "real";
+    location: center;
+    anchor: center;
+    width: 32%;
+    border: 1px;
+    border-radius: 12px;
+    border-color: #1a4693;
+    background-color: @background;
+}
+
+mainbox {
+    background-color: transparent;
+    spacing: 8px;
+    padding: 14px;
+}
+
+inputbar {
+    children: [ prompt, entry ];
+    background-color: @background-alt;
+    border-radius: 8px;
+    padding: 8px;
+}
+
+prompt {
+    enabled: true;
+    padding: 4px 8px;
+    text-color: @selected;
+}
+
+entry {
+    text-color: @foreground;
+    padding: 4px;
+}
+
+listview {
+    lines: 8;
+    columns: 1;
+    spacing: 6px;
+    scrollbar: false;
+    background-color: transparent;
+}
+
+element {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: transparent;
+    text-color: #89b4fa;
+}
+
+element normal.normal, element alternate.normal {
+    background-color: transparent;
+    text-color: #89b4fa;
+}
+
+element normal.active, element alternate.active {
+    background-color: transparent;
+    text-color: @active;
+}
+
+element selected.normal {
+    background-color: #1a4693;
+    text-color: #ffffff;
+}
+
+element selected.active {
+    background-color: #236ee3;
+    text-color: #ffffff;
+}
+
+element-icon {
+    size: 22px;
+    background-color: transparent;
+}
+
+element-text {
+    vertical-align: 0.5;
+    background-color: transparent;
+    text-color: inherit;
+}
+
+configuration {
+    show-icons: true;
+    icon-theme: "Papirus";
+}

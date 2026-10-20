@@ -1,0 +1,203 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 38,
+  "margin-top": 10,
+  "margin-left": 10,
+  "margin-right": 10,
+  "spacing": 0,
+
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+
+  "modules-center": [
+    "bluetooth",
+    "network",
+    "cpu",
+    "memory",
+    "disk",
+    "pulseaudio#microphone",
+    "pulseaudio",
+    "custom/dnd"
+  ],
+
+  "modules-right": [
+    "tray",
+    "clock"
+  ],
+
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": false,
+    "active-only": false,
+    "format": "{name} <span color='#89b4fa'>{windows}</span>{icon}",
+    "window-rewrite": {
+      "firefox": "󰈹",
+      "kitty": "",
+      "code": "󰨞",
+      "discord": "",
+      "kate": "󱞎",
+      "kwrite": "",
+      "thunar": "󰉋",
+      "sober": "",
+      "heroic": "",
+      "spotify": "",
+      "gtk-settings": "󰒓",
+      "dolphin": "󰉋",
+      "steam": "",
+      "htop": "",
+      "btop": "",
+      "qimgv": "󰋩",
+      "cmake": "",
+      "gimp": "",
+      "vim": "",
+      "nvim": "",
+      "mpv": "",
+      "vlc": "󰕼",
+      "rofi": "󰍉",
+      "uuctl": "󰒓",
+      "obs": "",
+      "java": "󰍳",
+      "SKlauncher": "󰍳",
+      "Minecraft": "󰍳",
+      "qpwgraph": "",
+      "nwg-look": "",
+      "pavucontrol": "",
+      "fileroller": "",
+      "qt5ct": "",
+      "qt6ct": "",
+      "nm-connection-editor": "󰀂",
+      "qv4l2": "",
+      "lstopo": "",
+      "genius": "",
+      "kvantummanager": "",
+      "libreoffice": "",
+      "calculator": "",
+      "clocks": "",
+      "electron": ""
+    },
+    "window-rewrite-default": "󰣆",
+    "format-icons": {
+      "empty": "",
+      "default": ""
+    }
+  },
+
+  "cpu": {
+    "interval": 2,
+    "format": "<span color='#f38ba8'></span> {usage}%",
+    "tooltip": true,
+    "on-click": "kitty -e btop",
+    "tooltip-format": "--- CPU ---\nTotal: {usage}%\n-- Cores --\nCore 0: {usage0}%\nCore 1: {usage1}%\nCore 2: {usage2}%\nCore 3: {usage3}%"
+  },
+
+  "memory": {
+    "interval": 2,
+    "format": "<span color='#cba6f7'></span> {percentage}%",
+    "tooltip-format": "RAM Usage: {used:0.1f}GB / {total:0.1f}GB",
+    "on-click": "kitty -e btop"
+  },
+
+  "disk": {
+    "interval": 30,
+    "format": "<span color='#89b4fa'>󰋊</span> {percentage_used}%",
+    "path": "/",
+    "tooltip-format": "Storage: {used} / {total}",
+    "on-click": "kitty -e btop"
+  },
+
+  "network": {
+    "interval": 30,
+    "format-wifi": "<span color='#94e2d5'></span> {signalStrength}%",
+    "format-ethernet": "<span color='#94e2d5'>󰈀</span> Eth",
+    "format-disconnected": "<span color='#f38ba8'>󰖪</span> Offline",
+    "tooltip-format": "Network: {essid}",
+    "on-click": "nm-connection-editor",
+    "on-click-right": "swaync-client -t -sw",
+  },
+
+  "bluetooth": {
+    "format": "<span color='#89b4fa'></span>",
+    "format-disabled": "<span color='#f38ba8'>󰂲</span>",
+    "format-connected": "<span color='#89b4fa'>󰂱</span> {device_alias}",
+    "format-connected-battery": "<span color='#89b4fa'>󰂱</span> {device_alias} ({device_battery_percentage}%)",
+    "tooltip-format": "Bluetooth: {controller_alias}\nStatus: {num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%",
+    "on-click": "~/.config/swaync/toggle-bluetooth.sh",
+    "on-click-right": "swaync-client -t -sw"
+  },
+
+  "pulseaudio": {
+    "format": "<span color='#a6e3a1'>{icon}</span> {volume}%",
+    "format-muted": "<span color='#f38ba8'> </span>Muted",
+    "tooltip-format": "Audio: {desc}",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", "", ""]
+    },
+    "on-click": "pavucontrol",
+    "on-click-right": "swaync-client -t -sw",
+  },
+
+  "pulseaudio#microphone": {
+    "format": "{format_source}",
+    "format-source": "<span color='#fab387'></span> {volume}%",
+    "format-source-muted": "<span color='#f38ba8'></span> Muted",
+    "on-click": "pavucontrol --tab=4",
+    "on-click-right": "swaync-client -t -sw",
+    "tooltip-format": "Microphone: {source_desc}"
+  },
+
+  "custom/dnd": {
+    "tooltip": true,
+    "format": "{icon}",
+    "tooltip": true,
+    "tooltip-format": "DND: {icon}",
+    "format-icons": {
+      "notification": "<span color='#f38ba8'></span>",
+      "none": "<span color='#cdd6f4'></span>",
+      "dnd-notification": "<span color='#f38ba8'>󰂛</span>",
+      "dnd-none": "<span color='#cdd6f4'>󰂛</span>",
+      "inhibited-notification": "<span color='#f38ba8'></span>",
+      "inhibited-none": "<span color='#cdd6f4'></span>",
+      "dnd-inhibited-notification": "<span color='#f38ba8'>󰂛</span>",
+      "dnd-inhibited-none": "<span color='#fab387'>󰂛</span>"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -d -sw",
+    "on-click-right": "swaync-client -t -sw",
+    "escape": true
+  },
+
+  "tray": {
+    "icon-size": 16,
+    "spacing": 10
+  },
+
+  "clock": {
+    "format": "<span color='#f9e2af'></span> {:%H:%M  |  %b %d %a}",
+    "tooltip-format": "{calendar}",
+    "calendar": {
+      "mode": "month",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#cba6f7'><b>{}</b></span>",
+        "days": "<span color='#cdd6f4'><b>{}</b></span>",
+        "weeks": "<span color='#94e2d5'><b>W{}</b></span>",
+        "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+        "today": "<span color='#f38ba8'><b>{}</b></span>"
+      }
+    },
+    "on-click": "swaync-client -t -sw"
+  }
+}
