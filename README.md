@@ -18,6 +18,7 @@ A minimalist, blue-themed Linux desktop environment configuration built for Hypr
 
 ### Desmos Artworks
 A gallery of mathematical visualizations, complex functions, and geometric designs built using Desmos.
+- Path: `linktr.ee/pxelight`
 
 ## Social & Contact Information
 
