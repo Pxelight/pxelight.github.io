@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hyprland Dotfiles Wiki | pxelight</title>
+  <meta name="description" content="Blue-themed Hyprland (Lua) dotfiles for Arch Linux. Download the archive and install it manually by copying the files into ~/.config.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Hyprland Dotfiles Wiki | pxelight">
+  <meta property="og:description" content="Blue-themed Hyprland (Lua) dotfiles for Arch Linux, with a step-by-step manual install guide.">
+  <meta property="og:url" content="https://pxelight.github.io/dotfiles/">
+  <meta property="og:image" content="https://pxelight.github.io/dotfiles/assets/screenshots/showcase-1.png">
+  <meta name="theme-color" content="#030919">
+
+  <!-- Blue Folder Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2381d6f8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z'></path></svg>">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            bgDark: '#030919',
+            cardBg: '#071634',
+            primary: '#1a4693',
+            accent: '#236ee3',
+            highlight: '#81d6f8',
+            pastelBlue: '#89b4fa',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    a:focus-visible, button:focus-visible, summary:focus-visible {
+      outline: 2px solid #81d6f8; outline-offset: 2px; border-radius: 6px;
+    }
+    pre { tab-size: 2; }
+    details > summary { list-style: none; cursor: pointer; }
+    details > summary::-webkit-details-marker { display: none; }
+    details[open] > summary .chev { transform: rotate(90deg); }
+    dialog::backdrop { background: rgba(3, 9, 25, 0.88); }
+  </style>
+</head>
+<body class="bg-bgDark text-white min-h-screen flex flex-col justify-between antialiased">
+
+  <!-- Header -->
+  <header class="border-b border-cardBg bg-bgDark/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center gap-4">
+      <a href="/" class="text-lg font-bold text-highlight flex items-center gap-2">
+        <svg class="w-5 h-5 text-accent" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5"/><path d="m12 19-7-7 7-7"/></svg>
+        <span>Back to Home</span>
+      </a>
+      <nav class="hidden sm:flex items-center gap-5 text-sm text-gray-300" aria-label="Page sections">
+        <a href="#showcase" class="hover:text-highlight transition-colors">Showcase</a>
+        <a href="#install" class="hover:text-highlight transition-colors">Install</a>
+        <a href="#troubleshooting" class="hover:text-highlight transition-colors">Troubleshooting</a>
+      </nav>
+      <span class="text-xs font-mono text-pastelBlue bg-cardBg px-3 py-1 rounded-full border border-primary whitespace-nowrap">Hyprland v0.56+ (Lua)</span>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-6 py-12 flex-1 space-y-14 w-full">
+
+    <!-- Title -->
+    <div class="border-b border-cardBg pb-8">
+      <h1 class="text-3xl md:text-4xl font-extrabold text-white mb-3">Hyprland Dotfiles Wiki &amp; Installation</h1>
+      <p class="text-gray-400 max-w-2xl">A blue-themed Arch Linux / Hyprland setup configured in Lua. There is no installer: you download one archive and copy its folders into <code class="font-mono text-highlight">~/.config</code>.</p>
+      <div class="mt-6 flex flex-col sm:flex-row gap-3">
+        <a href="assets/configs/dotfiles.zip" download="dotfiles.zip" class="inline-flex items-center justify-center gap-2 bg-accent hover:bg-primary text-white px-5 py-3 rounded-xl font-medium text-sm transition-colors shadow-md">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+          Download dotfiles.zip
+        </a>
+        <a href="#install" class="inline-flex items-center justify-center gap-2 border border-primary text-pastelBlue hover:bg-cardBg px-5 py-3 rounded-xl font-medium text-sm transition-colors">
+          Read the install guide
+        </a>
+      </div>
+    </div>
+
+    <!-- General information -->
+    <section aria-labelledby="info-title" class="bg-cardBg/40 border border-primary/30 rounded-xl p-6">
+      <h2 id="info-title" class="text-xl font-semibold text-highlight mb-4">General information</h2>
+      <ul class="grid grid-cols-1 md:grid-cols-2 gap-3 text-gray-300 text-sm">
+        <li class="bg-bgDark/50 p-3 rounded-lg border border-cardBg"><strong class="text-white">Window manager:</strong> Hyprland v0.56 or newer</li>
+        <li class="bg-bgDark/50 p-3 rounded-lg border border-cardBg"><strong class="text-white">Config language:</strong> Lua</li>
+        <li class="bg-bgDark/50 p-3 rounded-lg border border-cardBg"><strong class="text-white">Color palette:</strong> Deep blue</li>
+        <li class="bg-bgDark/50 p-3 rounded-lg border border-cardBg"><strong class="text-white">Installation:</strong> Manual, copy into <code class="font-mono text-highlight">~/.config</code></li>
+      </ul>
+    </section>
+
+    <!-- Showcase -->
+    <section id="showcase" aria-labelledby="showcase-title" class="space-y-6">
+      <h2 id="showcase-title" class="text-2xl font-bold text-highlight">Desktop showcase</h2>
+      <p class="text-sm text-gray-400 -mt-3">Select a screenshot to view it full size.</p>
+
+      <div class="grid md:grid-cols-2 gap-6">
+        <figure class="bg-cardBg/40 border border-primary/30 rounded-xl overflow-hidden p-4 flex flex-col justify-between">
+          <button type="button" class="shot overflow-hidden rounded-lg mb-3 border border-primary/20 bg-bgDark block w-full" data-full="assets/screenshots/showcase-1.png" data-alt="Main workspace with custom Waybar">
+            <img src="assets/screenshots/showcase-1.png" alt="Main workspace with custom Waybar in blue theme" loading="lazy" class="w-full h-48 object-cover motion-safe:hover:scale-105 motion-safe:transition-transform motion-safe:duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/071634/81d6f8?text=assets/screenshots/showcase-1.png';">
+          </button>
+          <figcaption>
+            <h3 class="font-semibold text-white">Main workspace</h3>
+            <p class="text-xs text-gray-400 mt-1">Clean desktop with a custom Waybar and the blue theme.</p>
+          </figcaption>
+        </figure>
+
+        <figure class="bg-cardBg/40 border border-primary/30 rounded-xl overflow-hidden p-4 flex flex-col justify-between">
+          <button type="button" class="shot overflow-hidden rounded-lg mb-3 border border-primary/20 bg-bgDark block w-full" data-full="assets/screenshots/showcase-2.png" data-alt="Lock screen and terminal layout">
+            <img src="assets/screenshots/showcase-2.png" alt="Lock screen and terminal layout in blue theme" loading="lazy" class="w-full h-48 object-cover motion-safe:hover:scale-105 motion-safe:transition-transform motion-safe:duration-300" onerror="this.onerror=null; this.src='https://placehold.co/600x400/071634/81d6f8?text=assets/screenshots/showcase-2.png';">
+          </button>
+          <figcaption>
+            <h3 class="font-semibold text-white">Lock screen &amp; workflow</h3>
+            <p class="text-xs text-gray-400 mt-1">Lua config files and the terminal layout.</p>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Install guide -->
+    <section id="install" aria-labelledby="install-title" class="space-y-6">
+      <div>
+        <h2 id="install-title" class="text-2xl font-bold text-highlight">Manual installation</h2>
+        <p class="text-gray-400 mt-2 max-w-2xl">The whole install is one copy: the folders inside the archive go straight into <code class="font-mono text-highlight">~/.config</code>. Do the steps in order.</p>
+      </div>
+
+      <div class="bg-yellow-500/10 border border-yellow-500/40 rounded-xl p-4 text-sm text-yellow-100">
+        <strong>Copying overwrites files with the same name.</strong> Step 2 makes a backup so you can go back to your old setup.
+      </div>
+
+      <ol class="space-y-5">
+
+        <li class="bg-cardBg/40 border border-primary/30 rounded-xl p-5">
+          <h3 class="font-semibold text-white mb-2"><span class="text-highlight">Step 1.</span> Check your Hyprland version</h3>
+          <p class="text-sm text-gray-300 mb-3">These configs are written in Lua, which needs Hyprland <strong>v0.56 or newer</strong>. Waybar is used for the top bar, so install it too if you do not have it.</p>
+          <pre class="code" data-lang="bash">hyprland --version
+sudo pacman -S --needed waybar</pre>
+          <p class="text-xs text-gray-400 mt-3">If the version is older, update first: <code class="font-mono text-highlight">sudo pacman -Syu</code>.</p>
+        </li>
+
+        <li class="bg-cardBg/40 border border-primary/30 rounded-xl p-5">
+          <h3 class="font-semibold text-white mb-2"><span class="text-highlight">Step 2.</span> Back up your current config</h3>
+          <p class="text-sm text-gray-300 mb-3">This copies your whole <code class="font-mono text-highlight">.config</code> folder to a safe place.</p>
+          <pre class="code" data-lang="bash">cp -r ~/.config ~/config-backup</pre>
+        </li>
+
+        <li class="bg-cardBg/40 border border-primary/30 rounded-xl p-5">
+          <h3 class="font-semibold text-white mb-2"><span class="text-highlight">Step 3.</span> Download and extract the archive</h3>
+          <p class="text-sm text-gray-300 mb-3">Use the download button above, or fetch it from the terminal. Extract it to a temporary folder first so you can see what is inside.</p>
+          <pre class="code" data-lang="bash">curl -L -o ~/Downloads/dotfiles.zip https://pxelight.github.io/dotfiles/assets/configs/dotfiles.zip
+unzip ~/Downloads/dotfiles.zip -d /tmp/pxelight-dotfiles
+ls /tmp/pxelight-dotfiles</pre>
+          <p class="text-xs text-gray-400 mt-3">If <code class="font-mono text-highlight">unzip</code> is missing: <code class="font-mono text-highlight">sudo pacman -S unzip</code>.</p>
+        </li>
+
+        <li class="bg-cardBg/40 border border-primary/30 rounded-xl p-5">
+          <h3 class="font-semibold text-white mb-2"><span class="text-highlight">Step 4.</span> Copy the files into ~/.config</h3>
+          <p class="text-sm text-gray-300 mb-3">The <code class="font-mono text-highlight">ls</code> output from step 3 should list config folders such as <code class="font-mono text-highlight">hypr</code> and <code class="font-mono text-highlight">waybar</code>. Copy their contents directly into <code class="font-mono text-highlight">~/.config</code>:</p>
+          <pre class="code" data-lang="bash">cp -r /tmp/pxelight-dotfiles/. ~/.config/</pre>
+          <p class="text-sm text-gray-300 mt-4 mb-3">If <code class="font-mono text-highlight">ls</code> showed only one wrapper folder (for example <code class="font-mono text-highlight">dotfiles</code>) and the config folders are inside it, copy from inside that folder instead:</p>
+          <pre class="code" data-lang="bash">cp -r /tmp/pxelight-dotfiles/dotfiles/. ~/.config/</pre>
+          <p class="text-xs text-gray-400 mt-3">Prefer a file manager? Open your home folder, press <kbd class="font-mono px-1.5 py-0.5 rounded bg-bgDark border border-primary/40">Ctrl</kbd>+<kbd class="font-mono px-1.5 py-0.5 rounded bg-bgDark border border-primary/40">H</kbd> to show hidden folders, then drag the extracted folders into <code class="font-mono text-highlight">.config</code>.</p>
+        </li>
+
+        <li class="bg-cardBg/40 border border-primary/30 rounded-xl p-5">
+          <h3 class="font-semibold text-white mb-2"><span class="text-highlight">Step 5.</span> Check the result and make scripts runnable</h3>
+          <p class="text-sm text-gray-300 mb-3">The folders must sit directly inside <code class="font-mono text-highlight">~/.config</code>, so you should see <code class="font-mono text-highlight">~/.config/hypr</code>, not <code class="font-mono text-highlight">~/.config/dotfiles/hypr</code>.</p>
+          <pre class="code" data-lang="bash">ls ~/.config/hypr
+find ~/.config -name "*.sh" -exec chmod +x {} +</pre>
+        </li>
+
+        <li class="bg-cardBg/40 border border-primary/30 rounded-xl p-5">
+          <h3 class="font-semibold text-white mb-2"><span class="text-highlight">Step 6.</span> Apply the config</h3>
+          <p class="text-sm text-gray-300 mb-3">If you are already in a Hyprland session, reload it. A full log out and back in is the most reliable way to load everything.</p>
+          <pre class="code" data-lang="bash">hyprctl reload
+pkill waybar; waybar &amp;</pre>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- Troubleshooting -->
+    <section id="troubleshooting" aria-labelledby="trouble-title" class="space-y-4">
+      <h2 id="trouble-title" class="text-2xl font-bold text-highlight">Troubleshooting</h2>
+
+      <details class="bg-cardBg/40 border border-primary/30 rounded-xl p-5">
+        <summary class="font-semibold text-white flex items-center gap-2">
+          <svg class="chev w-4 h-4 text-accent transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          Hyprland shows config errors or starts with a blank screen
+        </summary>
+        <div class="mt-3 text-sm text-gray-300 space-y-3">
+          <p>Print the errors Hyprland found in the config:</p>
+          <pre class="code" data-lang="bash">hyprctl configerrors</pre>
+          <p>The most common cause is a Hyprland version older than v0.56, because the Lua config is not read by older releases. Run <code class="font-mono text-highlight">hyprland --version</code> and update if needed.</p>
+        </div>
+      </details>
+
+      <details class="bg-cardBg/40 border border-primary/30 rounded-xl p-5">
+        <summary class="font-semibold text-white flex items-center gap-2">
+          <svg class="chev w-4 h-4 text-accent transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          Waybar is missing or looks wrong
+        </summary>
+        <div class="mt-3 text-sm text-gray-300 space-y-3">
+          <p>Restart it and read its output for errors:</p>
+          <pre class="code" data-lang="bash">pkill waybar; waybar</pre>
+          <p>If icons appear as empty boxes, a Nerd Font is missing. Install one, for example <code class="font-mono text-highlight">sudo pacman -S ttf-jetbrains-mono-nerd</code>, then restart Waybar.</p>
+        </div>
+      </details>
+
+      <details class="bg-cardBg/40 border border-primary/30 rounded-xl p-5">
+        <summary class="font-semibold text-white flex items-center gap-2">
+          <svg class="chev w-4 h-4 text-accent transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          A keybind or script does nothing
+        </summary>
+        <div class="mt-3 text-sm text-gray-300 space-y-3">
+          <p>Make sure the scripts are executable (step 5), and that any program a keybind launches is installed. Open the Lua files in <code class="font-mono text-highlight">~/.config/hypr</code> to see which commands each keybind runs.</p>
+        </div>
+      </details>
+
+      <details class="bg-cardBg/40 border border-primary/30 rounded-xl p-5">
+        <summary class="font-semibold text-white flex items-center gap-2">
+          <svg class="chev w-4 h-4 text-accent transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+          I want my old setup back
+        </summary>
+        <div class="mt-3 text-sm text-gray-300 space-y-3">
+          <p>Restore the backup from step 2. This puts your previous files back over the copied ones:</p>
+          <pre class="code" data-lang="bash">cp -r ~/config-backup/. ~/.config/</pre>
+          <p>Files that only exist in the dotfiles (not in your backup) stay in place. Delete those folders by hand if you want a clean restore.</p>
+        </div>
+      </details>
+    </section>
+
+    <!-- Download -->
+    <section id="download" aria-labelledby="download-title" class="bg-cardBg/30 border border-primary/40 rounded-xl p-6">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <h2 id="download-title" class="text-xl font-semibold text-white mb-2">Configuration archive</h2>
+          <p class="text-gray-300 text-sm max-w-xl">
+            The full Hyprland Lua setup, keybindings, and theme scripts in one zip. Follow the <a href="#install" class="text-highlight underline underline-offset-2">install guide</a> above to put it in place.
+          </p>
+        </div>
+        <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+          <a href="assets/configs/dotfiles.zip" download="dotfiles.zip" class="inline-flex items-center justify-center gap-2 bg-accent hover:bg-primary text-white px-5 py-3 rounded-xl font-medium text-sm transition-colors whitespace-nowrap shadow-md">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/><path d="M12 15V3"/></svg>
+            Download dotfiles.zip
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-t border-cardBg py-6 text-center text-xs text-gray-500">
+    &copy; 2026 pxelight. Hyprland Dotfiles Wiki.
+  </footer>
+
+  <!-- Screenshot viewer -->
+  <dialog id="viewer" class="bg-transparent p-4 max-w-5xl w-full m-auto" aria-label="Screenshot viewer">
+    <form method="dialog" class="flex justify-end mb-2">
+      <button class="text-sm bg-cardBg border border-primary px-3 py-1.5 rounded-lg hover:bg-primary transition-colors">Close</button>
+    </form>
+    <img id="viewer-img" src="" alt="" class="w-full rounded-lg border border-primary/40">
+  </dialog>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Style code blocks and add copy buttons
+      document.querySelectorAll('pre.code').forEach((pre) => {
+        pre.className = 'code bg-bgDark border border-primary/30 rounded-lg p-4 pr-20 text-sm font-mono text-pastelBlue overflow-x-auto whitespace-pre';
+        const wrap = document.createElement('div');
+        wrap.className = 'relative';
+        pre.parentNode.insertBefore(wrap, pre);
+        wrap.appendChild(pre);
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.textContent = 'Copy';
+        btn.className = 'absolute top-2 right-2 text-xs bg-cardBg border border-primary px-2.5 py-1 rounded-md text-gray-200 hover:bg-primary transition-colors';
+        btn.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(pre.textContent);
+            btn.textContent = 'Copied';
+          } catch (e) {
+            btn.textContent = 'Press Ctrl+C';
+          }
+          setTimeout(() => { btn.textContent = 'Copy'; }, 1800);
+        });
+        wrap.appendChild(btn);
+      });
+
+      // Screenshot viewer
+      const viewer = document.getElementById('viewer');
+      const viewerImg = document.getElementById('viewer-img');
+      document.querySelectorAll('.shot').forEach((shot) => {
+        shot.addEventListener('click', () => {
+          const img = shot.querySelector('img');
+          viewerImg.src = img.currentSrc || img.src;
+          viewerImg.alt = shot.dataset.alt || img.alt;
+          viewer.showModal();
+        });
+      });
+      viewer.addEventListener('click', (e) => { if (e.target === viewer) viewer.close(); });
+    });
+  </script>
+</body>
+</html>
