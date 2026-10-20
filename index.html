@@ -2,8 +2,20 @@
 <html lang="en" class="dark scroll-smooth">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>pxelight | Personal Hub</title>
+  <!-- PWA / mobile web app -->
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="#030919">
+  <meta name="color-scheme" content="dark">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="pxelight">
+  <meta name="format-detection" content="telephone=no">
+  <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icons/icon-192.png">
+
 
   <!-- Blue Terminal Favicon for Browser Tab -->
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2381d6f8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><polyline points='4 17 10 11 4 5'></polyline><line x1='12' y1='19' x2='20' y2='19'></line></svg>">
@@ -15,6 +27,7 @@
   <script>
     tailwind.config = {
       darkMode: 'class',
+      future: { hoverOnlyWhenSupported: true },
       theme: {
         extend: {
           colors: {
@@ -30,6 +43,15 @@
     }
   </script>
   <style>
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; background-color: #030919; scroll-padding-top: 7rem; }
+    body { -webkit-tap-highlight-color: transparent; padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); overflow-x: hidden; }
+    .min-h-dvh { min-height: 100vh; min-height: 100dvh; }
+    .pt-safe { padding-top: env(safe-area-inset-top); }
+    .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    .no-scrollbar { scrollbar-width: none; }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    a, button, summary { touch-action: manipulation; }
+    :not(pre) > code { overflow-wrap: anywhere; }
     body {
       background-color: #030919;
       color: #ffffff;
@@ -38,19 +60,19 @@
     .glow-effect {
       box-shadow: 0 0 25px -5px rgba(35, 110, 227, 0.3);
     }
-    .glow-effect:hover {
+    @media (hover: hover) { .glow-effect:hover {
       box-shadow: 0 0 35px 0px rgba(129, 214, 248, 0.5);
-    }
+    } }
   </style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-accent selection:text-white">
+<body class="min-h-dvh flex flex-col justify-between selection:bg-accent selection:text-white">
 
   <!-- Header / Navigation -->
-  <header class="border-b border-cardBg bg-bgDark/80 backdrop-blur-md sticky top-0 z-50">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
+  <header class="border-b border-cardBg bg-bgDark/80 backdrop-blur-md sticky top-0 z-50 pt-safe">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-3 sm:py-4 flex justify-between items-center gap-3">
       <!-- Site Logo & Title -->
-      <a href="/" class="text-2xl font-bold tracking-wider text-highlight flex items-center gap-3 group">
-        <div class="p-2 bg-cardBg border border-accent/50 rounded-xl group-hover:border-highlight transition-colors shadow-[0_0_15px_rgba(35,110,227,0.4)]">
+      <a href="/" class="text-xl sm:text-2xl font-bold tracking-wider text-highlight flex items-center gap-2 sm:gap-3 group">
+        <div class="p-1.5 sm:p-2 bg-cardBg border border-accent/50 rounded-xl group-hover:border-highlight transition-colors shadow-[0_0_15px_rgba(35,110,227,0.4)]">
           <i data-lucide="terminal" class="w-6 h-6 text-highlight"></i>
         </div>
         <span>pxelight</span>
@@ -61,43 +83,43 @@
         <a href="#desmos" class="hover:text-highlight transition-colors">Desmos</a>
         <a href="#contact" class="hover:text-highlight transition-colors">Contact</a>
       </nav>
-      <a href="https://linktr.ee/pxelight" target="_blank" rel="noopener noreferrer" class="bg-accent hover:bg-primary px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-md">
+      <a href="https://linktr.ee/pxelight" target="_blank" rel="noopener noreferrer" class="bg-accent hover:bg-primary px-4 py-2.5 rounded-lg text-sm font-semibold transition-all shadow-md whitespace-nowrap">
         Linktree
       </a>
     </div>
   </header>
 
   <!-- Hero Section -->
-  <section class="max-w-4xl mx-auto px-6 pt-16 pb-12 flex flex-col items-center justify-center text-center">
+  <section class="max-w-4xl mx-auto px-4 sm:px-6 pt-10 sm:pt-16 pb-8 sm:pb-12 flex flex-col items-center justify-center text-center">
 
     <!-- Centered Badge with Blue Terminal Icon -->
-    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cardBg border border-primary text-xs font-mono text-pastelBlue mb-8 shadow-md">
+    <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-cardBg border border-primary text-xs font-mono text-pastelBlue mb-6 sm:mb-8 shadow-md">
       <i data-lucide="terminal" class="w-4 h-4 text-highlight animate-pulse"></i>
       <span>pxelight.github.io</span>
     </div>
 
     <!-- Title with 'Trader' separated on top -->
-    <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 flex flex-col items-center justify-center gap-2">
+    <h1 class="text-5xl md:text-6xl font-extrabold tracking-tight mb-6 flex flex-col items-center justify-center gap-2">
       <span class="bg-gradient-to-r from-highlight via-pastelBlue to-white bg-clip-text text-transparent pb-2 leading-normal">
         Pxelight
       </span>
-      <span class="text-2xl md:text-4xl font-bold text-gray-300">
+      <span class="text-lg sm:text-2xl md:text-4xl font-bold text-gray-300">
         Trader | Hyprland &amp; Desmos Creator
       </span>
     </h1>
 
     <!-- Subtitle -->
-    <p class="text-gray-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+    <p class="text-gray-400 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
       Virtual futures trading platform, modern Lua-powered Hyprland dotfiles setup, and mathematical Desmos graph collection.
     </p>
 
   </section>
 
   <!-- Main Grid / Sections -->
-  <main class="max-w-6xl mx-auto px-6 py-8 grid md:grid-cols-3 gap-8">
+  <main class="max-w-6xl mx-auto px-4 sm:px-6 py-4 sm:py-8 grid md:grid-cols-3 gap-5 sm:gap-8 w-full">
 
     <!-- Card 1: Trader / Demo Futures -->
-    <div id="trading" class="bg-cardBg/60 border border-primary/40 rounded-2xl p-6 flex flex-col justify-between glow-effect transition-all duration-300 hover:-translate-y-1">
+    <div id="trading" class="bg-cardBg/60 border border-primary/40 rounded-2xl p-5 sm:p-6 flex flex-col justify-between glow-effect transition-all duration-300 hover:-translate-y-1">
       <div>
         <div class="p-3 bg-primary/30 text-highlight rounded-xl w-fit mb-4">
           <i data-lucide="candlestick-chart" class="w-8 h-8"></i>
@@ -107,14 +129,14 @@
           A futures simulator designed in Turkish to let users test leveraged trading and market strategies with virtual currency in a risk-free environment.
         </p>
       </div>
-      <a href="./futures/" class="inline-flex items-center justify-between w-full bg-accent hover:bg-primary text-white px-4 py-3 rounded-xl font-medium text-sm transition-colors group">
+      <a href="./futures/" class="inline-flex items-center justify-between w-full bg-accent hover:bg-primary text-white px-4 py-3 rounded-xl font-medium text-sm transition-colors group min-h-[48px]">
         <span>Try Platform</span>
         <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform"></i>
       </a>
     </div>
 
     <!-- Card 2: Hyprland Dotfiles -->
-    <div id="hyprland" class="bg-cardBg/60 border border-primary/40 rounded-2xl p-6 flex flex-col justify-between glow-effect transition-all duration-300 hover:-translate-y-1">
+    <div id="hyprland" class="bg-cardBg/60 border border-primary/40 rounded-2xl p-5 sm:p-6 flex flex-col justify-between glow-effect transition-all duration-300 hover:-translate-y-1">
       <div>
         <div class="p-3 bg-primary/30 text-highlight rounded-xl w-fit mb-4">
           <i data-lucide="layout-grid" class="w-8 h-8"></i>
@@ -124,14 +146,14 @@
           A sleek blue-themed, minimalist manual installation setup. Built for Hyprland v0.56+ with modern Lua configuration files.
         </p>
       </div>
-      <a href="./dotfiles/" class="inline-flex items-center justify-between w-full bg-cardBg border border-accent hover:bg-accent hover:text-white text-highlight px-4 py-3 rounded-xl font-medium text-sm transition-colors group">
+      <a href="./dotfiles/" class="inline-flex items-center justify-between w-full bg-cardBg border border-accent hover:bg-accent hover:text-white text-highlight px-4 py-3 rounded-xl font-medium text-sm transition-colors group min-h-[48px]">
         <span>Wiki &amp; Installation Guide</span>
         <i data-lucide="book-open" class="w-4 h-4 group-hover:scale-110 transition-transform"></i>
       </a>
     </div>
 
     <!-- Card 3: Desmos Graph Creator -->
-    <div id="desmos" class="bg-cardBg/60 border border-primary/40 rounded-2xl p-6 flex flex-col justify-between glow-effect transition-all duration-300 hover:-translate-y-1">
+    <div id="desmos" class="bg-cardBg/60 border border-primary/40 rounded-2xl p-5 sm:p-6 flex flex-col justify-between glow-effect transition-all duration-300 hover:-translate-y-1">
       <div>
         <div class="p-3 bg-primary/30 text-highlight rounded-xl w-fit mb-4">
           <i data-lucide="function-square" class="w-8 h-8"></i>
@@ -141,7 +163,7 @@
           Explore my complete gallery of mathematical graphs, creative visualizations, and complex function artworks crafted in Desmos.
         </p>
       </div>
-      <a href="https://linktr.ee/pxelight" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between w-full bg-accent hover:bg-primary text-white px-4 py-3 rounded-xl font-medium text-sm transition-colors group">
+      <a href="https://linktr.ee/pxelight" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-between w-full bg-accent hover:bg-primary text-white px-4 py-3 rounded-xl font-medium text-sm transition-colors group min-h-[48px]">
         <span>View All Artworks</span>
         <i data-lucide="external-link" class="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform"></i>
       </a>
@@ -150,32 +172,32 @@
   </main>
 
   <!-- Social Media & Contact Section -->
-  <section id="contact" class="max-w-6xl mx-auto px-6 py-12 w-full">
-    <div class="bg-cardBg/30 border border-primary/30 rounded-2xl p-8 text-center">
+  <section id="contact" class="max-w-6xl mx-auto px-4 sm:px-6 py-8 sm:py-12 w-full">
+    <div class="bg-cardBg/30 border border-primary/30 rounded-2xl p-5 sm:p-8 text-center">
       <h3 class="text-xl font-semibold mb-6 text-pastelBlue">Connect &amp; Social Links</h3>
-      <div class="flex flex-wrap justify-center gap-4 text-sm">
+      <div class="flex flex-wrap justify-center gap-3 sm:gap-4 text-sm">
 
         <!-- GitHub -->
-        <a href="https://github.com/Pxelight" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-bgDark border border-cardBg px-4 py-2 rounded-lg hover:border-highlight transition-colors text-gray-300 hover:text-white">
-          <svg class="w-4 h-4 fill-current text-highlight" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+        <a href="https://github.com/Pxelight" aria-label="GitHub" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-bgDark border border-cardBg w-14 h-14 sm:w-auto sm:h-auto sm:px-4 sm:py-2 rounded-xl sm:rounded-lg hover:border-highlight transition-colors text-gray-300 hover:text-white">
+          <svg class="w-6 h-6 sm:w-4 sm:h-4 fill-current text-highlight" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
 
         </a>
 
         <!-- X (Twitter) -->
-        <a href="https://x.com/gokhan0155d" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-bgDark border border-cardBg px-4 py-2 rounded-lg hover:border-highlight transition-colors text-gray-300 hover:text-white">
-          <svg class="w-4 h-4 fill-current text-highlight" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        <a href="https://x.com/gokhan0155d" aria-label="X (Twitter)" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-bgDark border border-cardBg w-14 h-14 sm:w-auto sm:h-auto sm:px-4 sm:py-2 rounded-xl sm:rounded-lg hover:border-highlight transition-colors text-gray-300 hover:text-white">
+          <svg class="w-6 h-6 sm:w-4 sm:h-4 fill-current text-highlight" aria-hidden="true" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
 
         </a>
 
         <!-- YouTube -->
-        <a href="https://youtube.com/@pxelight" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-bgDark border border-cardBg px-4 py-2 rounded-lg hover:border-highlight transition-colors text-gray-300 hover:text-white">
-          <svg class="w-4 h-4 fill-current text-highlight" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        <a href="https://youtube.com/@pxelight" aria-label="YouTube" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-bgDark border border-cardBg w-14 h-14 sm:w-auto sm:h-auto sm:px-4 sm:py-2 rounded-xl sm:rounded-lg hover:border-highlight transition-colors text-gray-300 hover:text-white">
+          <svg class="w-6 h-6 sm:w-4 sm:h-4 fill-current text-highlight" aria-hidden="true" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
 
         </a>
 
         <!-- Instagram -->
-        <a href="https://instagram.com/pxelight" target="_blank" rel="noopener noreferrer" class="flex items-center gap-2 bg-bgDark border border-cardBg px-4 py-2 rounded-lg hover:border-highlight transition-colors text-gray-300 hover:text-white">
-          <svg class="w-4 h-4 fill-current text-highlight" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+        <a href="https://instagram.com/pxelight" aria-label="Instagram" target="_blank" rel="noopener noreferrer" class="flex items-center justify-center gap-2 bg-bgDark border border-cardBg w-14 h-14 sm:w-auto sm:h-auto sm:px-4 sm:py-2 rounded-xl sm:rounded-lg hover:border-highlight transition-colors text-gray-300 hover:text-white">
+          <svg class="w-6 h-6 sm:w-4 sm:h-4 fill-current text-highlight" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
 
         </a>
 
@@ -184,8 +206,8 @@
   </section>
 
   <!-- Footer -->
-  <footer class="border-t border-cardBg bg-bgDark py-10 mt-auto">
-    <div class="max-w-6xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm text-gray-400">
+  <footer class="border-t border-cardBg bg-bgDark py-8 sm:py-10 mt-auto pb-safe">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-4 gap-6 sm:gap-8 text-sm text-gray-400">
 
       <div>
         <h4 class="text-white font-semibold mb-3 flex items-center gap-2">
@@ -198,19 +220,19 @@
 
       <div>
         <h4 class="text-white font-semibold mb-3">Quick Links</h4>
-        <ul class="space-y-2 text-xs">
-          <li><a href="./futures/" class="hover:text-highlight transition-colors">Demo Futures App</a></li>
-          <li><a href="/dotfiles/" class="hover:text-highlight transition-colors">Hyprland Wiki</a></li>
-          <li><a href="https://linktr.ee/pxelight" target="_blank" rel="noopener noreferrer" class="hover:text-highlight transition-colors">Desmos Portfolio</a></li>
+        <ul class="space-y-1 text-sm md:text-xs">
+          <li><a href="./futures/" class="inline-block py-1.5 hover:text-highlight transition-colors">Demo Futures App</a></li>
+          <li><a href="/dotfiles/" class="inline-block py-1.5 hover:text-highlight transition-colors">Hyprland Wiki</a></li>
+          <li><a href="https://linktr.ee/pxelight" target="_blank" rel="noopener noreferrer" class="inline-block py-1.5 hover:text-highlight transition-colors">Desmos Portfolio</a></li>
         </ul>
       </div>
 
       <div>
         <h4 class="text-white font-semibold mb-3">Inquiries &amp; Contact</h4>
-        <ul class="space-y-2 text-xs">
-          <li><a href="mailto:pxelight@gmail.com" class="hover:text-highlight transition-colors">Email: pxelight@gmail.com</a></li>
-          <li><a href="mailto:pxelight@gmail.com?subject=Sponsorship%20%26%20Collab" class="hover:text-highlight transition-colors">Collaboration &amp; Ads</a></li>
-          <li><a href="mailto:pxelight@gmail.com?subject=Support%20%26%20Feedback" class="hover:text-highlight transition-colors">Support &amp; Feedback</a></li>
+        <ul class="space-y-1 text-sm md:text-xs">
+          <li><a href="mailto:pxelight@gmail.com" class="inline-block py-1.5 hover:text-highlight transition-colors">Email: pxelight@gmail.com</a></li>
+          <li><a href="mailto:pxelight@gmail.com?subject=Sponsorship%20%26%20Collab" class="inline-block py-1.5 hover:text-highlight transition-colors">Collaboration &amp; Ads</a></li>
+          <li><a href="mailto:pxelight@gmail.com?subject=Support%20%26%20Feedback" class="inline-block py-1.5 hover:text-highlight transition-colors">Support &amp; Feedback</a></li>
         </ul>
       </div>
 
@@ -232,5 +254,3 @@
   </script>
 </body>
 </html>
-
-<!-- Hi, I'm Pxelight :D -->
